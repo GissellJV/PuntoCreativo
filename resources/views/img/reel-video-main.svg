@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="750" viewBox="0 0 1000 750" role="img" aria-labelledby="t d">
+<title id="t">Edición de Reel o TikTok - muestra 1</title><desc id="d">Ilustración de muestra para el servicio Edición de Reel o TikTok de Punto Creativo.</desc>
+<defs><linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ff4fa3"/><stop offset="1" stop-color="#8d5cff"/></linearGradient><filter id="b"><feGaussianBlur stdDeviation="28"/></filter></defs>
+<rect width="1000" height="750" rx="36" fill="#0b0e1a"/><rect x="28" y="28" width="944" height="694" rx="32" fill="url(#g)"/>
+<circle cx="820" cy="160" r="145" fill="#fff" opacity=".15"/><circle cx="795" cy="180" r="92" fill="none" stroke="#fff" stroke-width="18" opacity=".18"/>
+<path d="M80 590 C260 420 430 710 620 520 S900 360 970 510 V722 H28 V650 Z" fill="#071018" opacity=".35"/>
+<text x="82" y="112" fill="#fff" font-family="Arial, sans-serif" font-size="30" font-weight="700" letter-spacing="5">PUNTO CREATIVO</text>
+<text x="78" y="360" fill="#fff" font-family="Arial, sans-serif" font-size="82" font-weight="900">CREA</text>
+<text x="82" y="430" fill="#fff" font-family="Arial, sans-serif" font-size="35" font-weight="700">Edición de Reel o TikTok</text>
+<rect x="82" y="478" width="230" height="60" rx="18" fill="#fff" opacity=".92"/><text x="197" y="518" text-anchor="middle" fill="#111526" font-family="Arial" font-size="24" font-weight="800">VIDEO</text>
+<text x="82" y="670" fill="#fff" opacity=".75" font-family="Arial" font-size="24">Muestra visual · entrega digital</text>
+</svg>
