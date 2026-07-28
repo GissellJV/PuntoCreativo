@@ -1398,7 +1398,7 @@
             </div>
             <div class="footer-col">
                 <h4>Navegación</h4>
-                <a href="{{route('tienda')}}">Tienda</a>
+                <a href="{{route('catalogo')}}">Tienda</a>
                 <a href="{{route('carrito')}}">Carrito</a>
                 <a href="{{route('cuenta')}}">Mi cuenta</a>
                 <a href="{{route('sistemap')}}">Mapa del sitio</a>

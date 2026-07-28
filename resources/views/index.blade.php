@@ -1802,7 +1802,8 @@
                 <a href="#cotizar">Solicitar cotización</a>
                 <span>El Paraíso, Honduras</span>
                 <span>Atención digital</span>
-                <div class="footer-legal"><a href="{{route('privacidad')}}">Privacidad</a>
+                <div class="footer-legal">
+                    <a href="{{route('privacidad')}}">Privacidad</a>
                     <a href="{{route('terminos')}}">Términos</a>
                     <a href="{{route('cookies')}}">Cookies</a></div>
             </div>
