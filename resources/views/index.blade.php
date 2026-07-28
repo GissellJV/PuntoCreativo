@@ -1393,7 +1393,7 @@
 
                         <div class="mini-grid">
                             <div class="mini-card">
-                                <b>Videos para redes</b>
+                                <b>Videos para redes Sociales</b>
                                 <span>Reels · TikTok · Shorts</span>
                             </div>
                             <div class="mini-card">
