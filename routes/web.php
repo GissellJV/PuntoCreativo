@@ -53,6 +53,6 @@ Route::get('/terminos', function () {
 })->name('terminos');
 
 // Mapa del sitio
-Route::get('/sitemap', function () {
-    return view('sitemap');
-})->name('sitemap');
+Route::get('/sistemap', function () {
+    return view('sistemap');
+})->name('sistemap');
