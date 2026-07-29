@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ServicioController;
 use Illuminate\Support\Facades\Route;
 
 // Página principal / tienda
@@ -11,6 +12,14 @@ Route::get('/', function () {
 Route::get('/catalogo', function () {
     return view('catalogo');
 })->name('catalogo');
+
+// Mostrar formulario para registrar un servicio
+Route::get('/servicios/create', [ServicioController::class, 'create'])
+    ->name('servicios.create');
+
+// Guardar el servicio
+Route::post('/servicios', [ServicioController::class, 'store'])
+    ->name('servicios.store');
 
 // Detalle de producto
 Route::get('/producto', function () {
