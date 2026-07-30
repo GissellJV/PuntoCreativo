@@ -13,10 +13,16 @@ return new class extends Migration
     {
         Schema::create('servicios', function (Blueprint $table) {
             $table->id();
+            $table->string('categoria');
             $table->string('nombre');
             $table->text('descripcion');
             $table->decimal('precio', 10, 2);
-            $table->string('imagen');
+            $table->string('imagen_principal');
+            $table->string('imagen1');
+            $table->string('imagen2');
+            $table->string('imagen3')->nullable();
+            $table->string('imagen4')->nullable();
+
             $table->timestamps();
         });
     }
