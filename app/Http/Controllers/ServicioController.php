@@ -21,25 +21,62 @@ class ServicioController extends Controller
     public function store(Request $request)
     {
         $datos = $request->validate([
+            'categoria' => 'required|string|max:255',
             'nombre' => 'required|string|max:255',
             'descripcion' => 'required|string',
             'precio' => 'required|numeric|min:0',
-            'imagen' => 'required|image|max:2048',
+            'imagen_principal' => 'required|image|max:2048',
+            'imagen1' => 'required|image|max:2048',
+            'imagen2' => 'required|image|max:2048',
+            'imagen3' => 'nullable|image|max:2048',
+            'imagen4' => 'nullable|image|max:2048',
+
         ], [
+            'categoria.required' => 'La categoria del servicio es obligatoria.',
             'nombre.required' => 'El nombre del servicio es obligatorio.',
             'descripcion.required' => 'La descripción es obligatoria.',
+
             'precio.required' => 'El precio es obligatorio.',
             'precio.numeric' => 'El precio debe ser un número.',
             'precio.min' => 'El precio debe ser mayor o igual a 0.',
-            'imagen.image' => 'El archivo debe ser una imagen.',
-            'imagen.required' => 'La imagen es obligatoria.',
-            'imagen.uploaded' => 'La imagen no pudo subirse. Verifique que no supere los 2 MB.',
-            'imagen.max' => 'La imagen no debe ser mayor a 2 MB.',
+
+            'imagen_principal.image' => 'El archivo debe ser una imagen.',
+            'imagen_principal.required' => 'La imagen es obligatoria.',
+            'imagen_principal.uploaded' => 'La imagen no pudo subirse. Verifique que no supere los 2 MB.',
+            'imagen_principal.max' => 'La imagen no debe ser mayor a 2 MB.',
+
+            'imagen1.image' => 'El archivo debe ser una imagen.',
+            'imagen1.required' => 'La imagen es obligatoria.',
+            'imagen1.uploaded' => 'La imagen no pudo subirse. Verifique que no supere los 2 MB.',
+            'imagen1.max' => 'La imagen no debe ser mayor a 2 MB.',
+
+            'imagen2.image' => 'El archivo debe ser una imagen.',
+            'imagen2.required' => 'La imagen es obligatoria.',
+            'imagen2.uploaded' => 'La imagen no pudo subirse. Verifique que no supere los 2 MB.',
+            'imagen2.max' => 'La imagen no debe ser mayor a 2 MB.',
+
+            'imagen3.image' => 'El archivo debe ser una imagen.',
+            'imagen3.uploaded' => 'La imagen no pudo subirse. Verifique que no supere los 2 MB.',
+            'imagen3.max' => 'La imagen no debe ser mayor a 2 MB.',
+
+            'imagen4.image' => 'El archivo debe ser una imagen.',
+            'imagen4.uploaded' => 'La imagen no pudo subirse. Verifique que no supere los 2 MB.',
+            'imagen4.max' => 'La imagen no debe ser mayor a 2 MB.',
         ]);
 
-        if ($request->hasFile('imagen')) {
-            $datos['imagen'] = $request->file('imagen')
-                ->store('servicios', 'public');
+        $imagenes = [
+            'imagen_principal',
+            'imagen1',
+            'imagen2',
+            'imagen3',
+            'imagen4',
+        ];
+
+        foreach ($imagenes as $imagen) {
+            if ($request->hasFile($imagen)) {
+                $datos[$imagen] = $request->file($imagen)
+                    ->store('servicios', 'public');
+            }
         }
 
         Servicio::create($datos);

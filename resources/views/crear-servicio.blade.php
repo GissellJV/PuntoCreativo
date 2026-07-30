@@ -2749,6 +2749,13 @@
                     </p>
 
                     <div class="contact-list">
+                        <div class="contact-item">
+                            <span class="contact-icon">
+                                <i class="bi bi-tags-fill"></i>
+                            </span>
+                            <span>Categoria.</span>
+                        </div>
+
 
                         <div class="contact-item">
                             <span class="contact-icon">
@@ -2779,6 +2786,26 @@
         grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 18px !important;
         align-content: start !important;" >
                     @csrf
+                    <div class="field">
+                        <label for="categoria">Categoría</label>
+
+                        <select id="categoria" name="categoria">
+                            <option value="">Seleccione una categoría</option>
+                            <option value="Diseño gráfico" {{ old('categoria') == 'Diseño gráfico' ? 'selected' : '' }}>Diseño gráfico</option>
+                            <option value="Edición de videos" {{ old('categoria') == 'Edición de videos' ? 'selected' : '' }}>Edición de videos</option>
+                            <option value="Redes Sociales" {{ old('categoria') == 'Redes Sociales' ? 'selected' : '' }}>Redes Sociales</option>
+                            <option value="Motion Graphics" {{ old('categoria') == 'Motion Graphics' ? 'selected' : '' }}>Motion Graphics</option>
+                            <option value="Fotografía" {{ old('categoria') == 'Fotografía' ? 'selected' : '' }}>Fotografía</option>
+                            <option value="Flyers & Brochures" {{ old('categoria') == 'Flyers & Brochures' ? 'selected' : '' }}>Flyers & Brochures</option>
+                            <option value="Diseño de Logo" {{ old('categoria') == 'Diseño de Logo' ? 'selected' : '' }}>Diseño de Logo</option>
+
+
+                        </select>
+
+                        @error('categoria')
+                        <div class="text-danger mt-1">{{ $message }}</div>
+                        @enderror
+                    </div>
 
                     <div class="field full">
                         <label for="nombre">Nombre del servicio</label>
@@ -2829,17 +2856,75 @@
                     </div>
 
                     <div class="field">
-                        <label for="imagen">Imagen del servicio</label>
+                        <label for="imagen_principal">Imagen principal</label>
 
                         <input
                             type="file"
-                            id="imagen"
-                            name="imagen"
+                            id="imagen_principal"
+                            name="imagen_principal"
                             accept="image/*"
                         >
 
-                        @error('imagen')
-                        <div class="text-danger">{{ $message }}</div>
+                        @error('imagen_principal')
+                        <div class="text-danger mt-1">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="field">
+                        <label for="imagen1">Imagen 1</label>
+
+                        <input
+                            type="file"
+                            id="imagen1"
+                            name="imagen1"
+                            accept="image/*"
+                        >
+
+                        @error('imagen1')
+                        <div class="text-danger mt-1">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="field">
+                        <label for="imagen2">Imagen 2</label>
+
+                        <input
+                            type="file"
+                            id="imagen2"
+                            name="imagen2"
+                            accept="image/*"
+                        >
+
+                        @error('imagen2')
+                        <div class="text-danger mt-1">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="field">
+                        <label for="imagen3">Imagen 3</label>
+
+                        <input
+                            type="file"
+                            id="imagen3"
+                            name="imagen3"
+                            accept="image/*"
+                        >
+
+                        @error('imagen3')
+                        <div class="text-danger mt-1">{{ $message }}</div>
+                        @enderror
+                    </div>
+                    <div class="field">
+                        <label for="imagen4">Imagen 4</label>
+
+                        <input
+                            type="file"
+                            id="imagen4"
+                            name="imagen4"
+                            accept="image/*"
+                        >
+
+                        @error('imagen4')
+                        <div class="text-danger mt-1">{{ $message }}</div>
                         @enderror
                     </div>
 
