@@ -6,8 +6,15 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <meta name="description" content="Cuenta e historial local de pedidos de Punto Creativo.">
     <title>Mi cuenta | Punto Creativo</title>
-    <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/store.css">
+    <link
+        rel="stylesheet"
+        href="{{ asset('css/base.css') }}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ asset('css/store.css') }}"
+    >
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <style>
@@ -1616,10 +1623,10 @@ Punto Creativo
     ✆
 </a>
 
-<script src="js/products.js"></script>
-<script src="js/store.js"></script>
-<script src="js/common.js"></script>
-<script src="js/cuenta.js"></script>
+<script src="../../public/js/products.js"></script>
+<script src="../../public/js/store.js"></script>
+<script src="../../public/js/common.js"></script>
+<script src="../../public/js/cuenta.js"></script>
 
 </body>
 </html>

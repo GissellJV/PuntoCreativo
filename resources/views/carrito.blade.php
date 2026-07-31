@@ -5,11 +5,276 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <meta name="description" content="Carrito de servicios digitales de Punto Creativo.">
     <title>Carrito | Punto Creativo</title>
-    <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/store.css">
+    <link
+        rel="stylesheet"
+        href="{{ asset('css/base.css') }}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ asset('css/store.css') }}"
+    >
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <style>
+
+        /* ================================
+   DISEÑO DEL CARRITO
+================================ */
+
+        .cart-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1.7fr) minmax(300px, 0.8fr);
+            gap: 28px;
+            align-items: start;
+        }
+
+        .cart-list {
+            display: grid;
+            gap: 16px;
+        }
+
+        .cart-item {
+            display: grid;
+            grid-template-columns: 140px minmax(0, 1fr) auto;
+            gap: 20px;
+            align-items: center;
+            padding: 18px;
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.055);
+        }
+
+        .cart-item > img {
+            width: 140px;
+            height: 110px;
+            object-fit: cover;
+            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .image-placeholder {
+            width: 140px;
+            height: 110px;
+            display: grid;
+            place-items: center;
+            border-radius: 14px;
+            border: 1px dashed var(--border);
+            background: rgba(255, 255, 255, 0.04);
+            color: var(--muted);
+            font-size: 0.85rem;
+        }
+
+        .cart-item-info {
+            min-width: 0;
+        }
+
+        .cart-item-info h3 {
+            margin-bottom: 8px;
+            font-size: 1.08rem;
+        }
+
+        .cart-meta {
+            margin-bottom: 14px;
+            color: var(--muted);
+            font-size: 0.92rem;
+        }
+
+        .cart-actions-inline {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .qty-control {
+            display: grid;
+            grid-template-columns: 40px 55px 40px;
+            align-items: center;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .qty-control button {
+            height: 42px;
+            border: 0;
+            background: rgba(255, 255, 255, 0.055);
+            color: var(--text);
+            cursor: pointer;
+            font-size: 1.2rem;
+        }
+
+        .qty-control button:hover {
+            background: rgba(35, 213, 232, 0.15);
+            color: var(--cyan);
+        }
+
+        .qty-control input {
+            height: 42px;
+            padding: 0;
+            border: 0;
+            border-right: 1px solid var(--border);
+            border-left: 1px solid var(--border);
+            border-radius: 0;
+            background: transparent;
+            color: var(--text);
+            text-align: center;
+        }
+
+        .remove-link {
+            border: 0;
+            background: transparent;
+            color: #ff7b9f;
+            font-weight: 750;
+            cursor: pointer;
+        }
+
+        .remove-link:hover {
+            text-decoration: underline;
+        }
+
+        .item-total {
+            min-width: 120px;
+            text-align: right;
+        }
+
+        .item-total small {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--muted);
+        }
+
+        .item-total strong {
+            color: var(--cyan);
+            font-size: 1.08rem;
+        }
+
+        /* ================================
+           RESUMEN DEL PEDIDO
+        ================================ */
+
+        .order-summary {
+            position: sticky;
+            top: 100px;
+            padding: 24px;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.065);
+            box-shadow: var(--shadow);
+        }
+
+        .order-summary h2 {
+            margin-bottom: 24px;
+            font-size: 1.65rem;
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 13px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+            color: var(--muted);
+        }
+
+        .summary-row strong {
+            color: var(--text);
+            white-space: nowrap;
+        }
+
+        .summary-row.total {
+            margin-top: 6px;
+            padding-top: 18px;
+            border-bottom: 0;
+            font-size: 1.08rem;
+        }
+
+        .summary-row.total span,
+        .summary-row.total strong {
+            color: var(--cyan);
+            font-weight: 900;
+        }
+
+        .coupon-row {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) auto;
+            gap: 10px;
+            margin-top: 22px;
+        }
+
+        .coupon-row input {
+            min-width: 0;
+        }
+
+        .coupon-row .btn {
+            min-height: 48px;
+            padding-inline: 16px;
+        }
+
+        .empty-state {
+            padding: 55px 25px;
+            border: 1px dashed var(--border);
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.035);
+            text-align: center;
+        }
+
+        .empty-state h2 {
+            margin-bottom: 12px;
+            font-size: 2rem;
+        }
+
+        .empty-state p {
+            color: var(--muted);
+        }
+
+        /* ================================
+           RESPONSIVE
+        ================================ */
+
+        @media (max-width: 900px) {
+            .cart-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .order-summary {
+                position: static;
+            }
+        }
+
+        @media (max-width: 650px) {
+            .cart-item {
+                grid-template-columns: 95px minmax(0, 1fr);
+                align-items: start;
+            }
+
+            .cart-item > img,
+            .image-placeholder {
+                width: 95px;
+                height: 85px;
+            }
+
+            .item-total {
+                grid-column: 2;
+                min-width: 0;
+                text-align: left;
+            }
+
+            .cart-actions-inline {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .coupon-row {
+                grid-template-columns: 1fr;
+            }
+
+            .coupon-row .btn {
+                width: 100%;
+            }
+        }
         :root {
             --bg: #080a13;
             --bg-soft: #111526;
@@ -1344,20 +1609,56 @@
     </style>
 </head>
 <body>
-<div class="topbar">Diseño gráfico, edición audiovisual y contenido digital desde El Paraíso, Honduras.</div>
+<div class="topbar">
+    Diseño gráfico, edición audiovisual y contenido digital desde El Paraíso, Honduras.
+</div>
+
 <nav class="navbar">
     <div class="container nav-inner">
-        <a href="index.html" class="brand" aria-label="Ir al inicio">
-            <span class="brand-mark"><span>PC</span>
-            </span><span>Punto Creativo</span>
+
+        <a
+            href="{{ route('index') }}"
+            class="brand"
+            aria-label="Ir al inicio"
+        >
+            <span class="brand-mark">
+                <span>PC</span>
+            </span>
+
+            <span>Punto Creativo</span>
         </a>
-        <button class="menu-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
+
+        <button
+            class="menu-toggle"
+            aria-label="Abrir menú"
+            aria-expanded="false"
+        >
+            ☰
+        </button>
+
         <div class="nav-links" id="navLinks">
-            <a href="{{route('index')}}">Inicio</a>
-            <a href="{{route('catalogo')}}">Tienda</a>
-            <a href="{{route('index')}}#portafolio">Portafolio</a>
-            <a href="{{route('index')}}#cotizar">Contacto</a>
-            <form class="header-search" data-search-form role="search">
+
+            <a href="{{ route('index') }}">
+                Inicio
+            </a>
+
+            <a href="{{ route('catalogo') }}">
+                Tienda
+            </a>
+
+            <a href="{{ route('index') }}#portafolio">
+                Portafolio
+            </a>
+
+            <a href="{{ route('index') }}#cotizar">
+                Contacto
+            </a>
+
+            <form
+                class="header-search"
+                data-search-form
+                role="search"
+            >
                 <div class="search-input">
 
                     <i class="bi bi-search"></i>
@@ -1370,114 +1671,132 @@
 
                 </div>
             </form>
-            <a class="nav-icon" href="{{route('cuenta')}}" aria-label="Mi cuenta" title="Mi cuenta">♙</a>
-            <a class="nav-icon" href="{{route('carrito')}}" aria-label="Carrito" title="Carrito">🛒
-                <span class="cart-badge" data-cart-count>0</span>
+
+            <a
+                class="nav-icon"
+                href="{{ route('cuenta') }}"
+                aria-label="Mi cuenta"
+                title="Mi cuenta"
+            >
+                ♙
             </a>
+
+            <a
+                class="nav-icon"
+                href="{{ route('carrito') }}"
+                aria-label="Carrito"
+                title="Carrito"
+            >
+                🛒
+
+                <span
+                    class="cart-badge"
+                    data-cart-count
+                >
+                    0
+                </span>
+            </a>
+
         </div>
     </div>
 </nav>
+
 <main>
+
     <header class="page-hero">
         <div class="container">
+
             <nav class="breadcrumbs">
-                <a href="index.html">Inicio</a>
+                <a href="{{ route('index') }}">
+                    Inicio
+                </a>
+
                 <span>›</span>
+
                 <span>Carrito</span>
             </nav>
-            <span class="eyebrow">Paso 1 de 3</span>
-            <h1>Tu carrito de servicios.</h1>
-            <p>Modifica cantidades, elimina elementos o aplica un cupón antes de continuar al pago.</p>
+
+            <span class="eyebrow">
+                Paso 1 de 3
+            </span>
+
+            <h1>
+                Tu carrito de servicios.
+            </h1>
+
+            <p>
+                Modifica cantidades, elimina elementos
+                o aplica un cupón antes de continuar al pago.
+            </p>
+
         </div>
     </header>
+
     <section class="store-section">
         <div class="container cart-layout">
-            <div class="cart-list" id="cartList"></div>
-            <aside class="order-summary" id="cartSummary"></aside>
+
+            <div
+                class="cart-list"
+                id="cartList"
+            ></div>
+
+            <aside
+                class="order-summary"
+                id="cartSummary"
+            ></aside>
+
         </div>
     </section>
+
 </main>
 <footer>
-
-
     <div class="container">
-
-
 
         <div class="footer-grid">
 
-
-
-
-
             <div class="footer-brand">
 
+                <a
+                    href="{{ route('index') }}"
+                    class="brand"
+                >
+                    <span class="brand-mark">
+                        <span>PC</span>
+                    </span>
 
-
-                <a href="{{route('index')}}" class="brand">
-
-
-<span class="brand-mark">
-
-<span>
-PC
-</span>
-
-
-</span>
-
-
-                    <span>
-Punto Creativo
-</span>
-
-
-
+                    <span>Punto Creativo</span>
                 </a>
 
-
-
-
-
                 <p>
-
                     Diseño gráfico, edición audiovisual en Honduras
-
                 </p>
-
-
-
 
             </div>
 
-
-
-
-
-
-
             <div class="footer-col">
-
-
 
                 <h4>
                     Contacto
                 </h4>
 
-                <h4>
-                    <i class="fa-solid fa-envelope"></i> info@puntocreativo.hn <br>
-                    <i class="fa-solid fa-phone"></i> +504 9999-8888 <br>
-                    <i class="fa-solid fa-location-dot"></i> Danli, El Paraíso
-                </h4>
+                <p>
+                    <i class="fa-solid fa-envelope"></i>
+                    info@puntocreativo.hn
+                </p>
+
+                <p>
+                    <i class="fa-solid fa-phone"></i>
+                    +504 9999-8888
+                </p>
+
+                <p>
+                    <i class="fa-solid fa-location-dot"></i>
+                    Danlí, El Paraíso
+                </p>
 
             </div>
 
-
-
-
-
             <div class="footer-col">
-
 
                 <h4>
                     Redes Sociales
@@ -1488,56 +1807,52 @@ Punto Creativo
                     <i class="fa-brands fa-instagram"></i>
                     <i class="fa-brands fa-youtube"></i>
                     <i class="fa-brands fa-tiktok"></i>
-
                 </div>
 
-                <div>
-                    <a href="{{route('terminos')}}">
+                <div class="footer-links">
+
+                    <a href="{{ route('terminos') }}">
                         Términos
-                        <a href="{{route('privacidad')}}">
-                            Privacidad
-                        </a>
-                        <a href="{{route('cookies')}}">
-                            Cookies
-                        </a>
                     </a>
+
+                    <a href="{{ route('privacidad') }}">
+                        Privacidad
+                    </a>
+
+                    <a href="{{ route('cookies') }}">
+                        Cookies
+                    </a>
+
                 </div>
-
-
-
-
-
-
-
-
-
 
             </div>
-
 
         </div>
 
         <div class="footer-bottom">
-
-
-<span>
-
-    © <span data-year></span> Punto Creativo. Todos los derechos reservados.
-
-</span>
-
-
+            <span>
+                © <span data-year></span>
+                Punto Creativo. Todos los derechos reservados.
+            </span>
         </div>
 
-
-
-
     </div>
-
-
 </footer>
-<a class="whatsapp-float" href="https://wa.me/50400000000" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp" title="WhatsApp">✆</a>
-<script src="js/common.js"></script>
-<script src="js/carrito.js"></script>
+
+<a
+    class="whatsapp-float"
+    href="https://wa.me/50400000000"
+    target="_blank"
+    rel="noopener"
+    aria-label="Contactar por WhatsApp"
+    title="WhatsApp"
+>
+    ✆
+</a>
+
+<script src="{{ asset('js/store.js') }}"></script>
+<script src="{{ asset('js/common.js') }}"></script>
+<script src="{{ asset('js/carrito.js') }}?v={{ time() }}"></script>
+
 </body>
 </html>

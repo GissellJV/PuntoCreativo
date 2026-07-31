@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ServicioController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\PayPalController;
 
 // Página principal / tienda
 Route::get('/', function () {
@@ -47,6 +48,17 @@ Route::get('/confirmacion', function () {
 Route::get('/cuenta', function () {
     return view('cuenta');
 })->name('cuenta');
+
+// paypal
+Route::post(
+    '/paypal/orders',
+    [PayPalController::class, 'createOrder']
+)->name('paypal.orders.create');
+
+Route::post(
+    '/paypal/orders/{orderId}/capture',
+    [PayPalController::class, 'captureOrder']
+)->name('paypal.orders.capture');
 
 // Políticas de privacidad
 Route::get('/privacidad', function () {

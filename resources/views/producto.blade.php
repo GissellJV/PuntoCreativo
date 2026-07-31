@@ -9,8 +9,15 @@
 
     <title>Detalle de servicio | Punto Creativo</title>
 
-    <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/store.css">
+    <link
+        rel="stylesheet"
+        href="{{ asset('css/base.css') }}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ asset('css/store.css') }}"
+    >
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <style>
@@ -1597,20 +1604,54 @@ Detalle de servicio
                         {{ $servicio->descripcion }}
                     </p>
 
-                    <form action="" method="POST" style="margin-top:auto;">
-                        @csrf
-                        <input type="hidden" name="servicio_id" value="{{ $servicio->id }}">
+                    <form id="formAgregarCarrito" style="margin-top:auto;">
 
                         <div style="display:flex;align-items:center;gap:8px;margin-bottom:20px;">
-                            <label style="display:block;font-size:0.85rem;font-weight:750;margin-bottom:8px;color:#e9edff;">Cantidad</label>
-                            <button type="button" data-minus style="width:40px;height:44px;border:1px solid var(--border);border-radius:12px;background:rgba(255,255,255,.05);color:var(--text);">−</button>
-                            <input id="qty" name="cantidad" type="number" min="1" value="1" style="width:56px;height:44px;text-align:center;">
-                            <button type="button" data-plus style="width:40px;height:44px;border:1px solid var(--border);border-radius:12px;background:rgba(255,255,255,.05);color:var(--text);">+</button>
+
+                            <label
+                                for="qty"
+                                style="display:block;font-size:0.85rem;font-weight:750;margin-bottom:8px;color:#e9edff;"
+                            >
+                                Cantidad
+                            </label>
+
+                            <button
+                                type="button"
+                                data-minus
+                                style="width:40px;height:44px;border:1px solid var(--border);border-radius:12px;background:rgba(255,255,255,.05);color:var(--text);"
+                            >
+                                −
+                            </button>
+
+                            <input
+                                id="qty"
+                                name="cantidad"
+                                type="number"
+                                min="1"
+                                value="1"
+                                style="width:56px;height:44px;text-align:center;"
+                            >
+
+                            <button
+                                type="button"
+                                data-plus
+                                style="width:40px;height:44px;border:1px solid var(--border);border-radius:12px;background:rgba(255,255,255,.05);color:var(--text);"
+                            >
+                                +
+                            </button>
+
                         </div>
 
-                        <button type="submit" class="btn btn-primary" style="width:100%">
-                            Agregar al Carrito
+                        <button
+                            type="submit"
+                            id="botonAgregarCarrito"
+                            class="btn btn-primary"
+                            style="width:100%"
+                        >
+                            <i class="bi bi-cart-plus"></i>
+                            Agregar al carrito
                         </button>
+
                     </form>
                 </article>
             </div>
@@ -1677,19 +1718,228 @@ También puede interesarte
 
         <script>
             document.addEventListener('DOMContentLoaded', function () {
-                document.querySelectorAll('.thumb').forEach(function (btn) {
-                    btn.addEventListener('click', function () {
-                        document.querySelectorAll('.thumb').forEach(t => t.style.borderColor = 'var(--border)');
-                        btn.style.borderColor = 'var(--cyan)';
-                        document.getElementById('mainImage').src = btn.dataset.src;
+
+                /*
+                 * Información del servicio obtenida desde Laravel.
+                 */
+                const servicioActual = {
+                    id: @json((string) $servicio->id),
+                    nombre: @json($servicio->nombre),
+                    precio: @json((float) $servicio->precio),
+                    imagen: @json(asset('storage/' . $servicio->imagen_principal))
+                };
+
+                const CLAVE_CARRITO = 'pcCart';
+
+                /*
+                 * Treinta días expresados en milisegundos.
+                 */
+                const DURACION_CARRITO = 30 * 24 * 60 * 60 * 1000;
+
+                const inputCantidad = document.getElementById('qty');
+                const formulario = document.getElementById('formAgregarCarrito');
+                const botonAgregar = document.getElementById('botonAgregarCarrito');
+
+                /*
+                 * Galería de imágenes.
+                 */
+                document.querySelectorAll('.thumb').forEach(function (botonMiniatura) {
+                    botonMiniatura.addEventListener('click', function () {
+
+                        document.querySelectorAll('.thumb').forEach(function (miniatura) {
+                            miniatura.style.borderColor = 'var(--border)';
+                        });
+
+                        botonMiniatura.style.borderColor = 'var(--cyan)';
+
+                        document.getElementById('mainImage').src =
+                            botonMiniatura.dataset.src;
                     });
                 });
 
-                const input = document.getElementById('qty');
-                document.querySelector('[data-plus]').addEventListener('click', () => input.value = parseInt(input.value) + 1);
-                document.querySelector('[data-minus]').addEventListener('click', () => {
-                    if (parseInt(input.value) > 1) input.value = parseInt(input.value) - 1;
+                /*
+                 * Aumentar cantidad.
+                 */
+                document.querySelector('[data-plus]').addEventListener('click', function () {
+                    const cantidadActual = parseInt(inputCantidad.value, 10) || 1;
+
+                    inputCantidad.value = cantidadActual + 1;
                 });
+
+                /*
+                 * Disminuir cantidad.
+                 */
+                document.querySelector('[data-minus]').addEventListener('click', function () {
+                    const cantidadActual = parseInt(inputCantidad.value, 10) || 1;
+
+                    if (cantidadActual > 1) {
+                        inputCantidad.value = cantidadActual - 1;
+                    }
+                });
+
+                /*
+                 * Impedir cantidades menores a uno.
+                 */
+                inputCantidad.addEventListener('change', function () {
+                    const cantidad = parseInt(inputCantidad.value, 10);
+
+                    if (!cantidad || cantidad < 1) {
+                        inputCantidad.value = 1;
+                    }
+                });
+
+                /*
+                 * Leer el carrito y eliminar servicios vencidos.
+                 */
+                function obtenerCarrito() {
+                    try {
+                        const carritoGuardado = JSON.parse(
+                            localStorage.getItem(CLAVE_CARRITO)
+                        ) || [];
+
+                        const ahora = Date.now();
+
+                        const carritoVigente = carritoGuardado.filter(function (servicio) {
+                            const fechaAgregado = Number(
+                                servicio.agregadoEn ||
+                                servicio.addedAt ||
+                                ahora
+                            );
+
+                            return ahora - fechaAgregado < DURACION_CARRITO;
+                        });
+
+                        localStorage.setItem(
+                            CLAVE_CARRITO,
+                            JSON.stringify(carritoVigente)
+                        );
+
+                        return carritoVigente;
+                    } catch (error) {
+                        console.error('No se pudo leer el carrito:', error);
+
+                        localStorage.removeItem(CLAVE_CARRITO);
+
+                        return [];
+                    }
+                }
+
+                /*
+                 * Actualizar el número que aparece sobre el carrito.
+                 */
+                function actualizarContador(carrito) {
+                    const cantidadTotal = carrito.reduce(function (total, servicio) {
+                        return total + Number(
+                            servicio.cantidad ||
+                            servicio.qty ||
+                            0
+                        );
+                    }, 0);
+
+                    document.querySelectorAll('[data-cart-count]').forEach(function (contador) {
+                        contador.textContent = cantidadTotal;
+                    });
+                }
+
+                /*
+                 * Mostrar mensaje visual.
+                 */
+                function mostrarMensaje(mensaje) {
+                    let aviso = document.querySelector('.toast');
+
+                    if (!aviso) {
+                        aviso = document.createElement('div');
+                        aviso.className = 'toast';
+                        document.body.appendChild(aviso);
+                    }
+
+                    aviso.textContent = mensaje;
+                    aviso.classList.add('show');
+
+                    clearTimeout(window.temporizadorCarrito);
+
+                    window.temporizadorCarrito = setTimeout(function () {
+                        aviso.classList.remove('show');
+                    }, 2200);
+                }
+
+                /*
+                 * Agregar el servicio al carrito.
+                 */
+                formulario.addEventListener('submit', function (evento) {
+                    evento.preventDefault();
+
+                    const cantidad = Math.max(
+                        1,
+                        parseInt(inputCantidad.value, 10) || 1
+                    );
+
+                    const carrito = obtenerCarrito();
+
+                    const servicioExistente = carrito.find(function (servicio) {
+                        return String(servicio.id) === String(servicioActual.id);
+                    });
+
+                    const ahora = Date.now();
+
+                    if (servicioExistente) {
+                        /*
+                         * Si ya existe, aumenta la cantidad.
+                         */
+                        const cantidadExistente = Number(
+                            servicioExistente.cantidad ||
+                            servicioExistente.qty ||
+                            1
+                        );
+
+                        servicioExistente.cantidad =
+                            cantidadExistente + cantidad;
+
+                        /*
+                         * Renovamos el plazo de 30 días.
+                         */
+                        servicioExistente.agregadoEn = ahora;
+                    } else {
+                        carrito.push({
+                            id: servicioActual.id,
+                            nombre: servicioActual.nombre,
+                            precio: servicioActual.precio,
+                            imagen: servicioActual.imagen,
+                            cantidad: cantidad,
+                            agregadoEn: ahora
+                        });
+                    }
+
+                    localStorage.setItem(
+                        CLAVE_CARRITO,
+                        JSON.stringify(carrito)
+                    );
+
+                    actualizarContador(carrito);
+
+                    const contenidoOriginal = botonAgregar.innerHTML;
+
+                    botonAgregar.innerHTML = `
+                <i class="bi bi-check-circle"></i>
+                Agregado al carrito
+            `;
+
+                    botonAgregar.disabled = true;
+
+                    mostrarMensaje(
+                        servicioActual.nombre + ' fue agregado al carrito.'
+                    );
+
+                    setTimeout(function () {
+                        botonAgregar.innerHTML = contenidoOriginal;
+                        botonAgregar.disabled = false;
+                    }, 1400);
+                });
+
+                /*
+                 * Mostrar el contador al abrir la página.
+                 */
+                actualizarContador(obtenerCarrito());
             });
         </script>
 
@@ -1824,10 +2074,7 @@ Punto Creativo
 
 </a>
 
-<script src="js/products.js"></script>
-<script src="js/store.js"></script>
-<script src="js/common.js"></script>
-<script src="js/checkout.js"></script>
+<script src="{{ asset('js/common.js') }}"></script>
 
 </body>
 </html>

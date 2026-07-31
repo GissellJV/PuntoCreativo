@@ -5,8 +5,15 @@
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
     <meta name="description" content="Política de privacidad de Punto Creativo.">
     <title>Política de privacidad | Punto Creativo</title>
-    <link rel="stylesheet" href="css/base.css">
-    <link rel="stylesheet" href="css/store.css">
+    <link
+        rel="stylesheet"
+        href="{{ asset('css/base.css') }}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ asset('css/store.css') }}"
+    >
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <style>
@@ -1554,8 +1561,8 @@ Punto Creativo
 
 </footer>
 <a class="whatsapp-float" href="https://wa.me/50400000000" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp" title="WhatsApp">✆</a>
-<script src="js/products.js"></script>
-<script src="js/store.js"></script>
-<script src="js/common.js"></script>
+<script src="../../public/js/products.js"></script>
+<script src="../../public/js/store.js"></script>
+<script src="../../public/js/common.js"></script>
 </body>
 </html>

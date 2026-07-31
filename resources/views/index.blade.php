@@ -1346,7 +1346,7 @@
             padding-left: 45px;
         }
     </style>
-    <link rel="stylesheet" href="css/store.css" />
+    <link rel="stylesheet" href="../../public/css/store.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 
@@ -2064,9 +2064,10 @@ Punto Creativo
     }
     document.getElementById("year").textContent = new Date().getFullYear();
 </script>
-<script src="js/products.js"></script>
-<script src="js/store.js"></script>
-<script src="js/index-upgrade.js"></script>
+<script src="../../public/js/products.js"></script>
+<script src="../../public/js/index-upgrade.js"></script>
+<script src="{{ asset('js/store.js') }}"></script>
+<script src="{{ asset('js/carrito.js') }}?v={{ time() }}"></script>
 </body>
 </html>
 
