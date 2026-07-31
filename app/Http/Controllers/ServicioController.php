@@ -127,7 +127,15 @@ class ServicioController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $servicio = Servicio::findOrFail($id);
+
+        $relacionados = Servicio::where('categoria', $servicio->categoria)
+            ->where('id', '!=', $servicio->id)
+            ->inRandomOrder()
+            ->limit(3)
+            ->get();
+
+        return view('producto', compact('servicio', 'relacionados'));
     }
 
     /**

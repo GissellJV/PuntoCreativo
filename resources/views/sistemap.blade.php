@@ -11,6 +11,8 @@
 
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/store.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <style>
         :root {
             --bg: #080a13;
@@ -1323,6 +1325,25 @@
                 padding: 10px 12px;
             }
         }
+        .search-input{
+            position: relative;
+            flex: 1;
+        }
+
+        .search-input i{
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--muted);
+            font-size: 16px;
+            pointer-events: none;
+        }
+
+        .search-input input{
+            width: 100%;
+            padding-left: 45px;
+        }
     </style>
 
 </head>
@@ -1390,16 +1411,17 @@
 
             <form class="header-search" data-search-form role="search">
 
-                <input type="search"
-                       aria-label="Buscar servicios"
-                       placeholder="Buscar servicios">
+                <div class="search-input">
 
+                    <i class="bi bi-search"></i>
 
-                <button type="submit" aria-label="Buscar">
+                    <input
+                        type="search"
+                        aria-label="Buscar servicios"
+                        placeholder="Buscar servicios"
+                    >
 
-                    ⌕
-
-                </button>
+                </div>
 
 
             </form>
