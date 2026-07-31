@@ -2947,60 +2947,141 @@
 
 <footer>
 
+
     <div class="container">
+
+
 
         <div class="footer-grid">
 
+
+
+
+
             <div class="footer-brand">
 
+
+
                 <a href="{{route('index')}}" class="brand">
+
+
 <span class="brand-mark">
-<span>PC</span>
+
+<span>
+PC
 </span>
-                    <span>Punto Creativo</span>
+
+
+</span>
+
+
+                    <span>
+Punto Creativo
+</span>
+
+
+
                 </a>
 
+
+
+
+
                 <p>
-                    Diseño gráfico, edición audiovisual y contenido digital para marcas que quieren comunicar mejor y crecer en internet.
+
+                    Diseño gráfico, edición audiovisual en Honduras
+
                 </p>
 
+
+
+
             </div>
+
+
+
+
+
+
 
             <div class="footer-col">
 
-                <h4>Navegación</h4>
-                <a href="{{route('catalogo')}}">Tienda</a>
-                <a href="{{route('carrito')}}">Carrito</a>
-                <a href="{{route('cuenta')}}">Mi cuenta</a>
-                <a href="{{route('sistemap')}}">Mapa del sitio</a>
+
+
+                <h4>
+                    Contacto
+                </h4>
+
+                <h4>
+                    <i class="fa-solid fa-envelope"></i> info@puntocreativo.hn <br>
+                    <i class="fa-solid fa-phone"></i> +504 9999-8888 <br>
+                    <i class="fa-solid fa-location-dot"></i> Danli, El Paraíso
+                </h4>
 
             </div>
 
-            <div class="footer-col" >
 
-                <h4>Información</h4>
-                <a href="{{route('privacidad')}}">Privacidad</a>
-                <a href="{{route('terminos')}}">Términos y condiciones</a>
-                <a href="{{route('cookies')}}">Política de cookies</a>
-                <a href="{{route('index')}}#cotizar">Contacto y WhatsApp</a>
+
+
+
+            <div class="footer-col">
+
+
+                <h4>
+                    Redes Sociales
+                </h4>
+
+                <div>
+                    <i class="fa-brands fa-facebook"></i>
+                    <i class="fa-brands fa-instagram"></i>
+                    <i class="fa-brands fa-youtube"></i>
+                    <i class="fa-brands fa-tiktok"></i>
+
+                </div>
+
+                <div>
+                    <a href="{{route('terminos')}}">
+                        Términos
+                        <a href="{{route('privacidad')}}">
+                            Privacidad
+                        </a>
+                        <a href="{{route('cookies')}}">
+                            Cookies
+                        </a>
+                    </a>
+                </div>
+
+
+
+
+
+
+
+
+
 
             </div>
+
 
         </div>
 
         <div class="footer-bottom">
 
+
 <span>
-© <span data-year></span> Punto Creativo. Todos los derechos reservados.
+
+    © <span data-year></span> Punto Creativo. Todos los derechos reservados.
+
 </span>
 
-            <span>
-Prototipo transaccional para fines académicos.
-</span>
 
         </div>
 
+
+
+
     </div>
+
 
 </footer>
 

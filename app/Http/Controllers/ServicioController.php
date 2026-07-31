@@ -7,10 +7,46 @@ use Illuminate\Http\Request;
 
 class ServicioController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-       //
+        $query = Servicio::query();
 
+        if ($request->filled('buscar')) {
+            $query->where(function ($consulta) use ($request) {
+                $consulta->where('nombre', 'like', '%'.$request->buscar.'%')
+                    ->orWhere('categoria', 'like', '%'.$request->buscar.'%');
+            });
+        }
+
+        if ($request->filled('categoria')) {
+            $query->whereIn('categoria', $request->categoria);
+        }
+        if ($request->filled('precio_min')) {
+            $query->where('precio', '>=', $request->precio_min);
+        }
+
+        if ($request->filled('precio_max')) {
+            $query->where('precio', '<=', $request->precio_max);
+        }
+
+        if ($request->filled('orden')) {
+            if ($request->orden == 'precio_asc') {
+                $query->orderBy('precio', 'asc');
+            } elseif ($request->orden == 'precio_desc') {
+                $query->orderBy('precio', 'desc');
+            } elseif ($request->orden == 'popular') {
+                $query->orderBy('created_at', 'desc');
+            }
+        } else {
+            $query->orderBy('created_at', 'desc');
+        }
+
+        $servicios = $query
+            ->latest()
+            ->paginate(6)
+            ->withQueryString();
+
+        return view('catalogo', compact('servicios'));
     }
 
     public function create()
@@ -85,8 +121,6 @@ class ServicioController extends Controller
             ->route('servicios.create')
             ->with('success', 'Servicio registrado correctamente.');
     }
-
-
 
     /**
      * Display the specified resource.

@@ -1318,6 +1318,12 @@
                 padding: 10px 12px;
             }
         }
+        .service-card {
+            display: block;
+            color: inherit;
+            text-decoration: none;
+            cursor: pointer;
+        }
     </style>
     <link rel="stylesheet" href="css/store.css" />
 </head>
@@ -1443,41 +1449,65 @@
             </div>
 
             <div class="services-grid">
-                <article class="service-card reveal" style="--accent:#8d5cff">
+                <a
+                    href="{{ route('catalogo', ['categoria' => ['Diseño gráfico']]) }}"
+                    class="service-card reveal"
+                    style="--accent:#8d5cff"
+                >
                     <div class="service-icon">✦</div>
-                    <h3>Diseño publicitario</h3>
+                    <h3>Diseño gráfico</h3>
                     <p>Anuncios, promociones, pósters y piezas visuales para campañas digitales.</p>
-                </article>
+                </a>
 
-                <article class="service-card reveal" style="--accent:#23d5e8">
+                <a
+                    href="{{ route('catalogo', ['categoria' => ['Fotografía']]) }}"
+                    class="service-card reveal"
+                    style="--accent:#23d5e8"
+                >
                     <div class="service-icon">◈</div>
-                    <h3>Logos e identidad visual</h3>
-                    <p>Construimos una imagen coherente, reconocible y alineada con la personalidad de tu marca.</p>
-                </article>
+                    <h3>Fotografía</h3>
+                    <p>Capturamos imágenes profesionales para productos, eventos, marcas y contenido para redes sociales.</p>
+                </a>
 
-                <article class="service-card reveal" style="--accent:#ff4fa3">
+                <a
+                    href="{{ route('catalogo', ['categoria' => ['Edición de videos']]) }}"
+                    class="service-card reveal"
+                    style="--accent:#ff4fa3"
+                >
                     <div class="service-icon">▶</div>
                     <h3>Edición de video</h3>
                     <p>Videos cortos, anuncios, reels, contenido deportivo y material audiovisual para redes.</p>
-                </article>
+                </a>
 
-                <article class="service-card reveal" style="--accent:#ff9f43">
+                <a
+                    href="{{ route('catalogo', ['categoria' => ['Redes Sociales']]) }}"
+                    class="service-card reveal"
+                    style="--accent:#ff9f43"
+                >
                     <div class="service-icon">▣</div>
-                    <h3>Contenido para redes</h3>
+                    <h3>Redes Sociales</h3>
                     <p>Publicaciones, carruseles, historias y piezas adaptadas a Facebook, Instagram, TikTok y YouTube.</p>
-                </article>
+                </a>
 
-                <article class="service-card reveal" style="--accent:#35d07f">
+                <a
+                    href="{{ route('catalogo', ['categoria' => ['Flyers & Bounchers']]) }}"
+                    class="service-card reveal"
+                    style="--accent:#35d07f"
+                >
                     <div class="service-icon">⌁</div>
-                    <h3>Miniaturas digitales</h3>
-                    <p>Portadas llamativas para videos, transmisiones, páginas deportivas y medios informativos.</p>
-                </article>
+                    <h3>Flyers & Bounchers</h3>
+                    <p>Flyers, banners y piezas publicitarias para promociones, eventos y campañas digitales.</p>
+                </a>
 
-                <article class="service-card reveal" style="--accent:#5a7dff">
+                <a
+                    href="{{ route('catalogo', ['categoria' => ['Motion Graphics']]) }}"
+                    class="service-card reveal"
+                    style="--accent:#5a7dff"
+                >
                     <div class="service-icon">◎</div>
-                    <h3>Paquetes mensuales</h3>
-                    <p>Producción constante de contenido para negocios que necesitan presencia digital organizada.</p>
-                </article>
+                    <h3>Motion Graphics</h3>
+                    <p>Animaciones creativas con textos y efectos visuales para contenido publicitario y redes sociales.</p>
+                </a>
             </div>
         </div>
     </section>
@@ -1775,45 +1805,143 @@
 </main>
 
 <footer>
+
+
     <div class="container">
+
+
+
         <div class="footer-grid">
+
+
+
+
+
             <div class="footer-brand">
-                <a href="#inicio" class="brand">
-                    <span class="brand-mark"><span>PC</span></span>
-                    <span>Punto Creativo</span>
+
+
+
+                <a href="{{route('index')}}" class="brand">
+
+
+<span class="brand-mark">
+
+<span>
+PC
+</span>
+
+
+</span>
+
+
+                    <span>
+Punto Creativo
+</span>
+
+
+
                 </a>
+
+
+
+
+
                 <p>
-                    Diseño gráfico, edición audiovisual y contenido digital para marcas que quieren
-                    comunicar mejor y crecer en internet.
+
+                    Diseño gráfico, edición audiovisual en Honduras
+
                 </p>
+
+
+
+
             </div>
 
-            <div class="footer-col">
-                <h4>Navegación</h4>
-                <a href="#servicios">Servicios</a>
-                <a href="#portafolio">Portafolio</a>
-                <a href="#paquetes">Paquetes</a>
-                <a href="{{route('catalogo')}}">Tienda</a>
-                <a href="{{route('sistemap')}}">Mapa del sitio</a>
-            </div>
+
+
+
+
+
 
             <div class="footer-col">
-                <h4>Contacto</h4>
-                <a href="#cotizar">Solicitar cotización</a>
-                <span>El Paraíso, Honduras</span>
-                <span>Atención digital</span>
-                <div class="footer-legal">
-                    <a href="{{route('privacidad')}}">Privacidad</a>
-                    <a href="{{route('terminos')}}">Términos</a>
-                    <a href="{{route('cookies')}}">Cookies</a></div>
+
+
+
+                <h4>
+                    Contacto
+                </h4>
+
+                <h4>
+                    <i class="fa-solid fa-envelope"></i> info@puntocreativo.hn <br>
+                    <i class="fa-solid fa-phone"></i> +504 9999-8888 <br>
+                    <i class="fa-solid fa-location-dot"></i> Danli, El Paraíso
+                </h4>
+
             </div>
+
+
+
+
+
+            <div class="footer-col">
+
+
+                <h4>
+                    Redes Sociales
+                </h4>
+
+                <div>
+                    <i class="fa-brands fa-facebook"></i>
+                    <i class="fa-brands fa-instagram"></i>
+                    <i class="fa-brands fa-youtube"></i>
+                    <i class="fa-brands fa-tiktok"></i>
+
+                </div>
+
+                <div>
+                    <a href="{{route('terminos')}}">
+                        Términos
+                        <a href="{{route('privacidad')}}">
+                            Privacidad
+                        </a>
+                        <a href="{{route('cookies')}}">
+                            Cookies
+                        </a>
+                    </a>
+                </div>
+
+
+
+
+
+
+
+
+
+
+            </div>
+
+
         </div>
 
         <div class="footer-bottom">
-            <span>© <span id="year"></span> Punto Creativo. Todos los derechos reservados.</span>
-            <span>Diseñado para mostrar, cotizar y vender servicios digitales.</span>
+
+
+<span>
+
+    © <span data-year></span> Punto Creativo. Todos los derechos reservados.
+
+</span>
+
+
         </div>
+
+
+
+
     </div>
+
+
 </footer>
 
 <a
