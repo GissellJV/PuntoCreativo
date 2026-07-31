@@ -21,6 +21,9 @@ Route::post('/servicios', [ServicioController::class, 'store'])
     ->name('servicios.store');
 
 // Detalle de producto
+Route::get('/servicio/{id}', [ServicioController::class, 'show'])
+    ->name('servicio.detalle');
+
 Route::get('/producto', function () {
     return view('producto');
 })->name('producto');

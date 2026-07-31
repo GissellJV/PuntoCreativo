@@ -11,6 +11,8 @@
 
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/store.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <style>
         :root {
             --bg: #080a13;
@@ -1323,6 +1325,25 @@
                 padding: 10px 12px;
             }
         }
+        .search-input{
+            position: relative;
+            flex: 1;
+        }
+
+        .search-input i{
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--muted);
+            font-size: 16px;
+            pointer-events: none;
+        }
+
+        .search-input input{
+            width: 100%;
+            padding-left: 45px;
+        }
     </style>
 
 </head>
@@ -1387,14 +1408,17 @@
 
             <form class="header-search" data-search-form role="search">
 
-                <input type="search"
-                       aria-label="Buscar servicios"
-                       placeholder="Buscar servicios">
+                <div class="search-input">
 
+                    <i class="bi bi-search"></i>
 
-                <button type="submit" aria-label="Buscar">
-                    ⌕
-                </button>
+                    <input
+                        type="search"
+                        aria-label="Buscar servicios"
+                        placeholder="Buscar servicios"
+                    >
+
+                </div>
 
 
             </form>
@@ -1480,8 +1504,15 @@
 
 
                 <span id="crumbProduct">
-Servicio
+Detalle del Servicio
 </span>
+                <span>
+›
+</span>
+                <span>
+ {{ $servicio->nombre }}
+</span>
+
 
 
             </nav>
@@ -1492,15 +1523,6 @@ Servicio
             <span class="eyebrow">
 Detalle de servicio
 </span>
-
-
-
-
-            <h1 id="pageTitle">
-                Servicio creativo
-            </h1>
-
-
 
 
         </div>
@@ -1519,11 +1541,82 @@ Detalle de servicio
 
         <div class="container">
 
+            <div class="product-detail" style="display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:stretch;">
 
+                {{-- ===== GALERÍA ===== --}}
+                <div>
+                    <div style="width:100%;max-height:340px;aspect-ratio:4/3;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;background:var(--card);">
+                        <img id="mainImage"
+                             src="{{ asset('storage/' . $servicio->imagen_principal) }}"
+                             alt="{{ $servicio->nombre }}"
+                             style="width:100%;height:100%;object-fit:cover;display:block;">
+                    </div>
 
-            <div class="product-detail" id="productDetail">
+                    @php
+                        $miniaturas = collect([
+                            $servicio->imagen_principal,
+                            $servicio->imagen1,
+                            $servicio->imagen2,
+                            $servicio->imagen3,
+                            $servicio->imagen4,
+                        ])->filter();
+                    @endphp
 
+                    <div style="display:grid;grid-template-columns:repeat({{ $miniaturas->count() }}, 1fr);gap:10px;margin-top:10px;">
+                        @foreach($miniaturas as $i => $img)
+                            <button type="button"
+                                    class="thumb {{ $i === 0 ? 'active' : '' }}"
+                                    data-src="{{ asset('storage/' . $img) }}"
+                                    style="padding:0;border:1.5px solid {{ $i === 0 ? 'var(--cyan)' : 'var(--border)' }};border-radius:12px;overflow:hidden;aspect-ratio:1/1;background:none;cursor:pointer;">
+                                <img src="{{ asset('storage/' . $img) }}" style="width:100%;height:100%;object-fit:cover;display:block;">
+                            </button>
+                        @endforeach
+                    </div>
+                </div>
+
+                {{-- ===== INFO DEL SERVICIO ===== --}}
+                <article style="display:flex;flex-direction:column;height:100%;">
+                    <br>
+                    <span style="display:inline-block;font-size:0.78rem;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:#dce1ff;border:1px solid var(--border);border-radius:999px;padding:5px 12px;margin-bottom:14px;">
+            {{ $servicio->categoria }}
+        </span>
+
+                    <h1 style="font-size:clamp(1.6rem,3vw,2.4rem);margin-bottom:10px;">{{ $servicio->nombre }}</h1>
+
+                    <div style="font-size:1.9rem;font-weight:950;color:var(--cyan);margin-bottom:16px;">
+                        L. {{ number_format($servicio->precio, 2) }}
+                    </div>
+
+                    <div style="display:flex;align-items:center;gap:6px;margin-bottom:16px;">
+                        <span style="color:#ff9f43;">★★★★★</span>
+                        <span style="font-size:0.85rem;color:var(--muted);">(42 valoraciones)</span>
+                    </div>
+                    <h5> Descripción</h5>
+                    <p style="color:var(--muted);font-size:0.96rem;margin-bottom:24px;">
+
+                        {{ $servicio->descripcion }}
+                    </p>
+
+                    <form action="" method="POST" style="margin-top:auto;">
+                        @csrf
+                        <input type="hidden" name="servicio_id" value="{{ $servicio->id }}">
+
+                        <div style="display:flex;align-items:center;gap:8px;margin-bottom:20px;">
+                            <label style="display:block;font-size:0.85rem;font-weight:750;margin-bottom:8px;color:#e9edff;">Cantidad</label>
+                            <button type="button" data-minus style="width:40px;height:44px;border:1px solid var(--border);border-radius:12px;background:rgba(255,255,255,.05);color:var(--text);">−</button>
+                            <input id="qty" name="cantidad" type="number" min="1" value="1" style="width:56px;height:44px;text-align:center;">
+                            <button type="button" data-plus style="width:40px;height:44px;border:1px solid var(--border);border-radius:12px;background:rgba(255,255,255,.05);color:var(--text);">+</button>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary" style="width:100%">
+                            Agregar al Carrito
+                        </button>
+                    </form>
+                </article>
             </div>
+
+
+
 
 
 
@@ -1539,7 +1632,7 @@ También puede interesarte
 
 
                 <h2>
-                    Servicios relacionados
+                    Servicios Relacionados
                 </h2>
 
 
@@ -1550,10 +1643,31 @@ También puede interesarte
 
 
 
-            <div class="product-grid" id="relatedProducts">
-
-            </div>
-
+            @if($relacionados->count() > 0)
+                <div class="product-grid" style="display:grid;grid-template-columns:repeat(3, 1fr);gap:18px;">
+                    @foreach($relacionados as $rel)
+                        <article class="product-card" style="border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;background:var(--card);">
+                            <a href="{{ route('servicio.detalle', $rel->id) }}" style="display:block;aspect-ratio:4/3;background:rgba(255,255,255,.03);">
+                                <img src="{{ asset('storage/' . $rel->imagen_principal) }}"
+                                     alt="{{ $rel->nombre }}"
+                                     style="width:100%;height:100%;object-fit:cover;display:block;">
+                            </a>
+                            <div style="padding:16px;">
+                                <span style="font-size:0.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;font-weight:700;">{{ $rel->categoria }}</span>
+                                <h3 style="font-size:1.05rem;margin:6px 0 10px;">
+                                    <a href="{{ route('servicio.detalle', $rel->id) }}">{{ $rel->nombre }}</a>
+                                </h3>
+                                <div style="font-weight:850;color:var(--cyan);margin-bottom:14px;">L. {{ number_format($rel->precio, 2) }}</div>
+                                <a href="{{ route('servicio.detalle', $rel->id) }}" class="btn btn-secondary" style="width:100%">Ver más</a>
+                            </div>
+                        </article>
+                    @endforeach
+                </div>
+            @else
+                <p style="color:var(--muted);font-size:1.5rem;">
+                    No hay más servicios en la categoría "{{ $servicio->categoria }}" por ahora.
+                </p>
+            @endif
 
 
 
@@ -1561,21 +1675,31 @@ También puede interesarte
         </div>
 
 
+        <script>
+            document.addEventListener('DOMContentLoaded', function () {
+                document.querySelectorAll('.thumb').forEach(function (btn) {
+                    btn.addEventListener('click', function () {
+                        document.querySelectorAll('.thumb').forEach(t => t.style.borderColor = 'var(--border)');
+                        btn.style.borderColor = 'var(--cyan)';
+                        document.getElementById('mainImage').src = btn.dataset.src;
+                    });
+                });
+
+                const input = document.getElementById('qty');
+                document.querySelector('[data-plus]').addEventListener('click', () => input.value = parseInt(input.value) + 1);
+                document.querySelector('[data-minus]').addEventListener('click', () => {
+                    if (parseInt(input.value) > 1) input.value = parseInt(input.value) - 1;
+                });
+            });
+        </script>
+
     </section>
-
-
-
 
 
 </main>
 
 
-
-
-
-
-
-
+<br> <br>
 <footer>
 
 
@@ -1605,34 +1729,20 @@ PC
 
 </span>
 
-
                     <span>
 Punto Creativo
 </span>
 
-
-
                 </a>
-
-
-
 
 
                 <p>
 
-                    Diseño gráfico, edición audiovisual y contenido digital para marcas que quieren comunicar mejor y crecer en internet.
+                    Diseño gráfico, edición audiovisual en Honduras
 
                 </p>
 
-
-
-
             </div>
-
-
-
-
-
 
 
             <div class="footer-col">
@@ -1640,116 +1750,68 @@ Punto Creativo
 
 
                 <h4>
-                    Navegación
+                    Contacto
                 </h4>
 
-
-
-                <a href="{{route('catalogo')}}">
-                    Tienda
-                </a>
-
-
-                <a href="{{route('carrito')}}">
-                    Carrito
-                </a>
-
-
-                <a href="{{route('cuenta')}}">
-                    Mi cuenta
-                </a>
-
-
-                <a href="{{route('sistemap')}}">
-                    Mapa del sitio
-                </a>
-
+                <h4>
+                    <i class="fa-solid fa-envelope"></i> info@puntocreativo.hn <br>
+                    <i class="fa-solid fa-phone"></i> +504 9999-8888 <br>
+                    <i class="fa-solid fa-location-dot"></i> Danli, El Paraíso
+                </h4>
 
             </div>
-
-
-
 
 
             <div class="footer-col">
 
 
                 <h4>
-                    Información
+                    Redes Sociales
                 </h4>
 
+                <div>
+                    <i class="fa-brands fa-facebook"></i>
+                    <i class="fa-brands fa-instagram"></i>
+                    <i class="fa-brands fa-youtube"></i>
+                    <i class="fa-brands fa-tiktok"></i>
 
-                <a href="{{route('privacidad')}}">
-                    Privacidad
-                </a>
+                </div>
 
+                <div>
+                    <a href="{{route('terminos')}}">
+                        Términos
+                        <a href="{{route('privacidad')}}">
+                            Privacidad
+                        </a>
+                        <a href="{{route('cookies')}}">
+                            Cookies
+                        </a>
+                    </a>
+                </div>
 
-                <a href="{{route('terminos')}}">
-                    Términos y condiciones
-                </a>
-
-
-                <a href="{{route('cookies')}}">
-                    Política de cookies
-                </a>
-
-
-                <a href="{{route('index')}}#cotizar">
-                    Contacto y WhatsApp
-                </a>
 
 
             </div>
-
-
-
-
 
         </div>
-
-
-
-
 
 
         <div class="footer-bottom">
 
 
-
 <span>
 
-© <span data-year></span> Punto Creativo. Todos los derechos reservados.
+    © <span data-year></span> Punto Creativo. Todos los derechos reservados.
 
 </span>
-
-
-
-
-            <span>
-
-Prototipo transaccional para fines académicos.
-
-</span>
-
-
-
 
         </div>
-
-
-
 
 
     </div>
 
 
 </footer>
-
-
-
-
-
-
 
 <a class="whatsapp-float"
    href="https://wa.me/50400000000"
@@ -1765,7 +1827,7 @@ Prototipo transaccional para fines académicos.
 <script src="js/products.js"></script>
 <script src="js/store.js"></script>
 <script src="js/common.js"></script>
-<script src="js/producto.js"></script>
+<script src="js/checkout.js"></script>
 
 </body>
 </html>
