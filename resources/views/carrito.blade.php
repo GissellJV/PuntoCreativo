@@ -7,6 +7,8 @@
     <title>Carrito | Punto Creativo</title>
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/store.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <style>
         :root {
             --bg: #080a13;
@@ -1319,6 +1321,26 @@
                 padding: 10px 12px;
             }
         }
+
+        .search-input{
+            position: relative;
+            flex: 1;
+        }
+
+        .search-input i{
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--muted);
+            font-size: 16px;
+            pointer-events: none;
+        }
+
+        .search-input input{
+            width: 100%;
+            padding-left: 45px;
+        }
     </style>
 </head>
 <body>
@@ -1331,16 +1353,25 @@
         </a>
         <button class="menu-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
         <div class="nav-links" id="navLinks">
-            <a href="index.html">Inicio</a>
-            <a href="catalogo.html">Tienda</a>
-            <a href="index.html#portafolio">Portafolio</a>
-            <a href="index.html#cotizar">Contacto</a>
+            <a href="{{route('index')}}">Inicio</a>
+            <a href="{{route('catalogo')}}">Tienda</a>
+            <a href="{{route('index')}}#portafolio">Portafolio</a>
+            <a href="{{route('index')}}#cotizar">Contacto</a>
             <form class="header-search" data-search-form role="search">
-                <input type="search" aria-label="Buscar servicios" placeholder="Buscar servicios">
-                <button type="submit" aria-label="Buscar">⌕</button>
+                <div class="search-input">
+
+                    <i class="bi bi-search"></i>
+
+                    <input
+                        type="search"
+                        aria-label="Buscar servicios"
+                        placeholder="Buscar servicios"
+                    >
+
+                </div>
             </form>
-            <a class="nav-icon" href="cuenta.html" aria-label="Mi cuenta" title="Mi cuenta">♙</a>
-            <a class="nav-icon" href="carrito.html" aria-label="Carrito" title="Carrito">🛒
+            <a class="nav-icon" href="{{route('cuenta')}}" aria-label="Mi cuenta" title="Mi cuenta">♙</a>
+            <a class="nav-icon" href="{{route('carrito')}}" aria-label="Carrito" title="Carrito">🛒
                 <span class="cart-badge" data-cart-count>0</span>
             </a>
         </div>
