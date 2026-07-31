@@ -1506,8 +1506,6 @@ Punto Creativo
 
 </footer>
 <a class="whatsapp-float" href="https://wa.me/50400000000" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp" title="WhatsApp">✆</a>
-<script src="js/products.js"></script>
-<script src="js/store.js"></script>
 <script src="js/common.js"></script>
 <script src="js/carrito.js"></script>
 </body>
