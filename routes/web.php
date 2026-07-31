@@ -9,9 +9,8 @@ Route::get('/', function () {
 })->name('index');
 
 // Catálogo de productos
-Route::get('/catalogo', function () {
-    return view('catalogo');
-})->name('catalogo');
+Route::get('/catalogo', [ServicioController::class, 'index'])
+    ->name('catalogo');
 
 // Mostrar formulario para registrar un servicio
 Route::get('/servicios/create', [ServicioController::class, 'create'])
