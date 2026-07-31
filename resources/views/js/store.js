@@ -9,21 +9,60 @@
   const findProduct = id => products().find(p=>p.id===id);
   const getCart = () => { try{return JSON.parse(localStorage.getItem(CART_KEY))||[]}catch(e){return[]} };
   const setCart = cart => { localStorage.setItem(CART_KEY,JSON.stringify(cart)); updateCartBadges(); window.dispatchEvent(new CustomEvent('pc:cart')); };
-  const addToCart = (id, qty=1, variant='Estándar') => {
-    qty=Math.max(1,parseInt(qty)||1); const cart=getCart();
-    const existing=cart.find(i=>i.id===id && i.variant===variant);
-    if(existing) existing.qty+=qty; else cart.push({id,qty,variant});
-    setCart(cart); showToast('Servicio agregado al carrito');
-  };
+    const addToCart = (product, qty = 1, variant = 'Estándar') => {
+        qty = Math.max(1, parseInt(qty) || 1);
+
+        const cart = getCart();
+
+        const id = String(product.id);
+
+        const existing = cart.find(item =>
+            String(item.id) === id &&
+            item.variant === variant
+        );
+
+        if (existing) {
+            existing.qty += qty;
+        } else {
+            cart.push({
+                id: id,
+                name: product.name,
+                price: Number(product.price),
+                image: product.image,
+                qty: qty,
+                variant: variant
+            });
+        }
+
+        setCart(cart);
+        showToast('Servicio agregado al carrito');
+    };
   const updateItem=(id,variant,qty)=>{const cart=getCart();const item=cart.find(i=>i.id===id&&i.variant===variant);if(item){item.qty=Math.max(1,parseInt(qty)||1);setCart(cart)}};
   const removeItem=(id,variant)=>setCart(getCart().filter(i=>!(i.id===id&&i.variant===variant)));
   const clearCart=()=>{localStorage.removeItem(CART_KEY);localStorage.removeItem(COUPON_KEY);updateCartBadges();window.dispatchEvent(new CustomEvent('pc:cart'))};
   const cartCount=()=>getCart().reduce((s,i)=>s+i.qty,0);
-  const cartDetails=()=>getCart().map(i=>({...i,product:findProduct(i.id)})).filter(i=>i.product);
-  const subtotal=()=>cartDetails().reduce((s,i)=>s+i.product.price*i.qty,0);
+  const cartDetails = () => getCart();  const subtotal=()=>cartDetails().reduce((s,i)=>s+i.product.price*i.qty,0);
   const coupon=()=>localStorage.getItem(COUPON_KEY)||'';
   const setCoupon=code=>localStorage.setItem(COUPON_KEY,code);
-  const totals=()=>{const sub=subtotal();const discount=coupon()==='CREATIVO10'?sub*.10:0;const taxable=sub-discount;const tax=taxable*.15;return{sub,discount,tax,total:taxable+tax}};
+    const totals = () => {
+        const sub = subtotal();
+
+        const code = coupon().trim().toUpperCase();
+
+        const discount = code === 'CREATIVO10'
+            ? sub * 0.10
+            : 0;
+
+        const taxable = sub - discount;
+        const tax = taxable * 0.15;
+
+        return {
+            sub,
+            discount,
+            tax,
+            total: taxable + tax
+        };
+    };
   const saveOrder=order=>{const orders=JSON.parse(localStorage.getItem(ORDERS_KEY)||'[]');orders.unshift(order);localStorage.setItem(ORDERS_KEY,JSON.stringify(orders));localStorage.setItem(LAST_ORDER_KEY,JSON.stringify(order));};
   const orders=()=>{try{return JSON.parse(localStorage.getItem(ORDERS_KEY))||[]}catch(e){return[]}};
   const lastOrder=()=>{try{return JSON.parse(localStorage.getItem(LAST_ORDER_KEY))}catch(e){return null}};
