@@ -186,6 +186,18 @@
             background: linear-gradient(135deg, var(--cyan), #91eff7);
             box-shadow: 0 14px 36px rgba(35, 213, 232, 0.22);
         }
+        .logout-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #ff4f4f, #d62828);
+            color: #fff;
+            box-shadow: 0 14px 36px rgb(183, 28, 28);
+
+        }
+
+        .logout-btn:hover {
+            background: linear-gradient(135deg, #ff6b6b, #b71c1c);
+            transform: translateY(-2px);
+        }
 
         .btn-secondary {
             background: rgba(255, 255, 255, 0.07);
@@ -1393,11 +1405,11 @@
             </form>
 
             <a class="nav-icon" href="{{route('cuenta')}}" aria-label="Mi cuenta" title="Mi cuenta">
-                ♙
+                <i class="bi bi-person"></i>
             </a>
 
             <a class="nav-icon" href="{{route('carrito')}}" aria-label="Carrito" title="Carrito">
-                🛒
+                <i class="bi bi-cart3"></i>
                 <span class="cart-badge" data-cart-count>0</span>
             </a>
 
@@ -1438,18 +1450,32 @@
 
                     <div class="field">
                         <label for="profileName">Nombre</label>
-                        <input id="profileName">
+
+                        <input
+                            type="name"
+                            id="profileName"
+                            value="{{ auth()->user()->name }}"
+                            readonly
+                        >
                     </div>
 
                     <div class="field">
                         <label for="profileEmail">Correo</label>
-                        <input id="profileEmail" type="email">
+                        <input id="profileEmail" type="email"
+                               value="{{ auth()->user()->email }}"
+                               readonly
+                        >
                     </div>
 
-                    <button class="btn btn-primary" type="submit">
-                        Guardar datos
-                    </button>
+                </form>
+                <br>
+                <form action="{{ route('usuario.logout') }}" method="POST">
+                    @csrf
 
+                    <button class="btn btn-danger logout-btn" type="submit">
+                        <i class="bi bi-box-arrow-right"></i>
+                        Cerrar sesión
+                    </button>
                 </form>
 
                 <p class="secure-note">

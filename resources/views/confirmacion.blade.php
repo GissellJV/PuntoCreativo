@@ -71,12 +71,28 @@
                 </div>
             </form>
 
-            <a class="nav-icon" href="{{route('cuenta')}}" aria-label="Mi cuenta" title="Mi cuenta">
-                ♙
-            </a>
+            @auth
+                <a
+                    class="nav-icon"
+                    href="{{ route('cuenta') }}"
+                    aria-label="Mi cuenta"
+                    title="Mi cuenta"
+                >
+                    <i class="bi bi-person"></i></a>
+            @else
+                <button
+                    type="button"
+                    class="nav-icon account-modal-open"
+                    data-auth-open
+                    aria-label="Iniciar sesión"
+                    title="Iniciar sesión"
+                >
+                    <i class="bi bi-person"></i> </button>
+            @endauth
+
 
             <a class="nav-icon" href="{{route('carrito')}}" aria-label="Carrito" title="Carrito">
-                🛒
+                <i class="bi bi-cart3"></i>
                 <span class="cart-badge" data-cart-count>0</span>
             </a>
 
@@ -269,6 +285,8 @@ Punto Creativo
 
 
 </footer>
+@include('components.login-modal')
+
 
 <a class="whatsapp-float"
    href="https://wa.me/50400000000"
@@ -282,6 +300,7 @@ Punto Creativo
 <script src="{{ asset('js/store.js') }}"></script>
 <script src="{{ asset('js/common.js') }}"></script>
 <script src="{{ asset('js/confirmacion.js') }}?v={{ time() }}"></script>
+<script src="{{ asset('js/auth-modal.js') }}"></script>
 
 </body>
 </html>

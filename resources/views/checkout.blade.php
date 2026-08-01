@@ -107,14 +107,24 @@
                 </div>
             </form>
 
-            <a
-                class="nav-icon"
-                href="{{ route('cuenta') }}"
-                aria-label="Mi cuenta"
-                title="Mi cuenta"
-            >
-                <i class="bi bi-person"></i>
-            </a>
+            @auth
+                <a
+                    class="nav-icon"
+                    href="{{ route('cuenta') }}"
+                    aria-label="Mi cuenta"
+                    title="Mi cuenta"
+                >
+                    <i class="bi bi-person"></i></a>
+            @else
+                <button
+                    type="button"
+                    class="nav-icon account-modal-open"
+                    data-auth-open
+                    aria-label="Iniciar sesión"
+                    title="Iniciar sesión"
+                >
+                    <i class="bi bi-person"></i>  </button>
+            @endauth
 
             <a
                 class="nav-icon"
@@ -864,6 +874,7 @@
 
     </div>
 </footer>
+@include('components.login-modal')
 
 <a
     class="whatsapp-float"
@@ -897,6 +908,7 @@
     src="https://www.paypal.com/sdk/js?client-id={{ config('services.paypal.client_id') }}&currency=USD&intent=capture">
 </script> -->
 <script src="{{ asset('js/checkout.js') }}?v={{ time() }}"></script>
+<script src="{{ asset('js/auth-modal.js') }}"></script>
 
 </body>
 </html>
