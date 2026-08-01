@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ServicioController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PayPalController;
@@ -14,7 +15,7 @@ Route::get('/catalogo', [ServicioController::class, 'index'])
     ->name('catalogo');
 
 // Mostrar formulario para registrar un servicio
-Route::get('/servicios/create', [ServicioController::class, 'create'])
+Route::get('/servicios/create-puntoCreativo26', [ServicioController::class, 'create'])
     ->name('servicios.create');
 
 // Guardar el servicio
@@ -44,10 +45,11 @@ Route::get('/confirmacion', function () {
     return view('confirmacion');
 })->name('confirmacion');
 
-// Cuenta del usuario
-Route::get('/cuenta', function () {
+
+/*Route::get('/cuenta', function () {
     return view('cuenta');
 })->name('cuenta');
+*/
 
 // paypal
 Route::post(
@@ -79,3 +81,20 @@ Route::get('/terminos', function () {
 Route::get('/sistemap', function () {
     return view('sistemap');
 })->name('sistemap');
+
+// Cuenta del usuario
+Route::get('/cuenta', function () {
+    return view('cuenta');
+})->middleware('auth')->name('cuenta');
+
+
+// Iniciar sesión
+Route::post('/iniciar-sesion', [LoginController::class, 'login'])
+    ->name('usuario.login');
+
+// Registrar usuario
+Route::post('/registrarse', [LoginController::class, 'registrarse'])
+    ->name('usuario.registrarse');
+// Cerrar sesión
+Route::post('/cerrar-sesion', [LoginController::class, 'logout'])
+    ->name('usuario.logout');

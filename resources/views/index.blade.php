@@ -6,6 +6,7 @@
     <meta name="description" content="Punto Creativo: diseño gráfico, edición audiovisual y contenido digital para emprendedores, empresas y creadores." />
     <title>Punto Creativo | Diseño que conecta</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <style>
         :root {
@@ -1345,6 +1346,275 @@
             width: 100%;
             padding-left: 45px;
         }
+        /* Modal de inicio de sesión y registro */
+
+        .account-modal-open {
+            border: 0;
+            background: transparent;
+            color: inherit;
+            cursor: pointer;
+        }
+
+        .auth-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 5000;
+            display: none;
+            place-items: center;
+            padding: 24px;
+        }
+
+        .auth-modal.open {
+            display: grid;
+        }
+
+        .auth-modal-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(3, 5, 12, 0.82);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        .auth-modal-card {
+            position: relative;
+            z-index: 1;
+            width: min(100%, 560px);
+            max-height: calc(100vh - 48px);
+            overflow-y: auto;
+            padding: 34px;
+            border: 1px solid var(--border);
+            border-radius: 30px;
+            background:
+                radial-gradient(
+                    circle at 10% 5%,
+                    rgba(35, 213, 232, 0.16),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 90% 90%,
+                    rgba(255, 79, 163, 0.15),
+                    transparent 32%
+                ),
+                #111526;
+            box-shadow: var(--shadow);
+        }
+
+        .auth-modal-close {
+            position: absolute;
+            top: 18px;
+            right: 18px;
+            width: 42px;
+            height: 42px;
+            display: grid;
+            place-items: center;
+            border: 1px solid var(--border);
+            border-radius: 13px;
+            background: rgba(255, 255, 255, 0.06);
+            color: var(--text);
+            cursor: pointer;
+        }
+
+        .auth-modal-header {
+            padding-right: 48px;
+            margin-bottom: 28px;
+        }
+
+        .auth-modal-header h2 {
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            margin-bottom: 10px;
+        }
+
+        .auth-modal-header p {
+            color: var(--muted);
+        }
+
+        .auth-tabs {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+            padding: 7px;
+            margin-bottom: 26px;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .auth-tab {
+            min-height: 46px;
+            border: 0;
+            border-radius: 11px;
+            background: transparent;
+            color: var(--muted);
+            font-weight: 850;
+            cursor: pointer;
+        }
+
+        .auth-tab.active {
+            color: #071018;
+            background: linear-gradient(135deg, var(--cyan), #91eff7);
+        }
+
+        .auth-form {
+            display: none;
+            gap: 18px;
+        }
+
+        .auth-form.active {
+            display: grid;
+        }
+
+        .auth-input {
+            position: relative;
+        }
+
+        .auth-input i {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            z-index: 2;
+            transform: translateY(-50%);
+            color: var(--muted);
+            pointer-events: none;
+        }
+
+        .auth-input input {
+            width: 100%;
+            padding-left: 46px;
+        }
+
+        .remember-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--muted);
+            cursor: pointer;
+        }
+
+        .remember-option input {
+            width: auto;
+        }
+
+        .auth-submit {
+            width: 100%;
+        }
+
+        .auth-alert {
+            padding: 14px 16px;
+            border: 1px solid rgba(255, 79, 163, 0.55);
+            border-radius: 14px;
+            background: rgba(255, 79, 163, 0.12);
+            color: #ffd5e9;
+        }
+
+        body.auth-modal-visible {
+            overflow: hidden;
+        }
+
+        @media (max-width: 600px) {
+            .auth-modal {
+                padding: 14px;
+            }
+
+            .auth-modal-card {
+                padding: 28px 20px;
+                border-radius: 22px;
+            }
+
+            .auth-tabs {
+                grid-template-columns: 1fr;
+            }
+        }
+        .nav-icon {
+            width: 38px;
+            height: 38px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text);
+            cursor: pointer;
+        }
+
+        .nav-icon i {
+            font-size: 0.9rem;
+        }
+
+        .nav-icon:hover {
+            border-color: var(--cyan);
+            color: var(--cyan);
+        }
+        /*registro*/
+        .auth-switch{
+            margin-top: 18px;
+            text-align: center;
+            color: var(--muted);
+            font-size: .95rem;
+        }
+
+        .auth-link{
+            border: 0;
+            background: transparent;
+            color: var(--cyan);
+            font-weight: 700;
+            cursor: pointer;
+            padding: 0;
+            margin-left: 4px;
+        }
+
+        .auth-link:hover{
+            text-decoration: underline;
+        }
+        .auth-field-error {
+            margin-top: 5px;
+            color: #ff6b81;
+            font-size: 0.82rem;
+            line-height: 1.3;
+        }
+        /* Mensajes de éxito y error */
+
+        .alert-success,
+        .alert-error{
+            position: fixed;
+            top: 95px;
+            right: 25px;
+            min-width: 320px;
+            max-width: 420px;
+            padding: 15px 18px;
+            border-radius: 14px;
+            color: #fff;
+            font-size: .95rem;
+            font-weight: 600;
+            box-shadow: 0 18px 45px rgba(0,0,0,.30);
+            z-index: 9999;
+            animation: slideInRight .35s ease;
+        }
+
+        .alert-success{
+            background: linear-gradient(135deg,#19c37d,#0f9d58);
+            border-left: 5px solid #ffffff;
+        }
+
+        .alert-error{
+            background: linear-gradient(135deg,#ff4f4f,#d62828);
+            border-left: 5px solid #ffffff;
+        }
+
+        @keyframes slideInRight{
+
+            from{
+                opacity:0;
+                transform:translateX(40px);
+            }
+
+            to{
+                opacity:1;
+                transform:translateX(0);
+            }
+
+        }
     </style>
     <link rel="stylesheet" href="../../public/css/store.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -1381,13 +1651,47 @@
                     >
                 </div>
             </form>
-            <a class="nav-icon" href="{{route('cuenta')}}" aria-label="Mi cuenta" title="Mi cuenta">♙</a>
-            <a class="nav-icon" href="{{route('carrito')}}" aria-label="Carrito" title="Carrito">🛒<span class="cart-badge" data-cart-count>0</span></a>
+            @auth
+                <a
+                    class="nav-icon"
+                    href="{{ route('cuenta') }}"
+                    aria-label="Mi cuenta"
+                    title="Mi cuenta"
+                >
+                    <i class="bi bi-person"></i>              </a>
+            @else
+                <button
+                    type="button"
+                    class="nav-icon account-modal-open"
+                    data-auth-open
+                    aria-label="Iniciar sesión"
+                    title="Iniciar sesión"
+                >
+                    <i class="bi bi-person"></i>
+                </button>
+            @endauth
+
+            <a class="nav-icon" href="{{route('carrito')}}" aria-label="Carrito" title="Carrito"><i class="bi bi-cart3"></i><span class="cart-badge" data-cart-count>0</span></a>
         </div>
     </div>
 </nav>
 
 <main>
+    @if(session('success'))
+
+        <div class="alert-success" id="successAlert">
+
+            {{ session('success') }}
+
+        </div>
+
+    @endif
+        @if(session('error'))
+            <div class="alert-error" id="errorAlert">
+                <i class="bi bi-exclamation-circle-fill"></i>
+                {{ session('error') }}
+            </div>
+        @endif
     <header class="hero" id="inicio">
         <div class="container hero-grid">
             <div class="hero-copy reveal">
@@ -1973,6 +2277,8 @@ Punto Creativo
 
 
 </footer>
+@include('components.login-modal')
+
 
 <a
     class="whatsapp-float"
@@ -2068,6 +2374,7 @@ Punto Creativo
 <script src="../../public/js/index-upgrade.js"></script>
 <script src="{{ asset('js/store.js') }}"></script>
 <script src="{{ asset('js/carrito.js') }}?v={{ time() }}"></script>
+<script src="{{ asset('js/auth-modal.js') }}"></script>
 </body>
 </html>
 

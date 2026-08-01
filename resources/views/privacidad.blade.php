@@ -1348,6 +1348,228 @@
             padding-left: 45px;
         }
 
+        /* Modal de inicio de sesión y registro */
+
+        .account-modal-open {
+            border: 0;
+            background: transparent;
+            color: inherit;
+            cursor: pointer;
+        }
+
+        .auth-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 5000;
+            display: none;
+            place-items: center;
+            padding: 24px;
+        }
+
+        .auth-modal.open {
+            display: grid;
+        }
+
+        .auth-modal-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(3, 5, 12, 0.82);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        .auth-modal-card {
+            position: relative;
+            z-index: 1;
+            width: min(100%, 560px);
+            max-height: calc(100vh - 48px);
+            overflow-y: auto;
+            padding: 34px;
+            border: 1px solid var(--border);
+            border-radius: 30px;
+            background:
+                radial-gradient(
+                    circle at 10% 5%,
+                    rgba(35, 213, 232, 0.16),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 90% 90%,
+                    rgba(255, 79, 163, 0.15),
+                    transparent 32%
+                ),
+                #111526;
+            box-shadow: var(--shadow);
+        }
+
+        .auth-modal-close {
+            position: absolute;
+            top: 18px;
+            right: 18px;
+            width: 42px;
+            height: 42px;
+            display: grid;
+            place-items: center;
+            border: 1px solid var(--border);
+            border-radius: 13px;
+            background: rgba(255, 255, 255, 0.06);
+            color: var(--text);
+            cursor: pointer;
+        }
+
+        .auth-modal-header {
+            padding-right: 48px;
+            margin-bottom: 28px;
+        }
+
+        .auth-modal-header h2 {
+            font-size: clamp(1.8rem, 5vw, 2.5rem);
+            margin-bottom: 10px;
+        }
+
+        .auth-modal-header p {
+            color: var(--muted);
+        }
+
+        .auth-tabs {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+            padding: 7px;
+            margin-bottom: 26px;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .auth-tab {
+            min-height: 46px;
+            border: 0;
+            border-radius: 11px;
+            background: transparent;
+            color: var(--muted);
+            font-weight: 850;
+            cursor: pointer;
+        }
+
+        .auth-tab.active {
+            color: #071018;
+            background: linear-gradient(135deg, var(--cyan), #91eff7);
+        }
+
+        .auth-form {
+            display: none;
+            gap: 18px;
+        }
+
+        .auth-form.active {
+            display: grid;
+        }
+
+        .auth-input {
+            position: relative;
+        }
+
+        .auth-input i {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            z-index: 2;
+            transform: translateY(-50%);
+            color: var(--muted);
+            pointer-events: none;
+        }
+
+        .auth-input input {
+            width: 100%;
+            padding-left: 46px;
+        }
+
+        .remember-option {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--muted);
+            cursor: pointer;
+        }
+
+        .remember-option input {
+            width: auto;
+        }
+
+        .auth-submit {
+            width: 100%;
+        }
+
+        .auth-alert {
+            padding: 14px 16px;
+            border: 1px solid rgba(255, 79, 163, 0.55);
+            border-radius: 14px;
+            background: rgba(255, 79, 163, 0.12);
+            color: #ffd5e9;
+        }
+
+        body.auth-modal-visible {
+            overflow: hidden;
+        }
+
+        @media (max-width: 600px) {
+            .auth-modal {
+                padding: 14px;
+            }
+
+            .auth-modal-card {
+                padding: 28px 20px;
+                border-radius: 22px;
+            }
+
+            .auth-tabs {
+                grid-template-columns: 1fr;
+            }
+        }
+        .nav-icon {
+            width: 38px;
+            height: 38px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text);
+            cursor: pointer;
+        }
+
+        .nav-icon i {
+            font-size: 0.9rem;
+        }
+
+        .nav-icon:hover {
+            border-color: var(--cyan);
+            color: var(--cyan);
+        }
+        /*registro*/
+        .auth-switch{
+            margin-top: 18px;
+            text-align: center;
+            color: var(--muted);
+            font-size: .95rem;
+        }
+
+        .auth-link{
+            border: 0;
+            background: transparent;
+            color: var(--cyan);
+            font-weight: 700;
+            cursor: pointer;
+            padding: 0;
+            margin-left: 4px;
+        }
+
+        .auth-link:hover{
+            text-decoration: underline;
+        }
+
 
     </style>
 </head>
@@ -1374,8 +1596,25 @@
 
                 </div>
             </form>
-            <a class="nav-icon" href="{{route('cuenta')}}" aria-label="Mi cuenta" title="Mi cuenta">♙</a>
-            <a class="nav-icon" href="{{route('carrito')}}" aria-label="Carrito" title="Carrito">🛒<span class="cart-badge" data-cart-count>0</span></a>
+            @auth
+                <a
+                    class="nav-icon"
+                    href="{{ route('cuenta') }}"
+                    aria-label="Mi cuenta"
+                    title="Mi cuenta"
+                >
+                    <i class="bi bi-person"></i></a>
+            @else
+                <button
+                    type="button"
+                    class="nav-icon account-modal-open"
+                    data-auth-open
+                    aria-label="Iniciar sesión"
+                    title="Iniciar sesión"
+                >
+                    <i class="bi bi-person"></i></button>
+            @endauth
+            <a class="nav-icon" href="{{route('carrito')}}" aria-label="Carrito" title="Carrito"><i class="bi bi-cart3"></i><span class="cart-badge" data-cart-count>0</span></a>
         </div>
     </div>
 </nav>
@@ -1560,9 +1799,12 @@ Punto Creativo
 
 
 </footer>
+@include('components.login-modal')
+
 <a class="whatsapp-float" href="https://wa.me/50400000000" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp" title="WhatsApp">✆</a>
 <script src="../../public/js/products.js"></script>
 <script src="../../public/js/store.js"></script>
 <script src="../../public/js/common.js"></script>
+<script src="{{ asset('js/auth-modal.js') }}"></script>
 </body>
 </html>
