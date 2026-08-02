@@ -68,14 +68,26 @@ class PayPalController extends Controller
             'total' => ['required', 'numeric', 'min:0.01'],
         ]);
 
-        /*
-         * PayPal no procesa HNL directamente en todas las integraciones.
-         * Para Sandbox utilizaremos USD.
-         *
-         * Para un proyecto real debes hacer la conversión en el servidor
-         * con la tasa definida por el negocio.
-         */
-        $totalUsd = round((float) $datos['total'], 2);
+        $totalHnl = round(
+            (float) $datos['total'],
+            2
+        );
+
+        $tasaCambio = (float) config(
+            'services.paypal.hnl_por_usd'
+        );
+
+        if ($tasaCambio <= 0) {
+            return response()->json([
+                'message' =>
+                    'La tasa de cambio de PayPal no es válida.',
+            ], 422);
+        }
+
+        $totalUsd = round(
+            $totalHnl / $tasaCambio,
+            2
+        );
 
         try {
             $response = Http::withToken($this->accessToken())
@@ -93,7 +105,7 @@ class PayPalController extends Controller
                                 'amount' => [
                                     'currency_code' => 'USD',
                                     'value' => number_format(
-                                        $totalUsd,
+                                        $totalHnl,
                                         2,
                                         '.',
                                         ''

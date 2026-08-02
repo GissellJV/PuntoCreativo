@@ -4,6 +4,8 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ServicioController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PayPalController;
+use App\Http\Controllers\CuentaController;
+use App\Http\Controllers\PedidoController;
 
 // Página principal / tienda
 Route::get('/', function () {
@@ -39,6 +41,11 @@ Route::get('/carrito', function () {
 Route::get('/checkout', function () {
     return view('checkout');
 })->name('checkout');
+
+Route::post(
+    '/pedidos',
+    [PedidoController::class, 'store']
+)->name('pedidos.store');
 
 // Confirmación de compra
 Route::get('/confirmacion', function () {
@@ -98,3 +105,20 @@ Route::post('/registrarse', [LoginController::class, 'registrarse'])
 // Cerrar sesión
 Route::post('/cerrar-sesion', [LoginController::class, 'logout'])
     ->name('usuario.logout');
+
+Route::middleware('auth')->group(function () {
+    Route::get(
+        '/cuenta',
+        [CuentaController::class, 'index']
+    )->name('cuenta');
+
+    Route::put(
+        '/cuenta/perfil',
+        [CuentaController::class, 'actualizarPerfil']
+    )->name('cuenta.perfil.actualizar');
+
+    Route::put(
+        '/cuenta/password',
+        [CuentaController::class, 'actualizarPassword']
+    )->name('cuenta.password.actualizar');
+});

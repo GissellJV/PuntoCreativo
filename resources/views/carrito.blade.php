@@ -1856,7 +1856,7 @@
             aria-label="Abrir menú"
             aria-expanded="false"
         >
-            ☰
+            <i class="bi bi-list"></i>
         </button>
 
         <div class="nav-links" id="navLinks">
@@ -1945,7 +1945,9 @@
                     Inicio
                 </a>
 
-                <span>›</span>
+                <span aria-hidden="true">
+                    <i class="bi bi-chevron-right"></i>
+                </span>
 
                 <span>Carrito</span>
             </nav>
@@ -2082,13 +2084,38 @@
     aria-label="Contactar por WhatsApp"
     title="WhatsApp"
 >
-    ✆
+    <i class="bi bi-whatsapp"></i>
 </a>
 
 <script src="{{ asset('js/store.js') }}"></script>
 <script src="{{ asset('js/common.js') }}"></script>
 <script src="{{ asset('js/carrito.js') }}?v={{ time() }}"></script>
 <script src="{{ asset('js/auth-modal.js') }}"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const botonMenu = document.querySelector('.menu-toggle');
+        const enlacesMenu = document.getElementById('navLinks');
+
+        if (!botonMenu || !enlacesMenu) {
+            return;
+        }
+
+        function actualizarIconoMenu() {
+            botonMenu.innerHTML = enlacesMenu.classList.contains('open')
+                ? '<i class="bi bi-x-lg"></i>'
+                : '<i class="bi bi-list"></i>';
+        }
+
+        botonMenu.addEventListener('click', actualizarIconoMenu);
+
+        enlacesMenu.querySelectorAll('a').forEach(function (enlace) {
+            enlace.addEventListener('click', actualizarIconoMenu);
+        });
+
+        actualizarIconoMenu();
+    });
+</script>
+
 
 </body>
 </html>

@@ -1578,7 +1578,7 @@
 <nav class="navbar"><div class="container nav-inner">
         <a href="{{route('index')}}" class="brand" aria-label="Ir al inicio">
             <span class="brand-mark"><span>PC</span></span><span>Punto Creativo</span></a>
-        <button class="menu-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
+        <button class="menu-toggle" aria-label="Abrir menú" aria-expanded="false"><i class="bi bi-list"></i></button>
         <div class="nav-links" id="navLinks"><a href="{{route('index')}}">Inicio</a>
             <a href="{{route('catalogo')}}">Tienda</a>
             <a href="{{route('index')}}#portafolio">Portafolio</a>
@@ -1623,7 +1623,7 @@
         <div class="container">
             <nav class="breadcrumbs">
                 <a href="{{route('index')}}">Inicio</a>
-                <span>›</span>
+                <span aria-hidden="true"><i class="bi bi-chevron-right"></i></span>
                 <span>Política de privacidad</span>
             </nav>
             <span class="eyebrow">Información legal</span>
@@ -1801,10 +1801,36 @@ Punto Creativo
 </footer>
 @include('components.login-modal')
 
-<a class="whatsapp-float" href="https://wa.me/50400000000" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp" title="WhatsApp">✆</a>
+<a class="whatsapp-float" href="https://wa.me/50492336467" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp" title="WhatsApp"><i class="bi bi-whatsapp"></i></a>
 <script src="../../public/js/products.js"></script>
 <script src="../../public/js/store.js"></script>
 <script src="../../public/js/common.js"></script>
 <script src="{{ asset('js/auth-modal.js') }}"></script>
+<script src="{{ asset('js/cart-count.js') }}?v={{ time() }}"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const botonMenu = document.querySelector('.menu-toggle');
+        const enlacesMenu = document.getElementById('navLinks');
+
+        if (!botonMenu || !enlacesMenu) {
+            return;
+        }
+
+        function actualizarIconoMenu() {
+            botonMenu.innerHTML = enlacesMenu.classList.contains('open')
+                ? '<i class="bi bi-x-lg"></i>'
+                : '<i class="bi bi-list"></i>';
+        }
+
+        botonMenu.addEventListener('click', actualizarIconoMenu);
+
+        enlacesMenu.querySelectorAll('a').forEach(function (enlace) {
+            enlace.addEventListener('click', actualizarIconoMenu);
+        });
+
+        actualizarIconoMenu();
+    });
+</script>
+
 </body>
 </html>

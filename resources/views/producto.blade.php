@@ -1606,7 +1606,7 @@
 
 
         <button class="menu-toggle" aria-label="Abrir menú" aria-expanded="false">
-            ☰
+            <i class="bi bi-list"></i>
         </button>
 
 
@@ -1729,9 +1729,9 @@
                 </a>
 
 
-                <span>
-›
-</span>
+                <span aria-hidden="true">
+                    <i class="bi bi-chevron-right"></i>
+                </span>
 
 
                 <a href="{{route('catalogo')}}">
@@ -1739,17 +1739,17 @@
                 </a>
 
 
-                <span>
-›
-</span>
+                <span aria-hidden="true">
+                    <i class="bi bi-chevron-right"></i>
+                </span>
 
 
                 <span id="crumbProduct">
 Detalle del Servicio
 </span>
-                <span>
-›
-</span>
+                <span aria-hidden="true">
+                    <i class="bi bi-chevron-right"></i>
+                </span>
                 <span>
  {{ $servicio->nombre }}
 </span>
@@ -1829,7 +1829,13 @@ Detalle de servicio
                     </div>
 
                     <div style="display:flex;align-items:center;gap:6px;margin-bottom:16px;">
-                        <span style="color:#ff9f43;">★★★★★</span>
+                        <span style="color:#ff9f43;display:inline-flex;gap:3px;" aria-label="5 estrellas">
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                            <i class="bi bi-star-fill"></i>
+                        </span>
                         <span style="font-size:0.85rem;color:var(--muted);">(42 valoraciones)</span>
                     </div>
                     <h5> Descripción</h5>
@@ -1854,7 +1860,7 @@ Detalle de servicio
                                 data-minus
                                 style="width:40px;height:44px;border:1px solid var(--border);border-radius:12px;background:rgba(255,255,255,.05);color:var(--text);"
                             >
-                                −
+                                <i class="bi bi-dash-lg"></i>
                             </button>
 
                             <input
@@ -1871,7 +1877,7 @@ Detalle de servicio
                                 data-plus
                                 style="width:40px;height:44px;border:1px solid var(--border);border-radius:12px;background:rgba(255,255,255,.05);color:var(--text);"
                             >
-                                +
+                                <i class="bi bi-plus-lg"></i>
                             </button>
 
                         </div>
@@ -2300,18 +2306,44 @@ Punto Creativo
 
 
 <a class="whatsapp-float"
-   href="https://wa.me/50400000000"
+   href="https://wa.me/50492336467"
    target="_blank"
    rel="noopener"
    aria-label="Contactar por WhatsApp"
    title="WhatsApp">
 
-    ✆
+    <i class="bi bi-whatsapp"></i>
 
 </a>
 
 <script src="{{ asset('js/common.js') }}"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const botonMenu = document.querySelector('.menu-toggle');
+        const enlacesMenu = document.getElementById('navLinks');
+
+        if (!botonMenu || !enlacesMenu) {
+            return;
+        }
+
+        function actualizarIconoMenu() {
+            botonMenu.innerHTML = enlacesMenu.classList.contains('open')
+                ? '<i class="bi bi-x-lg"></i>'
+                : '<i class="bi bi-list"></i>';
+        }
+
+        botonMenu.addEventListener('click', actualizarIconoMenu);
+
+        enlacesMenu.querySelectorAll('a').forEach(function (enlace) {
+            enlace.addEventListener('click', actualizarIconoMenu);
+        });
+
+        actualizarIconoMenu();
+    });
+</script>
+
 <script src="{{ asset('js/auth-modal.js') }}"></script>
+<script src="{{ asset('js/cart-count.js') }}?v={{ time() }}"></script>
 
 </body>
 </html>

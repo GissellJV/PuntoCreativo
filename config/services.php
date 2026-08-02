@@ -17,6 +17,11 @@ return [
         'mode' => env('PAYPAL_MODE', 'sandbox'),
         'client_id' => env('PAYPAL_CLIENT_ID'),
         'secret' => env('PAYPAL_SECRET'),
+
+        'hnl_por_usd' => (float) env(
+            'PAYPAL_HNL_POR_USD',
+            26.50
+        ),
     ],
 
     'postmark' => [

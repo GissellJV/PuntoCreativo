@@ -2363,7 +2363,7 @@ Punto Creativo
    rel="noopener"
    aria-label="Contactar por WhatsApp"
    title="WhatsApp">
-    ✆
+    <i class="bi bi-whatsapp"></i>
 </a>
 
 <script src="../../public/js/products.js"></script>
@@ -2371,6 +2371,7 @@ Punto Creativo
 <script src="../../public/js/common.js"></script>
 <script src="{{ asset('js/auth-modal.js') }}"></script>
 {{-- <script src="js/catalogo.js"></script> --}}
+<script src="{{ asset('js/cart-count.js') }}?v={{ time() }}"></script>
 
 </body>
 </html>

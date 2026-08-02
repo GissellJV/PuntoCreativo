@@ -1876,7 +1876,7 @@ Prototipo transaccional para fines académicos.
 
 
 <a class="whatsapp-float"
-   href="https://wa.me/50400000000"
+   href="https://wa.me/50492336467"
    target="_blank"
    rel="noopener"
    aria-label="Contactar por WhatsApp"
@@ -1889,6 +1889,7 @@ Prototipo transaccional para fines académicos.
 <script src="../../public/js/products.js"></script>
 <script src="../../public/js/store.js"></script>
 <script src="../../public/js/common.js"></script>
+<script src="{{ asset('js/cart-count.js') }}?v={{ time() }}"></script>
 
 </body>
 </html>

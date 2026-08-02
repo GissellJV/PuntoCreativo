@@ -3,9 +3,19 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <meta name="description" content="Cuenta e historial local de pedidos de Punto Creativo.">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <meta
+        name="description"
+        content="Cuenta e historial de pedidos de Punto Creativo."
+    >
+
     <title>Mi cuenta | Punto Creativo</title>
+
     <link
         rel="stylesheet"
         href="{{ asset('css/base.css') }}"
@@ -15,1350 +25,715 @@
         rel="stylesheet"
         href="{{ asset('css/store.css') }}"
     >
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    >
+
     <style>
-        :root {
-            --bg: #080a13;
-            --bg-soft: #111526;
-            --card: rgba(255, 255, 255, 0.075);
-            --card-strong: rgba(255, 255, 255, 0.11);
-            --text: #f7f8ff;
-            --muted: #b9bfd3;
-            --purple: #8d5cff;
-            --cyan: #23d5e8;
-            --pink: #ff4fa3;
-            --orange: #ff9f43;
-            --green: #35d07f;
-            --border: rgba(255, 255, 255, 0.14);
-            --shadow: 0 22px 70px rgba(0, 0, 0, 0.38);
-            --radius: 24px;
-            --container: 1180px;
-        }
+        /* =====================================
+           CONTENEDORES
+        ===================================== */
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-            color: var(--text);
-            background:
-                radial-gradient(circle at 12% 8%, rgba(141, 92, 255, 0.25), transparent 32%),
-                radial-gradient(circle at 88% 16%, rgba(35, 213, 232, 0.18), transparent 28%),
-                radial-gradient(circle at 70% 84%, rgba(255, 79, 163, 0.16), transparent 34%),
-                var(--bg);
-            line-height: 1.65;
-            overflow-x: hidden;
-        }
-
-        body::before {
-            content: "";
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            opacity: 0.18;
-            background-image:
-                linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
-            background-size: 42px 42px;
-            mask-image: linear-gradient(to bottom, black, transparent 80%);
-            z-index: -1;
-        }
-
-        a {
-            color: inherit;
-            text-decoration: none;
-        }
-
-        button,
-        input,
-        textarea,
-        select {
-            font: inherit;
-        }
-
-        img,
-        svg {
-            display: block;
-            max-width: 100%;
-        }
-
-        .container {
-            width: min(calc(100% - 40px), var(--container));
+        .account-container {
+            width: min(calc(100% - 40px), 1320px);
             margin-inline: auto;
         }
 
-        .section {
-            padding: 96px 0;
+        .account-header {
+            padding: 55px 0 42px;
         }
 
-        .section-title {
-            max-width: 760px;
-            margin-bottom: 44px;
-        }
-
-        .eyebrow {
-            display: inline-flex;
+        .account-header .breadcrumbs {
+            display: flex;
+            flex-wrap: wrap;
             align-items: center;
             gap: 9px;
-            padding: 7px 12px;
+            margin-bottom: 22px;
+            color: var(--muted);
+            font-size: 0.88rem;
+        }
+
+        .account-header .breadcrumbs a {
+            color: var(--muted);
+        }
+
+        .account-header .breadcrumbs a:hover {
+            color: var(--cyan);
+        }
+
+        .account-header h1 {
+            max-width: 850px;
+            margin: 18px 0 16px;
+            font-size: clamp(2.8rem, 6vw, 5.4rem);
+            line-height: 1.03;
+        }
+
+        .account-header p {
+            max-width: 760px;
+            margin: 0;
+            color: var(--muted);
+            font-size: 1.04rem;
+            line-height: 1.65;
+        }
+
+        .account-section {
+            padding: 22px 0 90px;
+        }
+
+        .account-layout {
+            display: grid;
+            grid-template-columns: minmax(280px, 360px) minmax(0, 1fr);
+            align-items: start;
+            gap: 25px;
+        }
+
+        /* =====================================
+           MENSAJES
+        ===================================== */
+
+        .account-message {
+            display: flex;
+            align-items: center;
+            gap: 11px;
+            margin-bottom: 22px;
+            padding: 15px 18px;
+            border-radius: 15px;
+            font-weight: 750;
+        }
+
+        .account-message.success {
+            border: 1px solid rgba(53, 208, 127, 0.3);
+            color: #83efb1;
+            background: rgba(53, 208, 127, 0.1);
+        }
+
+        .account-message.error {
+            border: 1px solid rgba(255, 79, 112, 0.3);
+            color: #ff9bb0;
+            background: rgba(255, 79, 112, 0.09);
+        }
+
+        /* =====================================
+           PANEL DEL PERFIL
+        ===================================== */
+
+        .account-panel,
+        .orders-panel {
             border: 1px solid var(--border);
-            border-radius: 999px;
-            color: #dce1ff;
-            background: rgba(255, 255, 255, 0.05);
-            font-size: 0.82rem;
-            font-weight: 800;
+            border-radius: 24px;
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255, 255, 255, 0.075),
+                    rgba(255, 255, 255, 0.03)
+                );
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+        }
+
+        .account-panel {
+            position: sticky;
+            top: 100px;
+            padding: 27px;
+        }
+
+        .account-panel-heading {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 25px;
+        }
+
+        .account-avatar {
+            width: 54px;
+            height: 54px;
+            display: grid;
+            place-items: center;
+            flex: 0 0 auto;
+            border: 1px solid rgba(35, 213, 232, 0.26);
+            border-radius: 17px;
+            color: var(--cyan);
+            background: rgba(35, 213, 232, 0.09);
+            font-size: 1.4rem;
+        }
+
+        .account-panel-heading span {
+            display: block;
+            margin-bottom: 3px;
+            color: var(--muted);
+            font-size: 0.72rem;
+            font-weight: 850;
             letter-spacing: 0.08em;
             text-transform: uppercase;
-            margin-bottom: 16px;
         }
 
-        .eyebrow::before {
-            content: "";
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--cyan), var(--purple));
-            box-shadow: 0 0 18px var(--cyan);
+        .account-panel-heading h2 {
+            margin: 0;
+            font-size: 1.45rem;
         }
 
-        h1,
-        h2,
-        h3 {
-            line-height: 1.08;
-            letter-spacing: -0.035em;
+        .account-form {
+            display: grid;
+            gap: 16px;
         }
 
-        h1 {
-            font-size: clamp(3.2rem, 8vw, 7rem);
-            max-width: 900px;
+        .account-form + .account-form {
+            margin-top: 28px;
+            padding-top: 26px;
+            border-top: 1px solid rgba(255, 255, 255, 0.09);
         }
 
-        h2 {
-            font-size: clamp(2.2rem, 5vw, 4.2rem);
-            margin-bottom: 18px;
-        }
-
-        h3 {
-            font-size: 1.35rem;
-        }
-
-        .gradient-text {
-            background: linear-gradient(100deg, #ffffff 10%, var(--cyan) 44%, var(--purple) 70%, var(--pink));
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-        }
-
-        .lead,
-        .section-title p {
-            color: var(--muted);
-            font-size: clamp(1rem, 2vw, 1.15rem);
-        }
-
-        .btn {
-            min-height: 52px;
-            display: inline-flex;
+        .account-subtitle {
+            display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 10px;
-            padding: 0 20px;
-            border: 1px solid transparent;
+            gap: 9px;
+            margin-bottom: 2px;
+            font-size: 1rem;
+        }
+
+        .account-subtitle i {
+            color: var(--cyan);
+        }
+
+        .account-field {
+            display: grid;
+            gap: 8px;
+        }
+
+        .account-field label {
+            color: var(--text);
+            font-size: 0.86rem;
+            font-weight: 800;
+        }
+
+        .account-input {
+            position: relative;
+        }
+
+        .account-input > i {
+            position: absolute;
+            top: 50%;
+            left: 15px;
+            z-index: 2;
+            color: var(--muted);
+            transform: translateY(-50%);
+            pointer-events: none;
+        }
+
+        .account-input input {
+            width: 100%;
+            min-height: 50px;
+            padding: 0 15px 0 43px;
+            border: 1px solid var(--border);
             border-radius: 14px;
-            font-weight: 850;
-            cursor: pointer;
-            transition: transform .25s ease, border-color .25s ease, background .25s ease, box-shadow .25s ease;
+            outline: none;
+            color: var(--text);
+            background: rgba(255, 255, 255, 0.045);
         }
 
-        .btn:hover {
-            transform: translateY(-3px);
+        .account-input input:focus {
+            border-color: var(--cyan);
+            box-shadow: 0 0 0 4px rgba(35, 213, 232, 0.1);
         }
 
-        .btn-primary {
-            color: #071018;
-            background: linear-gradient(135deg, var(--cyan), #91eff7);
-            box-shadow: 0 14px 36px rgba(35, 213, 232, 0.22);
+        .account-input input[readonly] {
+            color: var(--muted);
+            cursor: not-allowed;
         }
+
+        .field-error {
+            color: #ff9bb0;
+            font-size: 0.78rem;
+            line-height: 1.45;
+        }
+
+        .account-form .btn {
+            width: 100%;
+        }
+
+        .logout-form {
+            margin-top: 28px;
+            padding-top: 26px;
+            border-top: 1px solid rgba(255, 255, 255, 0.09);
+        }
+
         .logout-btn {
             width: 100%;
-            background: linear-gradient(135deg, #ff4f4f, #d62828);
             color: #fff;
-            box-shadow: 0 14px 36px rgb(183, 28, 28);
-
+            background: linear-gradient(135deg, #ff5151, #d62828);
+            box-shadow: 0 14px 32px rgba(214, 40, 40, 0.22);
         }
 
         .logout-btn:hover {
             background: linear-gradient(135deg, #ff6b6b, #b71c1c);
-            transform: translateY(-2px);
         }
 
-        .btn-secondary {
-            background: rgba(255, 255, 255, 0.07);
-            border-color: var(--border);
-            color: var(--text);
-        }
-
-        .btn-whatsapp {
-            background: linear-gradient(135deg, #25d366, #9bebba);
-            color: #06150c;
-        }
-
-        .topbar {
-            text-align: center;
-            padding: 10px 20px;
-            color: #dce2f5;
-            font-size: 0.88rem;
-            border-bottom: 1px solid rgba(255,255,255,.08);
-            background: rgba(255,255,255,.035);
-        }
-
-        .navbar {
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            background: rgba(8, 10, 19, 0.72);
-            border-bottom: 1px solid rgba(255,255,255,.08);
-        }
-
-        .nav-inner {
-            min-height: 76px;
+        .account-note {
             display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 24px;
-        }
-
-        .brand {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            font-weight: 950;
-            letter-spacing: -0.03em;
-            font-size: 1.12rem;
-        }
-
-        .brand-mark {
-            width: 42px;
-            height: 42px;
-            display: grid;
-            place-items: center;
-            border-radius: 14px;
-            background: conic-gradient(from 210deg, var(--purple), var(--cyan), var(--pink), var(--orange), var(--purple));
-            box-shadow: 0 10px 32px rgba(141, 92, 255, .28);
-            transform: rotate(-6deg);
-        }
-
-        .brand-mark span {
-            width: 24px;
-            height: 24px;
-            display: grid;
-            place-items: center;
-            border-radius: 8px;
-            background: var(--bg);
-            color: white;
-            font-size: 0.85rem;
-            transform: rotate(6deg);
-        }
-
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 24px;
-            color: #d9deef;
-            font-weight: 700;
-            font-size: 0.93rem;
-        }
-
-        .nav-links a {
-            transition: color .2s ease;
-        }
-
-        .nav-links a:hover {
-            color: var(--cyan);
-        }
-
-        .menu-toggle {
-            display: none;
-            border: 1px solid var(--border);
-            background: rgba(255,255,255,.06);
-            color: var(--text);
-            width: 46px;
-            height: 46px;
-            border-radius: 14px;
-            cursor: pointer;
-            font-size: 1.4rem;
-        }
-
-        .hero {
-            min-height: calc(100vh - 112px);
-            display: grid;
-            align-items: center;
-            padding: 72px 0 58px;
-            position: relative;
-        }
-
-        .hero-grid {
-            display: grid;
-            grid-template-columns: 1.12fr .88fr;
-            align-items: center;
-            gap: 62px;
-        }
-
-        .hero-copy .lead {
-            max-width: 670px;
-            margin: 24px 0 30px;
-            font-size: 1.15rem;
-        }
-
-        .hero-actions {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 14px;
-        }
-
-        .hero-proof {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 22px;
-            margin-top: 34px;
-            color: var(--muted);
-            font-size: .93rem;
-        }
-
-        .hero-proof span {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .check {
-            width: 22px;
-            height: 22px;
-            border-radius: 50%;
-            display: inline-grid;
-            place-items: center;
-            background: rgba(53, 208, 127, .14);
-            color: #77efa9;
-            font-size: .76rem;
-            font-weight: 950;
-        }
-
-        .hero-visual {
-            position: relative;
-            min-height: 560px;
-        }
-
-        .orbit {
-            position: absolute;
-            inset: 20px;
-            border-radius: 50%;
-            border: 1px solid rgba(255,255,255,.11);
-            animation: spin 22s linear infinite;
-        }
-
-        .orbit::before,
-        .orbit::after {
-            content: "";
-            position: absolute;
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            top: 50%;
-            transform: translateY(-50%);
-        }
-
-        .orbit::before {
-            left: -8px;
-            background: var(--cyan);
-            box-shadow: 0 0 28px var(--cyan);
-        }
-
-        .orbit::after {
-            right: -8px;
-            background: var(--pink);
-            box-shadow: 0 0 28px var(--pink);
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        .design-board {
-            position: absolute;
-            inset: 52px 12px 42px 52px;
-            border: 1px solid rgba(255,255,255,.16);
-            border-radius: 34px;
-            padding: 22px;
-            background:
-                linear-gradient(145deg, rgba(255,255,255,.12), rgba(255,255,255,.035)),
-                rgba(17,21,38,.82);
-            box-shadow: var(--shadow);
-            backdrop-filter: blur(16px);
-            transform: rotate(3deg);
-        }
-
-        .window-bar {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 18px;
-        }
-
-        .window-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: rgba(255,255,255,.18);
-        }
-
-        .artboard {
-            height: calc(100% - 30px);
-            border-radius: 24px;
-            overflow: hidden;
-            display: grid;
-            grid-template-rows: 1.3fr .7fr;
-            gap: 13px;
-        }
-
-        .poster {
-            position: relative;
-            overflow: hidden;
-            border-radius: 22px;
-            background:
-                radial-gradient(circle at 70% 30%, rgba(255,255,255,.45), transparent 12%),
-                linear-gradient(135deg, #4424a6 0%, #8d5cff 40%, #ff4fa3 100%);
-            padding: 28px;
-        }
-
-        .poster::before {
-            content: "";
-            position: absolute;
-            width: 230px;
-            height: 230px;
-            border-radius: 42% 58% 62% 38%;
-            background: linear-gradient(135deg, var(--cyan), #b7f8ff);
-            right: -48px;
-            bottom: -58px;
-            transform: rotate(-18deg);
-            box-shadow: inset 0 0 0 14px rgba(255,255,255,.12);
-        }
-
-        .poster::after {
-            content: "CREA";
-            position: absolute;
-            right: 14px;
-            top: 4px;
-            font-size: 5.8rem;
-            font-weight: 1000;
-            letter-spacing: -.08em;
-            color: rgba(255,255,255,.11);
-            transform: rotate(90deg) translateX(62%);
-            transform-origin: top right;
-        }
-
-        .poster small {
-            display: block;
-            font-weight: 850;
-            letter-spacing: .14em;
-            text-transform: uppercase;
-            margin-bottom: 18px;
-        }
-
-        .poster strong {
-            position: relative;
-            z-index: 2;
-            display: block;
-            max-width: 240px;
-            font-size: 2.7rem;
-            line-height: .95;
-            letter-spacing: -.06em;
-        }
-
-        .mini-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 13px;
-        }
-
-        .mini-card {
-            border-radius: 20px;
-            padding: 18px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            min-height: 130px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .mini-card:first-child {
-            background: linear-gradient(135deg, #082c33, #12a9b9);
-        }
-
-        .mini-card:last-child {
-            background: linear-gradient(135deg, #39240c, #ff9f43);
-        }
-
-        .mini-card b {
-            font-size: 1.06rem;
-            max-width: 130px;
-            z-index: 2;
-        }
-
-        .mini-card span {
-            color: rgba(255,255,255,.72);
-            font-size: .82rem;
-            z-index: 2;
-        }
-
-        .floating-tag {
-            position: absolute;
-            border: 1px solid rgba(255,255,255,.17);
-            border-radius: 16px;
-            background: rgba(10,12,23,.82);
-            backdrop-filter: blur(16px);
-            box-shadow: 0 16px 40px rgba(0,0,0,.35);
-            padding: 13px 16px;
-            font-weight: 800;
-            color: #eef1ff;
-        }
-
-        .tag-one {
-            top: 28px;
-            right: -12px;
-            transform: rotate(-4deg);
-        }
-
-        .tag-two {
-            bottom: 24px;
-            left: 0;
-            transform: rotate(3deg);
-        }
-
-        .stats {
-            padding-top: 26px;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 14px;
-        }
-
-        .stat {
-            padding: 26px 20px;
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            background: var(--card);
-            text-align: center;
-        }
-
-        .stat strong {
-            display: block;
-            font-size: 1.85rem;
-            line-height: 1;
-            margin-bottom: 10px;
-        }
-
-        .stat span {
-            color: var(--muted);
-            font-size: .9rem;
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 18px;
-        }
-
-        .service-card {
-            min-height: 300px;
-            position: relative;
-            overflow: hidden;
-            padding: 28px;
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            background: linear-gradient(145deg, var(--card-strong), rgba(255,255,255,.035));
-            transition: transform .3s ease, border-color .3s ease, background .3s ease;
-        }
-
-        .service-card:hover {
-            transform: translateY(-8px);
-            border-color: rgba(35, 213, 232, .46);
-            background: linear-gradient(145deg, rgba(35,213,232,.12), rgba(141,92,255,.09));
-        }
-
-        .service-card::after {
-            content: "";
-            position: absolute;
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            right: -78px;
-            bottom: -74px;
-            background: var(--accent, var(--purple));
-            filter: blur(6px);
-            opacity: .17;
-        }
-
-        .service-icon {
-            width: 52px;
-            height: 52px;
-            display: grid;
-            place-items: center;
-            border-radius: 16px;
-            background: rgba(255,255,255,.09);
-            margin-bottom: 54px;
-            font-size: 1.45rem;
-            border: 1px solid rgba(255,255,255,.12);
-        }
-
-        .service-card h3 {
-            margin-bottom: 12px;
-        }
-
-        .service-card p {
-            color: var(--muted);
-            font-size: .96rem;
-        }
-
-        .portfolio-shell {
-            border: 1px solid var(--border);
-            border-radius: 30px;
-            padding: 16px;
-            background: rgba(255,255,255,.045);
-        }
-
-        .filter-row {
-            display: flex;
-            flex-wrap: wrap;
+            align-items: flex-start;
             gap: 10px;
-            padding: 8px 8px 22px;
-        }
-
-        .filter-btn {
-            padding: 9px 14px;
-            border: 1px solid var(--border);
-            border-radius: 999px;
-            background: rgba(255,255,255,.04);
-            color: #dce2f5;
-            font-weight: 750;
-            cursor: pointer;
-        }
-
-        .filter-btn.active {
-            background: linear-gradient(135deg, var(--purple), var(--pink));
-            border-color: transparent;
-            color: white;
-        }
-
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(12, 1fr);
-            grid-auto-rows: 190px;
-            gap: 14px;
-        }
-
-        .work {
-            position: relative;
-            overflow: hidden;
-            border-radius: 22px;
-            min-height: 190px;
-            isolation: isolate;
-            transition: transform .28s ease, opacity .25s ease;
-        }
-
-        .work:hover {
-            transform: scale(.985);
-        }
-
-        .work.hidden {
-            display: none;
-        }
-
-        .work:nth-child(1) { grid-column: span 7; grid-row: span 2; }
-        .work:nth-child(2) { grid-column: span 5; }
-        .work:nth-child(3) { grid-column: span 5; }
-        .work:nth-child(4) { grid-column: span 4; }
-        .work:nth-child(5) { grid-column: span 4; }
-        .work:nth-child(6) { grid-column: span 4; }
-
-        .work-bg {
-            position: absolute;
-            inset: 0;
-            z-index: -2;
-        }
-
-        .work:nth-child(1) .work-bg {
-            background:
-                radial-gradient(circle at 72% 25%, rgba(255,255,255,.35), transparent 12%),
-                linear-gradient(125deg, #1f1452, #7d3cff 48%, #ff4fa3);
-        }
-
-        .work:nth-child(2) .work-bg {
-            background: linear-gradient(135deg, #051e25, #087b8b 48%, #22d3e5);
-        }
-
-        .work:nth-child(3) .work-bg {
-            background: linear-gradient(135deg, #3b1c05, #cc6415 52%, #ffae54);
-        }
-
-        .work:nth-child(4) .work-bg {
-            background: linear-gradient(135deg, #1d234d, #3757c8 52%, #5fd6ff);
-        }
-
-        .work:nth-child(5) .work-bg {
-            background: linear-gradient(135deg, #3d1230, #b42378 55%, #ff80bd);
-        }
-
-        .work:nth-child(6) .work-bg {
-            background: linear-gradient(135deg, #123322, #187a44 55%, #66e795);
-        }
-
-        .work::before {
-            content: "";
-            position: absolute;
-            width: 220px;
-            height: 220px;
-            border-radius: 44% 56% 35% 65%;
-            right: -64px;
-            top: -72px;
-            border: 18px solid rgba(255,255,255,.12);
-            transform: rotate(30deg);
-            z-index: -1;
-        }
-
-        .work-content {
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            padding: 24px;
-            background: linear-gradient(to top, rgba(4,5,11,.78), transparent 64%);
-        }
-
-        .work small {
-            color: rgba(255,255,255,.74);
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: .12em;
-        }
-
-        .work h3 {
-            margin-top: 5px;
-            font-size: clamp(1.25rem, 2vw, 2rem);
-        }
-
-        .process-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 16px;
-            counter-reset: step;
-        }
-
-        .step {
-            counter-increment: step;
-            min-height: 245px;
-            padding: 26px;
-            border-top: 1px solid var(--border);
-            background: linear-gradient(to bottom, rgba(255,255,255,.045), transparent);
-        }
-
-        .step::before {
-            content: "0" counter(step);
-            display: block;
-            color: var(--cyan);
-            font-weight: 950;
-            font-size: 1.1rem;
-            letter-spacing: .08em;
-            margin-bottom: 70px;
-        }
-
-        .step h3 {
-            margin-bottom: 10px;
-        }
-
-        .step p {
+            margin-top: 20px;
             color: var(--muted);
-            font-size: .95rem;
+            font-size: 0.8rem;
+            line-height: 1.55;
         }
 
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 18px;
-            align-items: stretch;
+        .account-note i {
+            margin-top: 3px;
+            color: var(--cyan);
         }
 
-        .price-card {
-            position: relative;
+        /* =====================================
+           HISTORIAL DE PEDIDOS
+        ===================================== */
+
+        .orders-panel {
+            min-width: 0;
             padding: 30px;
-            border: 1px solid var(--border);
-            border-radius: 26px;
-            background: var(--card);
+        }
+
+        .orders-heading {
             display: flex;
-            flex-direction: column;
-        }
-
-        .price-card.featured {
-            background:
-                radial-gradient(circle at 90% 10%, rgba(35,213,232,.18), transparent 28%),
-                linear-gradient(145deg, rgba(141,92,255,.16), rgba(255,255,255,.06));
-            border-color: rgba(35,213,232,.38);
-            transform: translateY(-12px);
-            box-shadow: var(--shadow);
-        }
-
-        .popular {
-            position: absolute;
-            top: 18px;
-            right: 18px;
-            padding: 6px 10px;
-            border-radius: 999px;
-            background: var(--cyan);
-            color: #071018;
-            font-size: .72rem;
-            font-weight: 950;
-            text-transform: uppercase;
-            letter-spacing: .08em;
-        }
-
-        .price-card p {
-            color: var(--muted);
-            margin: 12px 0 20px;
-        }
-
-        .price {
-            font-size: 2.3rem;
-            font-weight: 1000;
-            letter-spacing: -.05em;
-            margin-bottom: 22px;
-        }
-
-        .price small {
-            font-size: .85rem;
-            color: var(--muted);
-            font-weight: 650;
-            letter-spacing: 0;
-        }
-
-        .feature-list {
-            list-style: none;
-            display: grid;
-            gap: 12px;
-            margin-bottom: 28px;
-        }
-
-        .feature-list li {
-            display: flex;
-            gap: 10px;
-            color: #e7eaff;
-            font-size: .93rem;
-        }
-
-        .price-card .btn {
-            width: 100%;
-            margin-top: auto;
-        }
-
-        .about-grid {
-            display: grid;
-            grid-template-columns: .9fr 1.1fr;
-            gap: 52px;
             align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            margin-bottom: 25px;
         }
 
-        .about-card {
-            position: relative;
-            min-height: 490px;
-            overflow: hidden;
-            border: 1px solid var(--border);
-            border-radius: 34px;
-            background:
-                radial-gradient(circle at 30% 20%, rgba(35,213,232,.32), transparent 22%),
-                radial-gradient(circle at 78% 76%, rgba(255,79,163,.28), transparent 25%),
-                linear-gradient(145deg, #161a33, #0a0d18);
-            box-shadow: var(--shadow);
-        }
-
-        .about-card::before {
-            content: "PC";
-            position: absolute;
-            inset: 0;
-            display: grid;
-            place-items: center;
-            font-size: 12rem;
-            font-weight: 1000;
-            color: rgba(255,255,255,.055);
-            letter-spacing: -.1em;
-        }
-
-        .about-chip {
-            position: absolute;
-            padding: 14px 18px;
-            border: 1px solid var(--border);
-            border-radius: 18px;
-            background: rgba(8,10,19,.72);
-            backdrop-filter: blur(18px);
+        .orders-heading span {
+            display: block;
+            margin-bottom: 4px;
+            color: var(--muted);
+            font-size: 0.72rem;
             font-weight: 850;
-            box-shadow: 0 14px 34px rgba(0,0,0,.32);
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
         }
 
-        .about-chip:nth-child(1) { left: 30px; top: 48px; }
-        .about-chip:nth-child(2) { right: 30px; top: 170px; }
-        .about-chip:nth-child(3) { left: 56px; bottom: 46px; }
-
-        .about-copy p {
-            color: var(--muted);
-            margin-bottom: 18px;
+        .orders-heading h2 {
+            margin: 0;
+            font-size: 1.65rem;
         }
 
-        .about-list {
-            display: grid;
-            gap: 14px;
-            margin-top: 28px;
-        }
-
-        .about-list div {
-            padding: 16px 18px;
-            border-left: 3px solid var(--cyan);
-            background: rgba(255,255,255,.04);
-            border-radius: 0 14px 14px 0;
-        }
-
-        .quote-shell {
-            display: grid;
-            grid-template-columns: .78fr 1.22fr;
-            border: 1px solid var(--border);
-            border-radius: 34px;
-            overflow: hidden;
-            background: rgba(255,255,255,.045);
-            box-shadow: var(--shadow);
-        }
-
-        .quote-info {
-            padding: 46px;
-            background:
-                radial-gradient(circle at 10% 10%, rgba(35,213,232,.23), transparent 24%),
-                linear-gradient(145deg, #161b37, #0c0f1d);
-        }
-
-        .quote-info p {
-            color: var(--muted);
-            margin: 20px 0 32px;
-        }
-
-        .contact-list {
-            display: grid;
-            gap: 14px;
-            color: #e9edff;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .contact-icon {
-            width: 42px;
-            height: 42px;
-            border-radius: 13px;
+        .orders-count {
+            min-width: 45px;
+            height: 45px;
             display: grid;
             place-items: center;
-            background: rgba(255,255,255,.08);
-            border: 1px solid rgba(255,255,255,.1);
+            flex: 0 0 auto;
+            border: 1px solid rgba(35, 213, 232, 0.25);
+            border-radius: 14px;
+            color: var(--cyan);
+            background: rgba(35, 213, 232, 0.08);
+            font-weight: 900;
         }
 
-        .quote-form {
-            padding: 46px;
+        .orders-history {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
             gap: 18px;
         }
 
-        .field {
-            display: grid;
-            gap: 8px;
-        }
-
-        .field.full {
-            grid-column: 1 / -1;
-        }
-
-        label {
-            color: #e9edff;
-            font-weight: 750;
-            font-size: .9rem;
-        }
-
-        input,
-        textarea,
-        select {
-            width: 100%;
+        .order-card {
+            overflow: hidden;
             border: 1px solid var(--border);
-            border-radius: 14px;
-            background: rgba(255,255,255,.045);
-            color: var(--text);
-            padding: 14px 15px;
-            outline: none;
-            transition: border-color .2s ease, box-shadow .2s ease;
+            border-radius: 19px;
+            background: rgba(255, 255, 255, 0.035);
         }
 
-        select option {
-            background: #111526;
+        .order-card-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 19px 21px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
 
-        input:focus,
-        textarea:focus,
-        select:focus {
-            border-color: var(--cyan);
-            box-shadow: 0 0 0 4px rgba(35,213,232,.11);
-        }
-
-        textarea {
-            resize: vertical;
-            min-height: 130px;
-        }
-
-        .form-note {
-            grid-column: 1 / -1;
+        .order-card-label {
+            display: block;
+            margin-bottom: 5px;
             color: var(--muted);
-            font-size: .83rem;
-        }
-
-        .quote-form .btn {
-            grid-column: 1 / -1;
-            width: 100%;
-        }
-
-        .faq-grid {
-            display: grid;
-            gap: 12px;
-            max-width: 900px;
-            margin-inline: auto;
-        }
-
-        details {
-            border: 1px solid var(--border);
-            border-radius: 18px;
-            background: rgba(255,255,255,.045);
-            padding: 20px 22px;
-        }
-
-        summary {
-            cursor: pointer;
+            font-size: 0.7rem;
             font-weight: 850;
-            list-style: none;
-            display: flex;
-            justify-content: space-between;
-            gap: 20px;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
         }
 
-        summary::-webkit-details-marker {
-            display: none;
+        .order-number {
+            color: var(--text);
+            overflow-wrap: anywhere;
         }
 
-        summary::after {
-            content: "+";
+        .order-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 6px 10px;
+            border: 1px solid rgba(255, 190, 71, 0.3);
+            border-radius: 999px;
+            color: #ffd27d;
+            background: rgba(255, 190, 71, 0.09);
+            font-size: 0.72rem;
+            font-weight: 850;
+            text-transform: uppercase;
+        }
+
+        .order-status.completado,
+        .order-status.completed,
+        .order-status.pagado {
+            border-color: rgba(53, 208, 127, 0.3);
+            color: #82efaf;
+            background: rgba(53, 208, 127, 0.09);
+        }
+
+        .order-information {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+
+        .order-information > div {
+            min-width: 0;
+            padding: 18px 21px;
+            border-right: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .order-information > div:last-child {
+            border-right: 0;
+        }
+
+        .order-information strong {
+            display: block;
+            overflow-wrap: anywhere;
+            color: var(--text);
+            font-size: 0.88rem;
+            line-height: 1.5;
+        }
+
+        .order-information strong i {
+            margin-right: 5px;
             color: var(--cyan);
-            font-size: 1.4rem;
-            line-height: 1;
         }
 
-        details[open] summary::after {
-            content: "−";
+        .order-total {
+            color: var(--cyan) !important;
+            font-size: 1rem !important;
         }
 
-        details p {
-            color: var(--muted);
-            padding-top: 14px;
+        .order-reference {
+            color: var(--muted) !important;
+            font-size: 0.76rem !important;
         }
 
-        footer {
-            padding: 42px 0 28px;
-            border-top: 1px solid rgba(255,255,255,.09);
-            background: rgba(0,0,0,.14);
-        }
-
-        .footer-grid {
+        .order-products {
             display: grid;
-            grid-template-columns: 1.4fr repeat(2, .7fr);
-            gap: 38px;
-            margin-bottom: 34px;
+            padding: 0 21px 20px;
         }
 
-        .footer-brand p {
-            color: var(--muted);
-            max-width: 470px;
-            margin-top: 15px;
-        }
-
-        .footer-col h4 {
-            margin-bottom: 14px;
-        }
-
-        .footer-col {
+        .order-product {
             display: grid;
-            align-content: start;
-            gap: 8px;
-            color: var(--muted);
-        }
-
-        .footer-bottom {
-            padding-top: 24px;
-            border-top: 1px solid rgba(255,255,255,.08);
-            display: flex;
-            justify-content: space-between;
+            grid-template-columns: minmax(0, 1fr) auto;
+            align-items: center;
             gap: 20px;
-            color: #8f97ae;
-            font-size: .84rem;
+            padding: 14px 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
         }
 
-        .whatsapp-float {
-            position: fixed;
-            right: 22px;
-            bottom: 22px;
-            z-index: 1100;
-            width: 58px;
-            height: 58px;
-            border-radius: 50%;
+        .order-product strong,
+        .order-product small {
+            display: block;
+        }
+
+        .order-product small {
+            margin-top: 4px;
+            color: var(--muted);
+            font-size: 0.78rem;
+        }
+
+        .order-product > span {
+            color: var(--cyan);
+            font-weight: 850;
+            white-space: nowrap;
+        }
+
+        .order-summary {
             display: grid;
-            place-items: center;
-            background: #25d366;
-            color: #06150c;
-            font-size: 1.6rem;
-            box-shadow: 0 18px 45px rgba(37,211,102,.35);
-            transition: transform .25s ease;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 10px;
+            padding: 17px 21px;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.025);
         }
 
-        .whatsapp-float:hover {
-            transform: translateY(-4px) scale(1.04);
+        .order-summary div {
+            min-width: 0;
         }
 
-        .reveal {
-            opacity: 0;
-            transform: translateY(26px);
-            transition: opacity .65s ease, transform .65s ease;
+        .order-summary span {
+            display: block;
+            margin-bottom: 3px;
+            color: var(--muted);
+            font-size: 0.7rem;
         }
 
-        .reveal.visible {
-            opacity: 1;
-            transform: none;
+        .order-summary strong {
+            overflow-wrap: anywhere;
+            font-size: 0.83rem;
         }
 
-        @media (max-width: 980px) {
-            .hero-grid,
-            .about-grid,
-            .quote-shell {
+        .order-summary .final-total strong {
+            color: var(--cyan);
+            font-size: 0.96rem;
+        }
+
+        /* =====================================
+           SIN PEDIDOS
+        ===================================== */
+
+        .orders-empty {
+            min-height: 390px;
+            display: grid;
+            justify-items: center;
+            align-content: center;
+            padding: 40px 25px;
+            border: 1px dashed var(--border);
+            border-radius: 20px;
+            background: rgba(255, 255, 255, 0.025);
+            text-align: center;
+        }
+
+        .orders-empty > i {
+            margin-bottom: 15px;
+            color: var(--cyan);
+            font-size: 3rem;
+        }
+
+        .orders-empty h3 {
+            margin-bottom: 10px;
+            font-size: 1.5rem;
+        }
+
+        .orders-empty p {
+            max-width: 460px;
+            margin-bottom: 22px;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        /* =====================================
+           BUSCADOR DEL NAVBAR
+        ===================================== */
+
+        .header-search {
+            flex: 0 1 290px;
+            margin: 0;
+        }
+
+        .header-search .search-input {
+            position: relative;
+            width: 100%;
+        }
+
+        .header-search .search-input i {
+            position: absolute;
+            top: 50%;
+            left: 15px;
+            z-index: 2;
+            color: var(--muted);
+            transform: translateY(-50%);
+            pointer-events: none;
+        }
+
+        .header-search .search-input input {
+            width: 100%;
+            height: 44px;
+            min-height: 44px;
+            padding: 0 15px 0 43px;
+            border: 1px solid var(--border);
+            border-radius: 13px;
+            color: var(--text);
+            background: rgba(255, 255, 255, 0.045);
+        }
+
+        /* =====================================
+           RESPONSIVE
+        ===================================== */
+
+        @media (max-width: 1050px) {
+            .account-layout {
+                grid-template-columns: 310px minmax(0, 1fr);
+            }
+
+            .order-information {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .order-information > div:nth-child(2n) {
+                border-right: 0;
+            }
+
+            .order-information > div:nth-child(-n + 2) {
+                border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            }
+
+            .order-summary {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 850px) {
+            .account-layout {
                 grid-template-columns: 1fr;
             }
 
-            .hero-visual {
-                min-height: 520px;
-                max-width: 640px;
-                width: 100%;
-                margin-inline: auto;
+            .account-panel {
+                position: static;
             }
 
-            .services-grid,
-            .pricing-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .process-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .price-card.featured {
-                transform: none;
-            }
-
-            .portfolio-grid {
-                grid-template-columns: repeat(2, 1fr);
-                grid-auto-rows: 240px;
-            }
-
-            .work,
-            .work:nth-child(n) {
-                grid-column: span 1;
-                grid-row: span 1;
-            }
-
-            .work:nth-child(1) {
-                grid-column: 1 / -1;
-            }
-
-            .footer-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .footer-brand {
-                grid-column: 1 / -1;
+            .header-search {
+                flex: 0 1 220px;
             }
         }
 
         @media (max-width: 760px) {
-            .section {
-                padding: 74px 0;
-            }
-
-            .menu-toggle {
-                display: grid;
-                place-items: center;
-            }
-
-            .nav-links {
-                position: absolute;
-                top: 76px;
-                left: 20px;
-                right: 20px;
-                display: none;
-                padding: 18px;
-                border: 1px solid var(--border);
-                border-radius: 18px;
-                background: rgba(10,12,23,.96);
-                box-shadow: var(--shadow);
-                flex-direction: column;
-                align-items: stretch;
-            }
-
-            .nav-links.open {
-                display: flex;
-            }
-
-            .nav-links .btn {
+            .header-search {
                 width: 100%;
+                flex: none;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .account-container {
+                width: calc(100% - 24px);
             }
 
-            .hero {
-                padding-top: 52px;
+            .account-header {
+                padding: 38px 0 25px;
             }
 
-            .hero-grid {
-                gap: 36px;
+            .account-header h1 {
+                font-size: clamp(2.6rem, 14vw, 3.7rem);
             }
 
-            .hero-visual {
-                min-height: 430px;
+            .account-section {
+                padding-top: 10px;
+                padding-bottom: 65px;
             }
 
-            .design-board {
-                inset: 36px 4px 26px 24px;
+            .account-panel,
+            .orders-panel {
+                padding: 20px 17px;
+                border-radius: 19px;
             }
 
-            .poster strong {
-                font-size: 2.1rem;
+            .orders-heading {
+                align-items: flex-start;
             }
 
-            .tag-one {
-                right: 0;
+            .order-card-header {
+                align-items: flex-start;
+                flex-direction: column;
             }
 
-            .services-grid,
-            .pricing-grid,
-            .process-grid,
-            .portfolio-grid,
-            .quote-form,
-            .footer-grid {
+            .order-information {
                 grid-template-columns: 1fr;
             }
 
-            .work,
-            .work:nth-child(n),
-            .work:nth-child(1) {
-                grid-column: auto;
+            .order-information > div,
+            .order-information > div:nth-child(2n),
+            .order-information > div:nth-child(-n + 2) {
+                border-right: 0;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.08);
             }
 
-            .quote-info,
-            .quote-form {
-                padding: 30px 24px;
+            .order-information > div:last-child {
+                border-bottom: 0;
             }
 
-            .field.full,
-            .quote-form .btn,
-            .form-note {
-                grid-column: auto;
+            .order-product {
+                grid-template-columns: 1fr;
+                gap: 7px;
             }
 
-            .footer-brand {
-                grid-column: auto;
+            .order-product > span {
+                white-space: normal;
             }
 
-            .footer-bottom {
-                flex-direction: column;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                width: min(calc(100% - 26px), var(--container));
-            }
-
-            h1 {
-                font-size: 3rem;
-            }
-
-            .hero-actions .btn {
-                width: 100%;
-            }
-
-            .stats-grid {
+            .order-summary {
                 grid-template-columns: 1fr;
             }
-
-            .hero-visual {
-                min-height: 390px;
-            }
-
-            .poster {
-                padding: 20px;
-            }
-
-            .poster strong {
-                font-size: 1.72rem;
-            }
-
-            .mini-card {
-                min-height: 112px;
-                padding: 14px;
-            }
-
-            .floating-tag {
-                font-size: .78rem;
-                padding: 10px 12px;
-            }
         }
-        .search-input{
-            position: relative;
-            flex: 1;
+        /* =====================================
+   PAGINACIÓN DEL HISTORIAL
+===================================== */
+
+        .orders-pagination {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 14px;
+
+            margin-top: 25px;
+            padding-top: 22px;
+
+            border-top:
+                1px solid rgba(255, 255, 255, 0.09);
         }
 
-        .search-input i{
-            position: absolute;
-            left: 16px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--muted);
-            font-size: 16px;
+        .pagination-button {
+            min-height: 44px;
+
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+
+            padding: 0 17px;
+
+            border: 1px solid var(--border);
+            border-radius: 13px;
+
+            color: var(--text);
+            background:
+                rgba(255, 255, 255, 0.055);
+
+            font-size: 0.86rem;
+            font-weight: 850;
+
+            transition:
+                transform 0.2s ease,
+                color 0.2s ease,
+                border-color 0.2s ease,
+                background 0.2s ease;
+        }
+
+        .pagination-button:hover {
+            color: var(--cyan);
+
+            border-color:
+                rgba(35, 213, 232, 0.38);
+
+            background:
+                rgba(35, 213, 232, 0.08);
+
+            transform: translateY(-2px);
+        }
+
+        .pagination-button.disabled {
+            color: rgba(185, 191, 211, 0.45);
+            background: rgba(255, 255, 255, 0.025);
+            cursor: not-allowed;
             pointer-events: none;
         }
 
-        .search-input input{
-            width: 100%;
-            padding-left: 45px;
+        .pagination-status {
+            color: var(--muted);
+            font-size: 0.87rem;
+            text-align: center;
+        }
+
+        .pagination-status strong {
+            color: var(--cyan);
         }
     </style>
 </head>
@@ -1372,25 +747,52 @@
 <nav class="navbar">
     <div class="container nav-inner">
 
-        <a href="{{route('index')}}" class="brand" aria-label="Ir al inicio">
-<span class="brand-mark">
-<span>PC</span>
-</span>
+        <a
+            href="{{ route('index') }}"
+            class="brand"
+            aria-label="Ir al inicio"
+        >
+            <span class="brand-mark">
+                <span>PC</span>
+            </span>
+
             <span>Punto Creativo</span>
         </a>
 
-        <button class="menu-toggle" aria-label="Abrir menú" aria-expanded="false">
+        <button
+            type="button"
+            class="menu-toggle"
+            aria-label="Abrir menú"
+            aria-expanded="false"
+        >
             ☰
         </button>
 
-        <div class="nav-links" id="navLinks">
+        <div
+            class="nav-links"
+            id="navLinks"
+        >
+            <a href="{{ route('index') }}">
+                Inicio
+            </a>
 
-            <a href="{{route('index')}}">Inicio</a>
-            <a href="{{route('catalogo')}}">Tienda</a>
-            <a href="{{route('index')}}#portafolio">Portafolio</a>
-            <a href="{{route('index')}}#cotizar">Contacto</a>
+            <a href="{{ route('catalogo') }}">
+                Tienda
+            </a>
 
-            <form class="header-search" data-search-form role="search">
+            <a href="{{ route('index') }}#portafolio">
+                Portafolio
+            </a>
+
+            <a href="{{ route('index') }}#cotizar">
+                Contacto
+            </a>
+
+            <form
+                class="header-search"
+                data-search-form
+                role="search"
+            >
                 <div class="search-input">
 
                     <i class="bi bi-search"></i>
@@ -1404,13 +806,29 @@
                 </div>
             </form>
 
-            <a class="nav-icon" href="{{route('cuenta')}}" aria-label="Mi cuenta" title="Mi cuenta">
+            <a
+                class="nav-icon"
+                href="{{ route('cuenta') }}"
+                aria-label="Mi cuenta"
+                title="Mi cuenta"
+            >
                 <i class="bi bi-person"></i>
             </a>
 
-            <a class="nav-icon" href="{{route('carrito')}}" aria-label="Carrito" title="Carrito">
+            <a
+                class="nav-icon"
+                href="{{ route('carrito') }}"
+                aria-label="Carrito"
+                title="Carrito"
+            >
                 <i class="bi bi-cart3"></i>
-                <span class="cart-badge" data-cart-count>0</span>
+
+                <span
+                    class="cart-badge"
+                    data-cart-count
+                >
+                    0
+                </span>
             </a>
 
         </div>
@@ -1419,82 +837,576 @@
 
 <main>
 
-    <header class="page-hero">
-        <div class="container">
+    <header class="account-header">
+        <div class="account-container">
 
             <nav class="breadcrumbs">
-                <a href="{{route('index')}}">Inicio</a>
+
+                <a href="{{ route('index') }}">
+                    Inicio
+                </a>
+
                 <span>›</span>
+
                 <span>Mi cuenta</span>
+
             </nav>
 
-            <span class="eyebrow">Cuenta local de demostración</span>
+            <span class="eyebrow">
+                Mi cuenta
+            </span>
 
-            <h1>Pedidos y datos del cliente.</h1>
+            <h1>
+                Pedidos y datos del cliente.
+            </h1>
 
             <p>
-                El historial se guarda en este navegador. También puedes comprar como invitado sin registrarte.
+                Consulta los pedidos asociados con tu cuenta,
+                actualiza tu nombre o cambia tu contraseña.
             </p>
 
         </div>
     </header>
 
-    <section class="store-section">
-        <div class="container account-shell">
+    <section class="account-section">
+        <div class="account-container">
 
-            <aside class="account-panel">
+            @if(session('success'))
+                <div class="account-message success">
 
-                <h2 style="font-size:1.55rem">Perfil</h2>
+                    <i class="bi bi-check-circle-fill"></i>
 
-                <form id="profileForm" style="display:grid;gap:14px;margin-top:18px">
+                    <span>
+                        {{ session('success') }}
+                    </span>
 
-                    <div class="field">
-                        <label for="profileName">Nombre</label>
-
-                        <input
-                            type="name"
-                            id="profileName"
-                            value="{{ auth()->user()->name }}"
-                            readonly
-                        >
-                    </div>
-
-                    <div class="field">
-                        <label for="profileEmail">Correo</label>
-                        <input id="profileEmail" type="email"
-                               value="{{ auth()->user()->email }}"
-                               readonly
-                        >
-                    </div>
-
-                </form>
-                <br>
-                <form action="{{ route('usuario.logout') }}" method="POST">
-                    @csrf
-
-                    <button class="btn btn-danger logout-btn" type="submit">
-                        <i class="bi bi-box-arrow-right"></i>
-                        Cerrar sesión
-                    </button>
-                </form>
-
-                <p class="secure-note">
-                    <span>ℹ</span>
-                    <span>Esta cuenta es simulada y funciona mediante almacenamiento local.</span>
-                </p>
-
-            </aside>
-
-            <section class="orders-panel">
-
-                <h2 style="font-size:1.55rem;margin-bottom:20px">
-                    Historial de pedidos
-                </h2>
-
-                <div class="order-history" id="orderHistory">
                 </div>
+            @endif
 
-            </section>
+            @if(
+                $errors->perfil->any() ||
+                $errors->password->any()
+            )
+                <div class="account-message error">
+
+                    <i class="bi bi-exclamation-circle-fill"></i>
+
+                    <span>
+                        Revisa los datos ingresados en el formulario.
+                    </span>
+
+                </div>
+            @endif
+
+            <div class="account-layout">
+
+                <aside class="account-panel">
+
+                    <div class="account-panel-heading">
+
+                        <div class="account-avatar">
+                            <i class="bi bi-person-fill"></i>
+                        </div>
+
+                        <div>
+                            <span>Información personal</span>
+
+                            <h2>
+                                Mi perfil
+                            </h2>
+                        </div>
+
+                    </div>
+
+                    {{-- Actualizar nombre --}}
+                    <form
+                        class="account-form"
+                        action="{{ route('cuenta.perfil.actualizar') }}"
+                        method="POST"
+                    >
+                        @csrf
+                        @method('PUT')
+
+                        <h3 class="account-subtitle">
+                            <i class="bi bi-pencil-square"></i>
+                            Datos de la cuenta
+                        </h3>
+
+                        <div class="account-field">
+
+                            <label for="profileName">
+                                Nombre completo
+                            </label>
+
+                            <div class="account-input">
+
+                                <i class="bi bi-person"></i>
+
+                                <input
+                                    id="profileName"
+                                    name="name"
+                                    type="text"
+                                    value="{{ old('name', auth()->user()->name) }}"
+                                    required
+                                >
+
+                            </div>
+
+                            @error('name', 'perfil')
+                            <span class="field-error">
+                                    {{ $message }}
+                                </span>
+                            @enderror
+
+                        </div>
+
+                        <div class="account-field">
+
+                            <label for="profileEmail">
+                                Correo electrónico
+                            </label>
+
+                            <div class="account-input">
+
+                                <i class="bi bi-envelope"></i>
+
+                                <input
+                                    id="profileEmail"
+                                    type="email"
+                                    value="{{ auth()->user()->email }}"
+                                    readonly
+                                >
+
+                            </div>
+
+                        </div>
+
+                        <button
+                            class="btn btn-primary"
+                            type="submit"
+                        >
+                            <i class="bi bi-check-circle"></i>
+                            Guardar nombre
+                        </button>
+
+                    </form>
+
+                    {{-- Cambiar contraseña --}}
+                    <form
+                        class="account-form"
+                        action="{{ route('cuenta.password.actualizar') }}"
+                        method="POST"
+                    >
+                        @csrf
+                        @method('PUT')
+
+                        <h3 class="account-subtitle">
+                            <i class="bi bi-shield-lock"></i>
+                            Cambiar contraseña
+                        </h3>
+
+                        <div class="account-field">
+
+                            <label for="currentPassword">
+                                Contraseña actual
+                            </label>
+
+                            <div class="account-input">
+
+                                <i class="bi bi-lock"></i>
+
+                                <input
+                                    id="currentPassword"
+                                    name="current_password"
+                                    type="password"
+                                    autocomplete="current-password"
+                                    required
+                                >
+
+                            </div>
+
+                            @error('current_password', 'password')
+                            <span class="field-error">
+                                    {{ $message }}
+                                </span>
+                            @enderror
+
+                        </div>
+
+                        <div class="account-field">
+
+                            <label for="newPassword">
+                                Nueva contraseña
+                            </label>
+
+                            <div class="account-input">
+
+                                <i class="bi bi-key"></i>
+
+                                <input
+                                    id="newPassword"
+                                    name="password"
+                                    type="password"
+                                    autocomplete="new-password"
+                                    required
+                                >
+
+                            </div>
+
+                            @error('password', 'password')
+                            <span class="field-error">
+                                    {{ $message }}
+                                </span>
+                            @enderror
+
+                        </div>
+
+                        <div class="account-field">
+
+                            <label for="passwordConfirmation">
+                                Confirmar nueva contraseña
+                            </label>
+
+                            <div class="account-input">
+
+                                <i class="bi bi-key-fill"></i>
+
+                                <input
+                                    id="passwordConfirmation"
+                                    name="password_confirmation"
+                                    type="password"
+                                    autocomplete="new-password"
+                                    required
+                                >
+
+                            </div>
+
+                        </div>
+
+                        <button
+                            class="btn btn-secondary"
+                            type="submit"
+                        >
+                            <i class="bi bi-shield-check"></i>
+                            Actualizar contraseña
+                        </button>
+
+                    </form>
+
+                    {{-- Cerrar sesión --}}
+                    <form
+                        class="logout-form"
+                        action="{{ route('usuario.logout') }}"
+                        method="POST"
+                    >
+                        @csrf
+
+                        <button
+                            class="btn logout-btn"
+                            type="submit"
+                        >
+                            <i class="bi bi-box-arrow-right"></i>
+                            Cerrar sesión
+                        </button>
+
+                    </form>
+
+                    <p class="account-note">
+
+                        <i class="bi bi-info-circle-fill"></i>
+
+                        <span>
+                            Tus pedidos se muestran si tienes iniciada sesion con tu cuenta.
+                        </span>
+
+                    </p>
+
+                </aside>
+
+                {{-- Historial --}}
+                <section class="orders-panel">
+
+                    <div class="orders-heading">
+
+                        <div>
+                            <span>Compras realizadas</span>
+
+                            <h2>
+                                Historial de pedidos
+                            </h2>
+                        </div>
+
+                        <div
+                            class="orders-count"
+                            title="Cantidad de pedidos"
+                        >
+                            {{ $pedidos->total() }}
+                        </div>
+
+                    </div>
+
+                    <div class="orders-history">
+
+                        @forelse($pedidos as $pedido)
+
+                            @php
+                                $estadoPedido = strtolower(
+                                    $pedido->estado ?? 'pendiente'
+                                );
+                            @endphp
+
+                            <article class="order-card">
+
+                                <div class="order-card-header">
+
+                                    <div>
+                                        <span class="order-card-label">
+                                            Número de pedido
+                                        </span>
+
+                                        <strong class="order-number">
+                                            {{ $pedido->numero_pedido }}
+                                        </strong>
+                                    </div>
+
+                                    <span
+                                        class="order-status {{ $estadoPedido }}"
+                                    >
+                                        <i class="bi bi-clock-history"></i>
+
+                                        {{ strtoupper($pedido->estado) }}
+                                    </span>
+
+                                </div>
+
+                                <div class="order-information">
+
+                                    <div>
+                                        <span class="order-card-label">
+                                            Fecha
+                                        </span>
+
+                                        <strong>
+                                            <i class="bi bi-calendar-check"></i>
+
+                                            {{ optional($pedido->created_at)->format('d/m/Y h:i a') }}
+                                        </strong>
+                                    </div>
+
+                                    <div>
+                                        <span class="order-card-label">
+                                            Método de pago
+                                        </span>
+
+                                        <strong>
+                                            <i class="bi bi-paypal"></i>
+
+                                            {{ ucfirst($pedido->metodo_pago) }}
+                                        </strong>
+                                    </div>
+
+                                    <div>
+                                        <span class="order-card-label">
+                                            Referencia
+                                        </span>
+
+                                        <strong class="order-reference">
+                                            {{ $pedido->referencia_pago ?: 'Sin referencia' }}
+                                        </strong>
+                                    </div>
+
+                                    <div>
+                                        <span class="order-card-label">
+                                            Total
+                                        </span>
+
+                                        <strong class="order-total">
+                                            L {{ number_format($pedido->total, 2) }}
+                                        </strong>
+                                    </div>
+
+                                </div>
+
+                                @if($pedido->detalles->isNotEmpty())
+
+                                    <div class="order-products">
+
+                                        @foreach($pedido->detalles as $detalle)
+
+                                            <div class="order-product">
+
+                                                <div>
+                                                    <strong>
+                                                        {{ $detalle->nombre_servicio }}
+                                                    </strong>
+
+                                                    <small>
+                                                        Cantidad:
+                                                        {{ $detalle->cantidad }}
+
+                                                        · Precio unitario:
+                                                        L {{ number_format($detalle->precio_unitario, 2) }}
+                                                    </small>
+                                                </div>
+
+                                                <span>
+                                                    L {{ number_format($detalle->subtotal, 2) }}
+                                                </span>
+
+                                            </div>
+
+                                        @endforeach
+
+                                    </div>
+
+                                @endif
+
+                                <div class="order-summary">
+
+                                    <div>
+                                        <span>Subtotal</span>
+
+                                        <strong>
+                                            L {{ number_format($pedido->subtotal, 2) }}
+                                        </strong>
+                                    </div>
+
+                                    <div>
+                                        <span>Descuento</span>
+
+                                        <strong>
+                                            − L {{ number_format($pedido->descuento, 2) }}
+                                        </strong>
+                                    </div>
+
+                                    <div>
+                                        <span>ISV</span>
+
+                                        <strong>
+                                            L {{ number_format($pedido->impuesto, 2) }}
+                                        </strong>
+                                    </div>
+
+                                    <div class="final-total">
+                                        <span>Total pagado</span>
+
+                                        <strong>
+                                            L {{ number_format($pedido->total, 2) }}
+                                        </strong>
+                                    </div>
+
+                                </div>
+
+                            </article>
+
+                        @empty
+
+                            <div class="orders-empty">
+
+                                <i class="bi bi-receipt-cutoff"></i>
+
+                                <h3>
+                                    Todavía no tienes pedidos
+                                </h3>
+
+                                <p>
+                                    Cuando completes una compra mientras
+                                    tengas iniciada esta sesión, el pedido
+                                    aparecerá automáticamente aquí.
+                                </p>
+
+                                <a
+                                    href="{{ route('catalogo') }}"
+                                    class="btn btn-primary"
+                                >
+                                    <i class="bi bi-bag"></i>
+                                    Ir a la tienda
+                                </a>
+
+                            </div>
+
+                        @endforelse
+
+                    </div>
+                    @if($pedidos->hasPages())
+
+                        <nav
+                            class="orders-pagination"
+                            aria-label="Paginación del historial de pedidos"
+                        >
+
+                            {{-- Página anterior --}}
+                            @if($pedidos->onFirstPage())
+
+                                <span
+                                    class="pagination-button disabled"
+                                    aria-disabled="true"
+                                >
+                <i class="bi bi-chevron-left"></i>
+                Anterior
+            </span>
+
+                            @else
+
+                                <a
+                                    class="pagination-button"
+                                    href="{{ $pedidos->previousPageUrl() }}"
+                                    rel="prev"
+                                >
+                                    <i class="bi bi-chevron-left"></i>
+                                    Anterior
+                                </a>
+
+                            @endif
+
+                            {{-- Número de página --}}
+                            <span class="pagination-status">
+
+            Página
+
+            <strong>
+                {{ $pedidos->currentPage() }}
+            </strong>
+
+            de
+
+            <strong>
+                {{ $pedidos->lastPage() }}
+            </strong>
+
+        </span>
+
+                            {{-- Página siguiente --}}
+                            @if($pedidos->hasMorePages())
+
+                                <a
+                                    class="pagination-button"
+                                    href="{{ $pedidos->nextPageUrl() }}"
+                                    rel="next"
+                                >
+                                    Siguiente
+                                    <i class="bi bi-chevron-right"></i>
+                                </a>
+
+                            @else
+
+                                <span
+                                    class="pagination-button disabled"
+                                    aria-disabled="true"
+                                >
+                Siguiente
+                <i class="bi bi-chevron-right"></i>
+            </span>
+
+                            @endif
+
+                        </nav>
+
+                    @endif
+
+                </section>
+
+            </div>
 
         </div>
     </section>
@@ -1502,157 +1414,121 @@
 </main>
 
 <footer>
-
-
     <div class="container">
-
-
 
         <div class="footer-grid">
 
-
-
-
-
             <div class="footer-brand">
 
+                <a
+                    href="{{ route('index') }}"
+                    class="brand"
+                >
+                    <span class="brand-mark">
+                        <span>PC</span>
+                    </span>
 
-
-                <a href="{{route('index')}}" class="brand">
-
-
-<span class="brand-mark">
-
-<span>
-PC
-</span>
-
-
-</span>
-
-
-                    <span>
-Punto Creativo
-</span>
-
-
-
+                    <span>Punto Creativo</span>
                 </a>
 
-
-
-
-
                 <p>
-
-                    Diseño gráfico, edición audiovisual en Honduras
-
+                    Diseño gráfico, edición audiovisual
+                    y contenido digital en Honduras.
                 </p>
 
-
-
-
             </div>
-
-
-
-
-
-
 
             <div class="footer-col">
 
+                <h4>Contacto</h4>
 
+                <p>
+                    <i class="bi bi-envelope-fill"></i>
+                    info@puntocreativo.hn
+                </p>
 
-                <h4>
-                    Contacto
-                </h4>
+                <p>
+                    <i class="bi bi-telephone-fill"></i>
+                    +504 9999-8888
+                </p>
 
-                <h4>
-                    <i class="fa-solid fa-envelope"></i> info@puntocreativo.hn <br>
-                    <i class="fa-solid fa-phone"></i> +504 9999-8888 <br>
-                    <i class="fa-solid fa-location-dot"></i> Danli, El Paraíso
-                </h4>
+                <p>
+                    <i class="bi bi-geo-alt-fill"></i>
+                    Danlí, El Paraíso
+                </p>
 
             </div>
 
-
-
-
-
             <div class="footer-col">
 
+                <h4>Redes sociales</h4>
 
-                <h4>
-                    Redes Sociales
-                </h4>
+                <div class="social-links">
 
-                <div>
-                    <i class="fa-brands fa-facebook"></i>
-                    <i class="fa-brands fa-instagram"></i>
-                    <i class="fa-brands fa-youtube"></i>
-                    <i class="fa-brands fa-tiktok"></i>
-
-                </div>
-
-                <div>
-                    <a href="{{route('terminos')}}">
-                        Términos
-                        <a href="{{route('privacidad')}}">
-                            Privacidad
-                        </a>
-                        <a href="{{route('cookies')}}">
-                            Cookies
-                        </a>
+                    <a href="#" aria-label="Facebook">
+                        <i class="bi bi-facebook"></i>
                     </a>
+
+                    <a href="#" aria-label="Instagram">
+                        <i class="bi bi-instagram"></i>
+                    </a>
+
+                    <a href="#" aria-label="YouTube">
+                        <i class="bi bi-youtube"></i>
+                    </a>
+
+                    <a href="#" aria-label="TikTok">
+                        <i class="bi bi-tiktok"></i>
+                    </a>
+
                 </div>
 
+                <div class="footer-links">
 
+                    <a href="{{ route('terminos') }}">
+                        Términos
+                    </a>
 
+                    <a href="{{ route('privacidad') }}">
+                        Privacidad
+                    </a>
 
+                    <a href="{{ route('cookies') }}">
+                        Cookies
+                    </a>
 
-
-
-
-
+                </div>
 
             </div>
-
 
         </div>
 
         <div class="footer-bottom">
 
-
-<span>
-
-    © <span data-year></span> Punto Creativo. Todos los derechos reservados.
-
-</span>
-
+            <span>
+                © <span data-year></span>
+                Punto Creativo. Todos los derechos reservados.
+            </span>
 
         </div>
 
-
-
-
     </div>
-
-
 </footer>
-<a class="whatsapp-float"
-   href="https://wa.me/50400000000"
-   target="_blank"
-   rel="noopener"
-   aria-label="Contactar por WhatsApp"
-   title="WhatsApp">
-    ✆
+
+<a
+    class="whatsapp-float"
+    href="https://wa.me/50492336467"
+    target="_blank"
+    rel="noopener"
+    aria-label="Contactar por WhatsApp"
+    title="WhatsApp"
+>
+    <i class="bi bi-whatsapp"></i>
 </a>
 
-<script src="../../public/js/products.js"></script>
-<script src="../../public/js/store.js"></script>
-<script src="../../public/js/common.js"></script>
-<script src="../../public/js/cuenta.js"></script>
+<script src="{{ asset('js/store.js') }}"></script>
+<script src="{{ asset('js/common.js') }}"></script>
+<script src="{{ asset('js/cart-count.js') }}?v={{ time() }}"></script>
 
 </body>
 </html>

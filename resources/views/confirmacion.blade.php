@@ -289,7 +289,7 @@ Punto Creativo
 
 
 <a class="whatsapp-float"
-   href="https://wa.me/50400000000"
+   href="https://wa.me/50492336467"
    target="_blank"
    rel="noopener"
    aria-label="Contactar por WhatsApp"
@@ -301,6 +301,7 @@ Punto Creativo
 <script src="{{ asset('js/common.js') }}"></script>
 <script src="{{ asset('js/confirmacion.js') }}?v={{ time() }}"></script>
 <script src="{{ asset('js/auth-modal.js') }}"></script>
+<script src="{{ asset('js/cart-count.js') }}?v={{ time() }}"></script>
 
 </body>
 </html>

@@ -284,6 +284,7 @@
                                         type="text"
                                         autocomplete="given-name"
                                         placeholder="Juan Carlos"
+                                        value="{{ auth()->user()?->name ?? '' }}"
                                         required
                                     >
 
@@ -336,7 +337,9 @@
                                         type="email"
                                         autocomplete="email"
                                         placeholder="juan@empresa.hn"
+                                        value="{{ auth()->user()?->email ?? '' }}"
                                         required
+                                        @auth readonly @endauth
                                     >
 
                                 </div>
@@ -537,7 +540,7 @@
                             </label>
 
                         </div>
-                        <!--<div
+                        <div
                             id="paypalButtonContainer"
                             class="paypal-button-container"
                         ></div>
@@ -545,7 +548,7 @@
                         <p
                             id="paypalMessage"
                             class="paypal-message"
-                        ></p> -->
+                        ></p>
 
                         {{-- Campos de tarjeta --}}
                         <div
@@ -723,7 +726,7 @@
 
                     </div>
 
-                    <button
+                   <!-- <button
                         type="submit"
                         form="checkoutForm"
                         class="btn btn-primary confirm-button"
@@ -732,7 +735,7 @@
                         <i class="bi bi-check-circle-fill"></i>
 
                         Confirmar pedido
-                    </button>
+                    </button> -->
 
                     <a
                         href="{{ route('carrito') }}"
@@ -878,7 +881,7 @@
 
 <a
     class="whatsapp-float"
-    href="https://wa.me/50400000000"
+    href="https://wa.me/50492336467"
     target="_blank"
     rel="noopener"
     aria-label="Contactar por WhatsApp"
@@ -889,7 +892,7 @@
 
 <script src="{{ asset('js/store.js') }}"></script>
 <script src="{{ asset('js/common.js') }}"></script>
-<!-- <script>
+<script>
     window.PUNTO_CREATIVO = {
         paypalClientId:
         @json(config('services.paypal.client_id')),
@@ -900,13 +903,14 @@
         capturePayPalOrderBaseUrl:
         @json(url('/paypal/orders')),
 
+        guardarPedidoUrl:
+        @json(route('pedidos.store')),
+
         confirmationUrl:
         @json(route('confirmacion'))
     };
 </script>
-<script
-    src="https://www.paypal.com/sdk/js?client-id={{ config('services.paypal.client_id') }}&currency=USD&intent=capture">
-</script> -->
+<script src="https://www.paypal.com/sdk/js?client-id={{ config('services.paypal.client_id') }}&currency=USD&intent=capture"></script>
 <script src="{{ asset('js/checkout.js') }}?v={{ time() }}"></script>
 <script src="{{ asset('js/auth-modal.js') }}"></script>
 

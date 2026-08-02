@@ -1,12 +1,38 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="Punto Creativo: diseño gráfico, edición audiovisual y contenido digital para emprendedores, empresas y creadores." />
-    <title>Punto Creativo | Diseño que conecta</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+    <meta
+        name="description"
+        content="Punto Creativo: servicios de diseño gráfico, edición audiovisual y contenido digital en Honduras."
+    >
+
+    <title>Punto Creativo | Diseño gráfico y edición audiovisual</title>
+
+    <link
+        rel="stylesheet"
+        href="{{ asset('css/base.css') }}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ asset('css/store.css') }}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="{{ asset('css/cookie-banner.css') }}?v={{ time() }}"
+    >
+
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    >
 
     <style>
         :root {
@@ -23,7 +49,7 @@
             --green: #35d07f;
             --border: rgba(255, 255, 255, 0.14);
             --shadow: 0 22px 70px rgba(0, 0, 0, 0.38);
-            --radius: 24px;
+            --radius: 22px;
             --container: 1180px;
         }
 
@@ -38,29 +64,56 @@
         }
 
         body {
-            font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+            min-height: 100vh;
+            overflow-x: hidden;
             color: var(--text);
             background:
-                radial-gradient(circle at 12% 8%, rgba(141, 92, 255, 0.25), transparent 32%),
-                radial-gradient(circle at 88% 16%, rgba(35, 213, 232, 0.18), transparent 28%),
-                radial-gradient(circle at 70% 84%, rgba(255, 79, 163, 0.16), transparent 34%),
+                radial-gradient(
+                    circle at 12% 7%,
+                    rgba(141, 92, 255, 0.24),
+                    transparent 28%
+                ),
+                radial-gradient(
+                    circle at 90% 16%,
+                    rgba(35, 213, 232, 0.16),
+                    transparent 28%
+                ),
                 var(--bg);
-            line-height: 1.65;
-            overflow-x: hidden;
+            font-family:
+                Inter,
+                ui-sans-serif,
+                system-ui,
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                sans-serif;
+            line-height: 1.6;
         }
 
         body::before {
             content: "";
             position: fixed;
             inset: 0;
-            pointer-events: none;
-            opacity: 0.18;
-            background-image:
-                linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
-            background-size: 42px 42px;
-            mask-image: linear-gradient(to bottom, black, transparent 80%);
             z-index: -1;
+            pointer-events: none;
+            opacity: 0.17;
+            background-image:
+                linear-gradient(
+                    rgba(255, 255, 255, 0.025) 1px,
+                    transparent 1px
+                ),
+                linear-gradient(
+                    90deg,
+                    rgba(255, 255, 255, 0.025) 1px,
+                    transparent 1px
+                );
+            background-size: 42px 42px;
+            mask-image:
+                linear-gradient(
+                    to bottom,
+                    black,
+                    transparent 85%
+                );
         }
 
         a {
@@ -69,147 +122,167 @@
         }
 
         button,
-        input,
-        textarea,
-        select {
+        input {
             font: inherit;
         }
 
-        img,
-        svg {
+        button {
+            color: inherit;
+        }
+
+        img {
             display: block;
             max-width: 100%;
         }
 
         .container {
-            width: min(calc(100% - 40px), var(--container));
+            width: min(
+                calc(100% - 40px),
+                var(--container)
+            );
             margin-inline: auto;
         }
 
         .section {
-            padding: 96px 0;
+            padding: 78px 0;
         }
 
-        .section-title {
-            max-width: 760px;
-            margin-bottom: 44px;
+        .section-soft {
+            border-top:
+                1px solid rgba(255, 255, 255, 0.07);
+            border-bottom:
+                1px solid rgba(255, 255, 255, 0.07);
+            background:
+                rgba(255, 255, 255, 0.018);
         }
 
-        .eyebrow {
+        .section-heading {
+            display: flex;
+            align-items: end;
+            justify-content: space-between;
+            gap: 24px;
+            margin-bottom: 30px;
+        }
+
+        .section-heading > div {
+            max-width: 720px;
+        }
+
+        .section-kicker {
             display: inline-flex;
             align-items: center;
-            gap: 9px;
-            padding: 7px 12px;
-            border: 1px solid var(--border);
-            border-radius: 999px;
-            color: #dce1ff;
-            background: rgba(255, 255, 255, 0.05);
-            font-size: 0.82rem;
-            font-weight: 800;
-            letter-spacing: 0.08em;
+            gap: 8px;
+            margin-bottom: 10px;
+            color: var(--cyan);
+            font-size: 0.77rem;
+            font-weight: 900;
+            letter-spacing: 0.12em;
             text-transform: uppercase;
-            margin-bottom: 16px;
         }
 
-        .eyebrow::before {
+        .section-kicker::before {
             content: "";
-            width: 8px;
-            height: 8px;
+            width: 9px;
+            height: 9px;
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--cyan), var(--purple));
-            box-shadow: 0 0 18px var(--cyan);
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--cyan),
+                    var(--purple)
+                );
+            box-shadow:
+                0 0 18px rgba(35, 213, 232, 0.6);
         }
 
-        h1,
-        h2,
-        h3 {
-            line-height: 1.08;
-            letter-spacing: -0.035em;
+        .section-heading h2 {
+            margin-bottom: 10px;
+            font-size:
+                clamp(2rem, 4vw, 3.3rem);
+            line-height: 1.05;
+            letter-spacing: -0.045em;
         }
 
-        h1 {
-            font-size: clamp(3.2rem, 8vw, 7rem);
-            max-width: 900px;
-        }
-
-        h2 {
-            font-size: clamp(2.2rem, 5vw, 4.2rem);
-            margin-bottom: 18px;
-        }
-
-        h3 {
-            font-size: 1.35rem;
-        }
-
-        .gradient-text {
-            background: linear-gradient(100deg, #ffffff 10%, var(--cyan) 44%, var(--purple) 70%, var(--pink));
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-        }
-
-        .lead,
-        .section-title p {
+        .section-heading p {
             color: var(--muted);
-            font-size: clamp(1rem, 2vw, 1.15rem);
+            font-size: 1rem;
+        }
+
+        .section-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            flex: 0 0 auto;
+            color: var(--cyan);
+            font-size: 0.9rem;
+            font-weight: 850;
+        }
+
+        .section-link:hover {
+            text-decoration: underline;
+            text-underline-offset: 4px;
         }
 
         .btn {
-            min-height: 52px;
+            min-height: 48px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
-            padding: 0 20px;
+            gap: 9px;
+            padding: 0 18px;
             border: 1px solid transparent;
-            border-radius: 14px;
+            border-radius: 13px;
             font-weight: 850;
             cursor: pointer;
-            transition: transform .25s ease, border-color .25s ease, background .25s ease, box-shadow .25s ease;
+            transition:
+                transform 0.22s ease,
+                border-color 0.22s ease,
+                background 0.22s ease;
         }
 
         .btn:hover {
-            transform: translateY(-3px);
+            transform: translateY(-2px);
         }
 
         .btn-primary {
             color: #071018;
-            background: linear-gradient(135deg, var(--cyan), #91eff7);
-            box-shadow: 0 14px 36px rgba(35, 213, 232, 0.22);
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--cyan),
+                    #91eff7
+                );
+            box-shadow:
+                0 14px 34px rgba(35, 213, 232, 0.2);
         }
 
         .btn-secondary {
-            background: rgba(255, 255, 255, 0.07);
             border-color: var(--border);
             color: var(--text);
+            background:
+                rgba(255, 255, 255, 0.055);
         }
 
-        .btn-whatsapp {
-            background: linear-gradient(135deg, #25d366, #9bebba);
-            color: #06150c;
-        }
-
-        .topbar {
-            text-align: center;
-            padding: 10px 20px;
-            color: #dce2f5;
-            font-size: 0.88rem;
-            border-bottom: 1px solid rgba(255,255,255,.08);
-            background: rgba(255,255,255,.035);
-        }
+        /* =====================================
+           ENCABEZADO
+        ===================================== */
 
         .navbar {
             position: sticky;
             top: 0;
             z-index: 1000;
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            background: rgba(8, 10, 19, 0.72);
-            border-bottom: 1px solid rgba(255,255,255,.08);
+            border-bottom:
+                1px solid rgba(255, 255, 255, 0.08);
+            background:
+                rgba(8, 10, 19, 0.9);
+            box-shadow:
+                0 10px 35px rgba(0, 0, 0, 0.16);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
         }
 
         .nav-inner {
-            min-height: 76px;
+            min-height: 78px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -220,913 +293,1062 @@
             display: inline-flex;
             align-items: center;
             gap: 12px;
-            font-weight: 950;
-            letter-spacing: -0.03em;
+            flex: 0 0 auto;
             font-size: 1.12rem;
+            font-weight: 950;
+            letter-spacing: -0.035em;
         }
 
         .brand-mark {
-            width: 42px;
-            height: 42px;
+            width: 43px;
+            height: 43px;
             display: grid;
             place-items: center;
             border-radius: 14px;
-            background: conic-gradient(from 210deg, var(--purple), var(--cyan), var(--pink), var(--orange), var(--purple));
-            box-shadow: 0 10px 32px rgba(141, 92, 255, .28);
+            background:
+                conic-gradient(
+                    from 210deg,
+                    var(--purple),
+                    var(--cyan),
+                    var(--pink),
+                    var(--orange),
+                    var(--purple)
+                );
+            box-shadow:
+                0 10px 28px rgba(141, 92, 255, 0.28);
             transform: rotate(-6deg);
         }
 
         .brand-mark span {
-            width: 24px;
-            height: 24px;
+            width: 25px;
+            height: 25px;
             display: grid;
             place-items: center;
             border-radius: 8px;
+            color: #fff;
             background: var(--bg);
-            color: white;
-            font-size: 0.85rem;
+            font-size: 0.78rem;
             transform: rotate(6deg);
-        }
-
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 24px;
-            color: #d9deef;
-            font-weight: 700;
-            font-size: 0.93rem;
-        }
-
-        .nav-links a {
-            transition: color .2s ease;
-        }
-
-        .nav-links a:hover {
-            color: var(--cyan);
         }
 
         .menu-toggle {
             display: none;
-            border: 1px solid var(--border);
-            background: rgba(255,255,255,.06);
-            color: var(--text);
             width: 46px;
             height: 46px;
-            border-radius: 14px;
+            place-items: center;
+            border: 1px solid var(--border);
+            border-radius: 13px;
+            color: var(--text);
+            background:
+                rgba(255, 255, 255, 0.055);
             cursor: pointer;
-            font-size: 1.4rem;
+            font-size: 1.35rem;
         }
 
-        .hero {
-            min-height: calc(100vh - 112px);
-            display: grid;
+        .nav-links {
+            min-width: 0;
+            display: flex;
             align-items: center;
-            padding: 72px 0 58px;
+            justify-content: flex-end;
+            gap: 20px;
+            color: #dfe3f4;
+            font-size: 0.9rem;
+            font-weight: 750;
+        }
+
+        .nav-links > a:not(.nav-icon) {
+            transition: color 0.2s ease;
+        }
+
+        .nav-links > a:not(.nav-icon):hover {
+            color: var(--cyan);
+        }
+
+        .header-search {
+            width: 238px;
+            flex: 0 1 238px;
+            margin: 0;
+        }
+
+        .search-input {
             position: relative;
+            width: 100%;
+            height: 44px;
+        }
+
+        .search-input i {
+            position: absolute;
+            top: 50%;
+            left: 15px;
+            z-index: 2;
+            color: var(--muted);
+            font-size: 0.95rem;
+            transform: translateY(-50%);
+            pointer-events: none;
+        }
+
+        .search-input input {
+            width: 100%;
+            height: 44px;
+            padding: 0 14px 0 43px;
+            border: 1px solid var(--border);
+            border-radius: 13px;
+            outline: none;
+            color: var(--text);
+            background:
+                rgba(255, 255, 255, 0.045);
+        }
+
+        .search-input input::placeholder {
+            color: var(--muted);
+            opacity: 0.72;
+        }
+
+        .search-input input:focus {
+            border-color: var(--cyan);
+            box-shadow:
+                0 0 0 4px rgba(35, 213, 232, 0.1);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-icon {
+            position: relative;
+            width: 44px;
+            height: 44px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            flex: 0 0 auto;
+            border: 1px solid var(--border);
+            border-radius: 13px;
+            color: var(--text);
+            background:
+                rgba(255, 255, 255, 0.05);
+            cursor: pointer;
+            transition:
+                transform 0.2s ease,
+                color 0.2s ease,
+                border-color 0.2s ease,
+                background 0.2s ease;
+        }
+
+        .nav-icon:hover {
+            color: var(--cyan);
+            border-color:
+                rgba(35, 213, 232, 0.4);
+            background:
+                rgba(35, 213, 232, 0.08);
+            transform: translateY(-2px);
+        }
+
+        .nav-icon i {
+            font-size: 1.08rem;
+            line-height: 1;
+        }
+
+        .account-modal-open {
+            padding: 0;
+        }
+
+        .cart-badge {
+            position: absolute;
+            top: -7px;
+            right: -7px;
+            z-index: 3;
+            min-width: 21px;
+            height: 21px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0 5px;
+            border: 2px solid var(--bg);
+            border-radius: 999px;
+            color: #fff;
+            background: var(--pink);
+            font-size: 0.69rem;
+            font-weight: 900;
+            line-height: 1;
+        }
+
+        /* =====================================
+           HERO
+        ===================================== */
+
+        .hero {
+            padding: 74px 0 62px;
         }
 
         .hero-grid {
             display: grid;
-            grid-template-columns: 1.12fr .88fr;
-            align-items: center;
-            gap: 62px;
+            grid-template-columns:
+                minmax(0, 1fr)
+                minmax(360px, 0.9fr);
+            align-items: stretch;
+            gap: 34px;
         }
 
-        .hero-copy .lead {
-            max-width: 670px;
-            margin: 24px 0 30px;
-            font-size: 1.15rem;
+        .hero-content {
+            min-height: 410px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 46px;
+            border: 1px solid var(--border);
+            border-radius: 26px;
+            background:
+                radial-gradient(
+                    circle at 10% 0%,
+                    rgba(141, 92, 255, 0.2),
+                    transparent 34%
+                ),
+                linear-gradient(
+                    145deg,
+                    rgba(255, 255, 255, 0.085),
+                    rgba(255, 255, 255, 0.035)
+                );
+            box-shadow: var(--shadow);
+        }
+
+        .hero-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            align-self: flex-start;
+            margin-bottom: 18px;
+            color: var(--cyan);
+            font-size: 0.79rem;
+            font-weight: 900;
+            letter-spacing: 0.11em;
+            text-transform: uppercase;
+        }
+
+        .hero-content h1 {
+            max-width: 720px;
+            margin-bottom: 20px;
+            font-size:
+                clamp(2.7rem, 6vw, 5.3rem);
+            line-height: 0.99;
+            letter-spacing: -0.06em;
+        }
+
+        .hero-content h1 span {
+            background:
+                linear-gradient(
+                    100deg,
+                    #fff 5%,
+                    var(--cyan) 45%,
+                    var(--purple) 73%,
+                    var(--pink)
+                );
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        .hero-content p {
+            max-width: 660px;
+            margin-bottom: 28px;
+            color: var(--muted);
+            font-size: 1.07rem;
         }
 
         .hero-actions {
             display: flex;
             flex-wrap: wrap;
-            gap: 14px;
-        }
-
-        .hero-proof {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 22px;
-            margin-top: 34px;
-            color: var(--muted);
-            font-size: .93rem;
-        }
-
-        .hero-proof span {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .check {
-            width: 22px;
-            height: 22px;
-            border-radius: 50%;
-            display: inline-grid;
-            place-items: center;
-            background: rgba(53, 208, 127, .14);
-            color: #77efa9;
-            font-size: .76rem;
-            font-weight: 950;
+            gap: 12px;
         }
 
         .hero-visual {
             position: relative;
-            min-height: 560px;
+            min-height: 410px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            border-radius: 26px;
+            background:
+                radial-gradient(
+                    circle at 75% 25%,
+                    rgba(35, 213, 232, 0.28),
+                    transparent 25%
+                ),
+                radial-gradient(
+                    circle at 25% 80%,
+                    rgba(255, 79, 163, 0.22),
+                    transparent 28%
+                ),
+                linear-gradient(
+                    145deg,
+                    #171c38,
+                    #0c0f1d
+                );
+            box-shadow: var(--shadow);
         }
 
-        .orbit {
-            position: absolute;
-            inset: 20px;
-            border-radius: 50%;
-            border: 1px solid rgba(255,255,255,.11);
-            animation: spin 22s linear infinite;
-        }
-
-        .orbit::before,
-        .orbit::after {
+        .hero-visual::before {
             content: "";
             position: absolute;
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            top: 50%;
-            transform: translateY(-50%);
+            width: 280px;
+            height: 280px;
+            right: -90px;
+            top: -90px;
+            border: 28px solid rgba(255, 255, 255, 0.08);
+            border-radius: 44% 56% 61% 39%;
+            transform: rotate(28deg);
         }
 
-        .orbit::before {
-            left: -8px;
-            background: var(--cyan);
-            box-shadow: 0 0 28px var(--cyan);
-        }
-
-        .orbit::after {
-            right: -8px;
-            background: var(--pink);
-            box-shadow: 0 0 28px var(--pink);
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        .design-board {
+        .hero-screen {
             position: absolute;
-            inset: 52px 12px 42px 52px;
-            border: 1px solid rgba(255,255,255,.16);
-            border-radius: 34px;
+            inset: 54px 42px 42px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 24px;
+            background:
+                rgba(10, 13, 27, 0.88);
+            box-shadow:
+                0 24px 55px rgba(0, 0, 0, 0.35);
+            transform: rotate(2.5deg);
+        }
+
+        .hero-screen-bar {
+            height: 42px;
+            display: flex;
+            align-items: center;
+            gap: 7px;
+            padding: 0 16px;
+            border-bottom:
+                1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .hero-screen-bar span {
+            width: 9px;
+            height: 9px;
+            border-radius: 50%;
+            background:
+                rgba(255, 255, 255, 0.2);
+        }
+
+        .hero-screen-content {
+            height: calc(100% - 42px);
+            display: grid;
+            grid-template-columns: 0.9fr 1.1fr;
+            gap: 12px;
+            padding: 16px;
+        }
+
+        .visual-card {
+            min-height: 0;
+            overflow: hidden;
+            border-radius: 17px;
+        }
+
+        .visual-card-main {
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
             padding: 22px;
             background:
-                linear-gradient(145deg, rgba(255,255,255,.12), rgba(255,255,255,.035)),
-                rgba(17,21,38,.82);
-            box-shadow: var(--shadow);
-            backdrop-filter: blur(16px);
-            transform: rotate(3deg);
+                linear-gradient(
+                    145deg,
+                    #5c2fd5,
+                    #b947d3 58%,
+                    #ff5ca8
+                );
         }
 
-        .window-bar {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 18px;
-        }
-
-        .window-dot {
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: rgba(255,255,255,.18);
-        }
-
-        .artboard {
-            height: calc(100% - 30px);
-            border-radius: 24px;
-            overflow: hidden;
-            display: grid;
-            grid-template-rows: 1.3fr .7fr;
-            gap: 13px;
-        }
-
-        .poster {
-            position: relative;
-            overflow: hidden;
-            border-radius: 22px;
-            background:
-                radial-gradient(circle at 70% 30%, rgba(255,255,255,.45), transparent 12%),
-                linear-gradient(135deg, #4424a6 0%, #8d5cff 40%, #ff4fa3 100%);
-            padding: 28px;
-        }
-
-        .poster::before {
-            content: "";
-            position: absolute;
-            width: 230px;
-            height: 230px;
-            border-radius: 42% 58% 62% 38%;
-            background: linear-gradient(135deg, var(--cyan), #b7f8ff);
-            right: -48px;
-            bottom: -58px;
-            transform: rotate(-18deg);
-            box-shadow: inset 0 0 0 14px rgba(255,255,255,.12);
-        }
-
-        .poster::after {
-            content: "CREA";
-            position: absolute;
-            right: 14px;
-            top: 4px;
-            font-size: 5.8rem;
-            font-weight: 1000;
-            letter-spacing: -.08em;
-            color: rgba(255,255,255,.11);
-            transform: rotate(90deg) translateX(62%);
-            transform-origin: top right;
-        }
-
-        .poster small {
-            display: block;
-            font-weight: 850;
-            letter-spacing: .14em;
+        .visual-card-main small {
+            margin-bottom: 7px;
+            font-weight: 900;
+            letter-spacing: 0.1em;
             text-transform: uppercase;
-            margin-bottom: 18px;
         }
 
-        .poster strong {
-            position: relative;
-            z-index: 2;
-            display: block;
-            max-width: 240px;
-            font-size: 2.7rem;
-            line-height: .95;
-            letter-spacing: -.06em;
+        .visual-card-main strong {
+            max-width: 180px;
+            font-size: 1.8rem;
+            line-height: 1;
+            letter-spacing: -0.05em;
         }
 
-        .mini-grid {
+        .visual-side {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 13px;
+            grid-template-rows: 1fr 1fr;
+            gap: 12px;
         }
 
-        .mini-card {
-            border-radius: 20px;
+        .visual-card-video,
+        .visual-card-social {
+            display: flex;
+            align-items: end;
             padding: 18px;
+            font-weight: 850;
+        }
+
+        .visual-card-video {
+            background:
+                linear-gradient(
+                    135deg,
+                    #08636f,
+                    #21c8d7
+                );
+        }
+
+        .visual-card-social {
+            background:
+                linear-gradient(
+                    135deg,
+                    #7c3c0c,
+                    #ff9f43
+                );
+        }
+
+        .floating-note {
+            position: absolute;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 11px 14px;
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            color: #eef1ff;
+            background:
+                rgba(8, 10, 19, 0.88);
+            box-shadow:
+                0 14px 35px rgba(0, 0, 0, 0.32);
+            font-size: 0.83rem;
+            font-weight: 850;
+            backdrop-filter: blur(12px);
+        }
+
+        .floating-note.one {
+            top: 23px;
+            right: 18px;
+            transform: rotate(-3deg);
+        }
+
+        .floating-note.two {
+            bottom: 18px;
+            left: 18px;
+            transform: rotate(2deg);
+        }
+
+        /* =====================================
+           CATEGORÍAS
+        ===================================== */
+
+        .category-grid {
+            display: grid;
+            grid-template-columns:
+                repeat(4, minmax(0, 1fr));
+            gap: 16px;
+        }
+
+        .category-card {
+            min-height: 170px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            min-height: 130px;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .mini-card:first-child {
-            background: linear-gradient(135deg, #082c33, #12a9b9);
-        }
-
-        .mini-card:last-child {
-            background: linear-gradient(135deg, #39240c, #ff9f43);
-        }
-
-        .mini-card b {
-            font-size: 1.06rem;
-            max-width: 130px;
-            z-index: 2;
-        }
-
-        .mini-card span {
-            color: rgba(255,255,255,.72);
-            font-size: .82rem;
-            z-index: 2;
-        }
-
-        .floating-tag {
-            position: absolute;
-            border: 1px solid rgba(255,255,255,.17);
-            border-radius: 16px;
-            background: rgba(10,12,23,.82);
-            backdrop-filter: blur(16px);
-            box-shadow: 0 16px 40px rgba(0,0,0,.35);
-            padding: 13px 16px;
-            font-weight: 800;
-            color: #eef1ff;
-        }
-
-        .tag-one {
-            top: 28px;
-            right: -12px;
-            transform: rotate(-4deg);
-        }
-
-        .tag-two {
-            bottom: 24px;
-            left: 0;
-            transform: rotate(3deg);
-        }
-
-        .stats {
-            padding-top: 26px;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 14px;
-        }
-
-        .stat {
-            padding: 26px 20px;
+            padding: 23px;
             border: 1px solid var(--border);
             border-radius: 20px;
-            background: var(--card);
-            text-align: center;
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255, 255, 255, 0.075),
+                    rgba(255, 255, 255, 0.03)
+                );
+            transition:
+                transform 0.25s ease,
+                border-color 0.25s ease,
+                background 0.25s ease;
         }
 
-        .stat strong {
-            display: block;
-            font-size: 1.85rem;
-            line-height: 1;
-            margin-bottom: 10px;
+        .category-card:hover {
+            border-color:
+                rgba(35, 213, 232, 0.4);
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(35, 213, 232, 0.11),
+                    rgba(141, 92, 255, 0.08)
+                );
+            transform: translateY(-5px);
         }
 
-        .stat span {
-            color: var(--muted);
-            font-size: .9rem;
-        }
-
-        .services-grid {
+        .category-icon {
+            width: 51px;
+            height: 51px;
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 18px;
+            place-items: center;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 15px;
+            color: var(--cyan);
+            background:
+                rgba(255, 255, 255, 0.065);
+            font-size: 1.35rem;
+        }
+
+        .category-card h3 {
+            margin-bottom: 5px;
+            font-size: 1.08rem;
+        }
+
+        .category-card p {
+            color: var(--muted);
+            font-size: 0.84rem;
+        }
+
+        /* =====================================
+           SERVICIOS DESTACADOS
+        ===================================== */
+
+        .featured-grid {
+            display: grid;
+            grid-template-columns:
+                repeat(4, minmax(0, 1fr));
+            gap: 17px;
         }
 
         .service-card {
-            min-height: 300px;
-            position: relative;
             overflow: hidden;
-            padding: 28px;
             border: 1px solid var(--border);
-            border-radius: var(--radius);
-            background: linear-gradient(145deg, var(--card-strong), rgba(255,255,255,.035));
-            transition: transform .3s ease, border-color .3s ease, background .3s ease;
+            border-radius: 21px;
+            background:
+                rgba(255, 255, 255, 0.045);
+            transition:
+                transform 0.25s ease,
+                border-color 0.25s ease;
         }
 
         .service-card:hover {
-            transform: translateY(-8px);
-            border-color: rgba(35, 213, 232, .46);
-            background: linear-gradient(145deg, rgba(35,213,232,.12), rgba(141,92,255,.09));
+            border-color:
+                rgba(35, 213, 232, 0.4);
+            transform: translateY(-5px);
         }
 
-        .service-card::after {
+        .service-image {
+            position: relative;
+            aspect-ratio: 4 / 3;
+            display: grid;
+            place-items: center;
+            overflow: hidden;
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 3rem;
+        }
+
+        .service-image::before {
             content: "";
             position: absolute;
             width: 150px;
             height: 150px;
+            right: -45px;
+            top: -45px;
+            border:
+                18px solid rgba(255, 255, 255, 0.1);
             border-radius: 50%;
-            right: -78px;
-            bottom: -74px;
-            background: var(--accent, var(--purple));
-            filter: blur(6px);
-            opacity: .17;
         }
 
-        .service-icon {
-            width: 52px;
-            height: 52px;
-            display: grid;
-            place-items: center;
-            border-radius: 16px;
-            background: rgba(255,255,255,.09);
-            margin-bottom: 54px;
-            font-size: 1.45rem;
-            border: 1px solid rgba(255,255,255,.12);
+        .service-image.logo {
+            background:
+                linear-gradient(
+                    145deg,
+                    #3c248e,
+                    #8659ee
+                );
+        }
+
+        .service-image.video {
+            background:
+                linear-gradient(
+                    145deg,
+                    #07505b,
+                    #16a9b8
+                );
+        }
+
+        .service-image.social {
+            background:
+                linear-gradient(
+                    145deg,
+                    #7e254f,
+                    #e74997
+                );
+        }
+
+        .service-image.motion {
+            background:
+                linear-gradient(
+                    145deg,
+                    #81410f,
+                    #ef8f35
+                );
+        }
+
+        .service-image i {
+            position: relative;
+            z-index: 1;
+        }
+
+        .service-card-body {
+            padding: 18px;
+        }
+
+        .service-category {
+            display: block;
+            margin-bottom: 6px;
+            color: var(--muted);
+            font-size: 0.72rem;
+            font-weight: 850;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
         }
 
         .service-card h3 {
-            margin-bottom: 12px;
+            min-height: 47px;
+            margin-bottom: 13px;
+            font-size: 1.06rem;
+            line-height: 1.25;
         }
 
-        .service-card p {
-            color: var(--muted);
-            font-size: .96rem;
+        .service-price {
+            margin-bottom: 15px;
+            color: var(--cyan);
+            font-size: 1.08rem;
+            font-weight: 950;
         }
 
-        .portfolio-shell {
-            border: 1px solid var(--border);
-            border-radius: 30px;
-            padding: 16px;
-            background: rgba(255,255,255,.045);
+        .service-card .btn {
+            width: 100%;
+            min-height: 43px;
+            font-size: 0.83rem;
         }
 
-        .filter-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            padding: 8px 8px 22px;
-        }
-
-        .filter-btn {
-            padding: 9px 14px;
-            border: 1px solid var(--border);
-            border-radius: 999px;
-            background: rgba(255,255,255,.04);
-            color: #dce2f5;
-            font-weight: 750;
-            cursor: pointer;
-        }
-
-        .filter-btn.active {
-            background: linear-gradient(135deg, var(--purple), var(--pink));
-            border-color: transparent;
-            color: white;
-        }
+        /* =====================================
+           PORTAFOLIO
+        ===================================== */
 
         .portfolio-grid {
             display: grid;
-            grid-template-columns: repeat(12, 1fr);
-            grid-auto-rows: 190px;
-            gap: 14px;
+            grid-template-columns:
+                repeat(12, minmax(0, 1fr));
+            grid-auto-rows: 205px;
+            gap: 15px;
         }
 
-        .work {
+        .portfolio-item {
             position: relative;
             overflow: hidden;
-            border-radius: 22px;
-            min-height: 190px;
+            border: 1px solid var(--border);
+            border-radius: 20px;
             isolation: isolate;
-            transition: transform .28s ease, opacity .25s ease;
+            transition:
+                transform 0.25s ease,
+                border-color 0.25s ease;
         }
 
-        .work:hover {
-            transform: scale(.985);
+        .portfolio-item:hover {
+            border-color:
+                rgba(35, 213, 232, 0.42);
+            transform: scale(0.985);
         }
 
-        .work.hidden {
-            display: none;
+        .portfolio-item:nth-child(1) {
+            grid-column: span 4;
         }
 
-        .work:nth-child(1) { grid-column: span 7; grid-row: span 2; }
-        .work:nth-child(2) { grid-column: span 5; }
-        .work:nth-child(3) { grid-column: span 5; }
-        .work:nth-child(4) { grid-column: span 4; }
-        .work:nth-child(5) { grid-column: span 4; }
-        .work:nth-child(6) { grid-column: span 4; }
-
-        .work-bg {
-            position: absolute;
-            inset: 0;
-            z-index: -2;
+        .portfolio-item:nth-child(2) {
+            grid-column: span 4;
         }
 
-        .work:nth-child(1) .work-bg {
-            background:
-                radial-gradient(circle at 72% 25%, rgba(255,255,255,.35), transparent 12%),
-                linear-gradient(125deg, #1f1452, #7d3cff 48%, #ff4fa3);
+        .portfolio-item:nth-child(3) {
+            grid-column: span 4;
         }
 
-        .work:nth-child(2) .work-bg {
-            background: linear-gradient(135deg, #051e25, #087b8b 48%, #22d3e5);
+        .portfolio-item:nth-child(4) {
+            grid-column: span 6;
         }
 
-        .work:nth-child(3) .work-bg {
-            background: linear-gradient(135deg, #3b1c05, #cc6415 52%, #ffae54);
+        .portfolio-item:nth-child(5) {
+            grid-column: span 6;
         }
 
-        .work:nth-child(4) .work-bg {
-            background: linear-gradient(135deg, #1d234d, #3757c8 52%, #5fd6ff);
-        }
-
-        .work:nth-child(5) .work-bg {
-            background: linear-gradient(135deg, #3d1230, #b42378 55%, #ff80bd);
-        }
-
-        .work:nth-child(6) .work-bg {
-            background: linear-gradient(135deg, #123322, #187a44 55%, #66e795);
-        }
-
-        .work::before {
+        .portfolio-item::before {
             content: "";
             position: absolute;
-            width: 220px;
-            height: 220px;
-            border-radius: 44% 56% 35% 65%;
-            right: -64px;
-            top: -72px;
-            border: 18px solid rgba(255,255,255,.12);
-            transform: rotate(30deg);
+            width: 190px;
+            height: 190px;
+            right: -65px;
+            top: -80px;
+            border:
+                20px solid rgba(255, 255, 255, 0.1);
+            border-radius: 44% 56% 38% 62%;
+            transform: rotate(25deg);
             z-index: -1;
         }
 
-        .work-content {
+        .portfolio-item.one {
+            background:
+                linear-gradient(
+                    135deg,
+                    #362086,
+                    #8d5cff
+                );
+        }
+
+        .portfolio-item.two {
+            background:
+                linear-gradient(
+                    135deg,
+                    #07505e,
+                    #23b9c9
+                );
+        }
+
+        .portfolio-item.three {
+            background:
+                linear-gradient(
+                    135deg,
+                    #6d254c,
+                    #e64c98
+                );
+        }
+
+        .portfolio-item.four {
+            background:
+                linear-gradient(
+                    135deg,
+                    #78400f,
+                    #ef983e
+                );
+        }
+
+        .portfolio-item.five {
+            background:
+                linear-gradient(
+                    135deg,
+                    #173e72,
+                    #4d8ee8
+                );
+        }
+
+        .portfolio-content {
             height: 100%;
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
-            padding: 24px;
-            background: linear-gradient(to top, rgba(4,5,11,.78), transparent 64%);
+            padding: 22px;
+            background:
+                linear-gradient(
+                    to top,
+                    rgba(4, 5, 11, 0.82),
+                    transparent 70%
+                );
         }
 
-        .work small {
-            color: rgba(255,255,255,.74);
-            font-weight: 800;
+        .portfolio-content i {
+            position: absolute;
+            top: 22px;
+            left: 22px;
+            font-size: 1.5rem;
+        }
+
+        .portfolio-content small {
+            color: rgba(255, 255, 255, 0.74);
+            font-weight: 850;
+            letter-spacing: 0.09em;
             text-transform: uppercase;
-            letter-spacing: .12em;
         }
 
-        .work h3 {
-            margin-top: 5px;
-            font-size: clamp(1.25rem, 2vw, 2rem);
+        .portfolio-content h3 {
+            margin-top: 4px;
+            font-size: 1.35rem;
         }
 
-        .process-grid {
+        /* =====================================
+           NOSOTROS Y TESTIMONIOS
+        ===================================== */
+
+        .about-strip {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 16px;
-            counter-reset: step;
-        }
-
-        .step {
-            counter-increment: step;
-            min-height: 245px;
-            padding: 26px;
-            border-top: 1px solid var(--border);
-            background: linear-gradient(to bottom, rgba(255,255,255,.045), transparent);
-        }
-
-        .step::before {
-            content: "0" counter(step);
-            display: block;
-            color: var(--cyan);
-            font-weight: 950;
-            font-size: 1.1rem;
-            letter-spacing: .08em;
-            margin-bottom: 70px;
-        }
-
-        .step h3 {
-            margin-bottom: 10px;
-        }
-
-        .step p {
-            color: var(--muted);
-            font-size: .95rem;
-        }
-
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 18px;
+            grid-template-columns:
+                minmax(0, 0.8fr)
+                minmax(0, 1.2fr);
+            gap: 24px;
             align-items: stretch;
+            margin-bottom: 52px;
         }
 
-        .price-card {
-            position: relative;
-            padding: 30px;
+        .about-visual,
+        .about-copy {
+            padding: 32px;
             border: 1px solid var(--border);
-            border-radius: 26px;
-            background: var(--card);
-            display: flex;
-            flex-direction: column;
-        }
-
-        .price-card.featured {
+            border-radius: 22px;
             background:
-                radial-gradient(circle at 90% 10%, rgba(35,213,232,.18), transparent 28%),
-                linear-gradient(145deg, rgba(141,92,255,.16), rgba(255,255,255,.06));
-            border-color: rgba(35,213,232,.38);
-            transform: translateY(-12px);
-            box-shadow: var(--shadow);
+                rgba(255, 255, 255, 0.045);
         }
 
-        .popular {
-            position: absolute;
-            top: 18px;
-            right: 18px;
-            padding: 6px 10px;
-            border-radius: 999px;
-            background: var(--cyan);
-            color: #071018;
-            font-size: .72rem;
-            font-weight: 950;
-            text-transform: uppercase;
-            letter-spacing: .08em;
-        }
-
-        .price-card p {
-            color: var(--muted);
-            margin: 12px 0 20px;
-        }
-
-        .price {
-            font-size: 2.3rem;
-            font-weight: 1000;
-            letter-spacing: -.05em;
-            margin-bottom: 22px;
-        }
-
-        .price small {
-            font-size: .85rem;
-            color: var(--muted);
-            font-weight: 650;
-            letter-spacing: 0;
-        }
-
-        .feature-list {
-            list-style: none;
-            display: grid;
-            gap: 12px;
-            margin-bottom: 28px;
-        }
-
-        .feature-list li {
-            display: flex;
-            gap: 10px;
-            color: #e7eaff;
-            font-size: .93rem;
-        }
-
-        .price-card .btn {
-            width: 100%;
-            margin-top: auto;
-        }
-
-        .about-grid {
-            display: grid;
-            grid-template-columns: .9fr 1.1fr;
-            gap: 52px;
-            align-items: center;
-        }
-
-        .about-card {
-            position: relative;
-            min-height: 490px;
-            overflow: hidden;
-            border: 1px solid var(--border);
-            border-radius: 34px;
-            background:
-                radial-gradient(circle at 30% 20%, rgba(35,213,232,.32), transparent 22%),
-                radial-gradient(circle at 78% 76%, rgba(255,79,163,.28), transparent 25%),
-                linear-gradient(145deg, #161a33, #0a0d18);
-            box-shadow: var(--shadow);
-        }
-
-        .about-card::before {
-            content: "PC";
-            position: absolute;
-            inset: 0;
+        .about-visual {
             display: grid;
             place-items: center;
-            font-size: 12rem;
-            font-weight: 1000;
-            color: rgba(255,255,255,.055);
-            letter-spacing: -.1em;
+            min-height: 230px;
+            background:
+                radial-gradient(
+                    circle at 30% 20%,
+                    rgba(35, 213, 232, 0.25),
+                    transparent 24%
+                ),
+                radial-gradient(
+                    circle at 75% 80%,
+                    rgba(255, 79, 163, 0.22),
+                    transparent 26%
+                ),
+                #111526;
         }
 
-        .about-chip {
-            position: absolute;
-            padding: 14px 18px;
-            border: 1px solid var(--border);
-            border-radius: 18px;
-            background: rgba(8,10,19,.72);
-            backdrop-filter: blur(18px);
-            font-weight: 850;
-            box-shadow: 0 14px 34px rgba(0,0,0,.32);
+        .about-visual strong {
+            font-size: 6rem;
+            line-height: 1;
+            letter-spacing: -0.1em;
+            color:
+                rgba(255, 255, 255, 0.13);
         }
 
-        .about-chip:nth-child(1) { left: 30px; top: 48px; }
-        .about-chip:nth-child(2) { right: 30px; top: 170px; }
-        .about-chip:nth-child(3) { left: 56px; bottom: 46px; }
+        .about-copy h2 {
+            margin-bottom: 14px;
+            font-size:
+                clamp(1.9rem, 4vw, 3rem);
+            letter-spacing: -0.045em;
+        }
 
         .about-copy p {
             color: var(--muted);
-            margin-bottom: 18px;
         }
 
-        .about-list {
+        .testimonial-grid {
             display: grid;
-            gap: 14px;
-            margin-top: 28px;
+            grid-template-columns:
+                repeat(3, minmax(0, 1fr));
+            gap: 17px;
         }
 
-        .about-list div {
-            padding: 16px 18px;
-            border-left: 3px solid var(--cyan);
-            background: rgba(255,255,255,.04);
-            border-radius: 0 14px 14px 0;
-        }
-
-        .quote-shell {
-            display: grid;
-            grid-template-columns: .78fr 1.22fr;
+        .testimonial {
+            min-height: 215px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 25px;
             border: 1px solid var(--border);
-            border-radius: 34px;
-            overflow: hidden;
-            background: rgba(255,255,255,.045);
-            box-shadow: var(--shadow);
-        }
-
-        .quote-info {
-            padding: 46px;
+            border-radius: 20px;
             background:
-                radial-gradient(circle at 10% 10%, rgba(35,213,232,.23), transparent 24%),
-                linear-gradient(145deg, #161b37, #0c0f1d);
+                linear-gradient(
+                    145deg,
+                    rgba(255, 255, 255, 0.075),
+                    rgba(255, 255, 255, 0.03)
+                );
         }
 
-        .quote-info p {
-            color: var(--muted);
-            margin: 20px 0 32px;
+        .quote-icon {
+            color: var(--cyan);
+            font-size: 1.45rem;
         }
 
-        .contact-list {
-            display: grid;
-            gap: 14px;
-            color: #e9edff;
+        .testimonial blockquote {
+            margin: 18px 0 22px;
+            color: #eef1ff;
+            font-size: 1rem;
+            line-height: 1.65;
         }
 
-        .contact-item {
+        .testimonial footer {
             display: flex;
             align-items: center;
             gap: 12px;
+            padding: 0;
+            border: 0;
+            background: transparent;
         }
 
-        .contact-icon {
+        .client-avatar {
             width: 42px;
             height: 42px;
-            border-radius: 13px;
             display: grid;
             place-items: center;
-            background: rgba(255,255,255,.08);
-            border: 1px solid rgba(255,255,255,.1);
+            flex: 0 0 auto;
+            border-radius: 50%;
+            color: #071018;
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--cyan),
+                    #91eff7
+                );
+            font-weight: 950;
         }
 
-        .quote-form {
-            padding: 46px;
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 18px;
+        .client-data strong,
+        .client-data small {
+            display: block;
         }
 
-        .field {
-            display: grid;
-            gap: 8px;
+        .client-data small {
+            color: var(--muted);
+            font-size: 0.77rem;
         }
 
-        .field.full {
-            grid-column: 1 / -1;
-        }
+        /* =====================================
+           MENSAJES
+        ===================================== */
 
-        label {
-            color: #e9edff;
-            font-weight: 750;
-            font-size: .9rem;
-        }
-
-        input,
-        textarea,
-        select {
-            width: 100%;
-            border: 1px solid var(--border);
+        .alert-success,
+        .alert-error {
+            position: fixed;
+            top: 95px;
+            right: 22px;
+            z-index: 5000;
+            min-width: 300px;
+            max-width: 420px;
+            padding: 14px 17px;
             border-radius: 14px;
-            background: rgba(255,255,255,.045);
-            color: var(--text);
-            padding: 14px 15px;
-            outline: none;
-            transition: border-color .2s ease, box-shadow .2s ease;
+            color: #fff;
+            box-shadow:
+                0 18px 45px rgba(0, 0, 0, 0.3);
+            font-size: 0.9rem;
+            font-weight: 750;
         }
 
-        select option {
-            background: #111526;
+        .alert-success {
+            background:
+                linear-gradient(
+                    135deg,
+                    #19c37d,
+                    #0f9d58
+                );
         }
 
-        input:focus,
-        textarea:focus,
-        select:focus {
-            border-color: var(--cyan);
-            box-shadow: 0 0 0 4px rgba(35,213,232,.11);
+        .alert-error {
+            background:
+                linear-gradient(
+                    135deg,
+                    #ff4f4f,
+                    #d62828
+                );
         }
 
-        textarea {
-            resize: vertical;
-            min-height: 130px;
-        }
+        /* =====================================
+           PIE DE PÁGINA
+        ===================================== */
 
-        .form-note {
-            grid-column: 1 / -1;
-            color: var(--muted);
-            font-size: .83rem;
-        }
-
-        .quote-form .btn {
-            grid-column: 1 / -1;
-            width: 100%;
-        }
-
-        .faq-grid {
-            display: grid;
-            gap: 12px;
-            max-width: 900px;
-            margin-inline: auto;
-        }
-
-        details {
-            border: 1px solid var(--border);
-            border-radius: 18px;
-            background: rgba(255,255,255,.045);
-            padding: 20px 22px;
-        }
-
-        summary {
-            cursor: pointer;
-            font-weight: 850;
-            list-style: none;
-            display: flex;
-            justify-content: space-between;
-            gap: 20px;
-        }
-
-        summary::-webkit-details-marker {
-            display: none;
-        }
-
-        summary::after {
-            content: "+";
-            color: var(--cyan);
-            font-size: 1.4rem;
-            line-height: 1;
-        }
-
-        details[open] summary::after {
-            content: "−";
-        }
-
-        details p {
-            color: var(--muted);
-            padding-top: 14px;
-        }
-
-        footer {
-            padding: 42px 0 28px;
-            border-top: 1px solid rgba(255,255,255,.09);
-            background: rgba(0,0,0,.14);
+        footer.site-footer {
+            padding: 44px 0 25px;
+            border-top:
+                1px solid rgba(255, 255, 255, 0.09);
+            background:
+                rgba(0, 0, 0, 0.18);
         }
 
         .footer-grid {
             display: grid;
-            grid-template-columns: 1.4fr repeat(2, .7fr);
-            gap: 38px;
-            margin-bottom: 34px;
+            grid-template-columns:
+                1.2fr 0.8fr 0.8fr 0.8fr;
+            gap: 34px;
+            margin-bottom: 30px;
         }
 
         .footer-brand p {
+            max-width: 330px;
+            margin-top: 14px;
             color: var(--muted);
-            max-width: 470px;
-            margin-top: 15px;
+            font-size: 0.89rem;
         }
 
-        .footer-col h4 {
-            margin-bottom: 14px;
+        .footer-column h4 {
+            margin-bottom: 13px;
+            font-size: 0.94rem;
         }
 
-        .footer-col {
-            display: grid;
-            align-content: start;
+        .footer-column {
+            color: var(--muted);
+            font-size: 0.85rem;
+        }
+
+        .footer-column p,
+        .footer-column a {
+            display: flex;
+            align-items: center;
             gap: 8px;
-            color: var(--muted);
+            margin-bottom: 8px;
+        }
+
+        .footer-column a:hover {
+            color: var(--cyan);
+        }
+
+        .footer-social {
+            display: flex;
+            gap: 9px;
+        }
+
+        .footer-social a {
+            width: 37px;
+            height: 37px;
+            display: grid;
+            place-items: center;
+            margin: 0;
+            border: 1px solid var(--border);
+            border-radius: 11px;
+            color: var(--text);
+            background:
+                rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-social a:hover {
+            color: var(--cyan);
+            border-color:
+                rgba(35, 213, 232, 0.38);
         }
 
         .footer-bottom {
-            padding-top: 24px;
-            border-top: 1px solid rgba(255,255,255,.08);
-            display: flex;
-            justify-content: space-between;
-            gap: 20px;
+            padding-top: 21px;
+            border-top:
+                1px solid rgba(255, 255, 255, 0.08);
             color: #8f97ae;
-            font-size: .84rem;
+            font-size: 0.8rem;
         }
 
         .whatsapp-float {
             position: fixed;
             right: 22px;
             bottom: 22px;
-            z-index: 1100;
+            z-index: 1200;
             width: 58px;
             height: 58px;
-            border-radius: 50%;
             display: grid;
             place-items: center;
-            background: #25d366;
+            border-radius: 50%;
             color: #06150c;
-            font-size: 1.6rem;
-            box-shadow: 0 18px 45px rgba(37,211,102,.35);
-            transition: transform .25s ease;
+            background: #25d366;
+            box-shadow:
+                0 18px 45px rgba(37, 211, 102, 0.35);
+            font-size: 1.5rem;
+            transition:
+                transform 0.22s ease;
         }
 
         .whatsapp-float:hover {
-            transform: translateY(-4px) scale(1.04);
+            transform:
+                translateY(-4px)
+                scale(1.04);
         }
 
         .reveal {
             opacity: 0;
-            transform: translateY(26px);
-            transition: opacity .65s ease, transform .65s ease;
+            transform: translateY(22px);
+            transition:
+                opacity 0.6s ease,
+                transform 0.6s ease;
         }
 
         .reveal.visible {
@@ -1134,167 +1356,74 @@
             transform: none;
         }
 
-        @media (max-width: 980px) {
-            .hero-grid,
-            .about-grid,
-            .quote-shell {
-                grid-template-columns: 1fr;
+        /* =====================================
+           RESPONSIVE
+        ===================================== */
+
+        @media (max-width: 1100px) {
+            .nav-links {
+                gap: 14px;
             }
 
-            .hero-visual {
-                min-height: 520px;
-                max-width: 640px;
-                width: 100%;
-                margin-inline: auto;
+            .header-search {
+                width: 200px;
+                flex-basis: 200px;
             }
 
-            .services-grid,
-            .pricing-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .process-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .price-card.featured {
-                transform: none;
-            }
-
-            .portfolio-grid {
-                grid-template-columns: repeat(2, 1fr);
-                grid-auto-rows: 240px;
-            }
-
-            .work,
-            .work:nth-child(n) {
-                grid-column: span 1;
-                grid-row: span 1;
-            }
-
-            .work:nth-child(1) {
-                grid-column: 1 / -1;
+            .featured-grid {
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
             }
 
             .footer-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .footer-brand {
-                grid-column: 1 / -1;
+                grid-template-columns:
+                    1fr 1fr;
             }
         }
 
-        @media (max-width: 760px) {
-            .section {
-                padding: 74px 0;
-            }
-
+        @media (max-width: 900px) {
             .menu-toggle {
                 display: grid;
-                place-items: center;
+            }
+
+            .nav-inner {
+                position: relative;
             }
 
             .nav-links {
                 position: absolute;
-                top: 76px;
-                left: 20px;
-                right: 20px;
+                top: calc(100% + 10px);
+                right: 0;
+                left: 0;
                 display: none;
+                align-items: stretch;
+                flex-direction: column;
                 padding: 18px;
                 border: 1px solid var(--border);
                 border-radius: 18px;
-                background: rgba(10,12,23,.96);
+                background:
+                    rgba(8, 10, 19, 0.98);
                 box-shadow: var(--shadow);
-                flex-direction: column;
-                align-items: stretch;
             }
 
             .nav-links.open {
                 display: flex;
             }
 
-            .nav-links .btn {
+            .header-search {
+                width: 100%;
+                flex: none;
+            }
+
+            .nav-actions {
                 width: 100%;
             }
 
-            .hero {
-                padding-top: 52px;
+            .nav-icon {
+                flex: 1;
             }
 
             .hero-grid {
-                gap: 36px;
-            }
-
-            .hero-visual {
-                min-height: 430px;
-            }
-
-            .design-board {
-                inset: 36px 4px 26px 24px;
-            }
-
-            .poster strong {
-                font-size: 2.1rem;
-            }
-
-            .tag-one {
-                right: 0;
-            }
-
-            .services-grid,
-            .pricing-grid,
-            .process-grid,
-            .portfolio-grid,
-            .quote-form,
-            .footer-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .work,
-            .work:nth-child(n),
-            .work:nth-child(1) {
-                grid-column: auto;
-            }
-
-            .quote-info,
-            .quote-form {
-                padding: 30px 24px;
-            }
-
-            .field.full,
-            .quote-form .btn,
-            .form-note {
-                grid-column: auto;
-            }
-
-            .footer-brand {
-                grid-column: auto;
-            }
-
-            .footer-bottom {
-                flex-direction: column;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .container {
-                width: min(calc(100% - 26px), var(--container));
-            }
-
-            h1 {
-                font-size: 3rem;
-            }
-
-            .hero-actions .btn {
-                width: 100%;
-            }
-
-            .stats-grid {
                 grid-template-columns: 1fr;
             }
 
@@ -1302,983 +1431,981 @@
                 min-height: 390px;
             }
 
-            .poster {
-                padding: 20px;
+            .category-grid {
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
             }
 
-            .poster strong {
-                font-size: 1.72rem;
-            }
-
-            .mini-card {
-                min-height: 112px;
-                padding: 14px;
-            }
-
-            .floating-tag {
-                font-size: .78rem;
-                padding: 10px 12px;
-            }
-        }
-        .service-card {
-            display: block;
-            color: inherit;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        .search-input{
-            position: relative;
-            flex: 1;
-        }
-
-        .search-input i{
-            position: absolute;
-            left: 16px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--muted);
-            font-size: 16px;
-            pointer-events: none;
-        }
-
-        .search-input input{
-            width: 100%;
-            padding-left: 45px;
-        }
-        /* Modal de inicio de sesión y registro */
-
-        .account-modal-open {
-            border: 0;
-            background: transparent;
-            color: inherit;
-            cursor: pointer;
-        }
-
-        .auth-modal {
-            position: fixed;
-            inset: 0;
-            z-index: 5000;
-            display: none;
-            place-items: center;
-            padding: 24px;
-        }
-
-        .auth-modal.open {
-            display: grid;
-        }
-
-        .auth-modal-overlay {
-            position: absolute;
-            inset: 0;
-            background: rgba(3, 5, 12, 0.82);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-        }
-
-        .auth-modal-card {
-            position: relative;
-            z-index: 1;
-            width: min(100%, 560px);
-            max-height: calc(100vh - 48px);
-            overflow-y: auto;
-            padding: 34px;
-            border: 1px solid var(--border);
-            border-radius: 30px;
-            background:
-                radial-gradient(
-                    circle at 10% 5%,
-                    rgba(35, 213, 232, 0.16),
-                    transparent 30%
-                ),
-                radial-gradient(
-                    circle at 90% 90%,
-                    rgba(255, 79, 163, 0.15),
-                    transparent 32%
-                ),
-                #111526;
-            box-shadow: var(--shadow);
-        }
-
-        .auth-modal-close {
-            position: absolute;
-            top: 18px;
-            right: 18px;
-            width: 42px;
-            height: 42px;
-            display: grid;
-            place-items: center;
-            border: 1px solid var(--border);
-            border-radius: 13px;
-            background: rgba(255, 255, 255, 0.06);
-            color: var(--text);
-            cursor: pointer;
-        }
-
-        .auth-modal-header {
-            padding-right: 48px;
-            margin-bottom: 28px;
-        }
-
-        .auth-modal-header h2 {
-            font-size: clamp(1.8rem, 5vw, 2.5rem);
-            margin-bottom: 10px;
-        }
-
-        .auth-modal-header p {
-            color: var(--muted);
-        }
-
-        .auth-tabs {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 8px;
-            padding: 7px;
-            margin-bottom: 26px;
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            background: rgba(255, 255, 255, 0.04);
-        }
-
-        .auth-tab {
-            min-height: 46px;
-            border: 0;
-            border-radius: 11px;
-            background: transparent;
-            color: var(--muted);
-            font-weight: 850;
-            cursor: pointer;
-        }
-
-        .auth-tab.active {
-            color: #071018;
-            background: linear-gradient(135deg, var(--cyan), #91eff7);
-        }
-
-        .auth-form {
-            display: none;
-            gap: 18px;
-        }
-
-        .auth-form.active {
-            display: grid;
-        }
-
-        .auth-input {
-            position: relative;
-        }
-
-        .auth-input i {
-            position: absolute;
-            left: 16px;
-            top: 50%;
-            z-index: 2;
-            transform: translateY(-50%);
-            color: var(--muted);
-            pointer-events: none;
-        }
-
-        .auth-input input {
-            width: 100%;
-            padding-left: 46px;
-        }
-
-        .remember-option {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            color: var(--muted);
-            cursor: pointer;
-        }
-
-        .remember-option input {
-            width: auto;
-        }
-
-        .auth-submit {
-            width: 100%;
-        }
-
-        .auth-alert {
-            padding: 14px 16px;
-            border: 1px solid rgba(255, 79, 163, 0.55);
-            border-radius: 14px;
-            background: rgba(255, 79, 163, 0.12);
-            color: #ffd5e9;
-        }
-
-        body.auth-modal-visible {
-            overflow: hidden;
-        }
-
-        @media (max-width: 600px) {
-            .auth-modal {
-                padding: 14px;
-            }
-
-            .auth-modal-card {
-                padding: 28px 20px;
-                border-radius: 22px;
-            }
-
-            .auth-tabs {
+            .about-strip {
                 grid-template-columns: 1fr;
             }
         }
-        .nav-icon {
-            width: 38px;
-            height: 38px;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            background: rgba(255, 255, 255, 0.05);
-            color: var(--text);
-            cursor: pointer;
-        }
 
-        .nav-icon i {
-            font-size: 0.9rem;
-        }
-
-        .nav-icon:hover {
-            border-color: var(--cyan);
-            color: var(--cyan);
-        }
-        /*registro*/
-        .auth-switch{
-            margin-top: 18px;
-            text-align: center;
-            color: var(--muted);
-            font-size: .95rem;
-        }
-
-        .auth-link{
-            border: 0;
-            background: transparent;
-            color: var(--cyan);
-            font-weight: 700;
-            cursor: pointer;
-            padding: 0;
-            margin-left: 4px;
-        }
-
-        .auth-link:hover{
-            text-decoration: underline;
-        }
-        .auth-field-error {
-            margin-top: 5px;
-            color: #ff6b81;
-            font-size: 0.82rem;
-            line-height: 1.3;
-        }
-        /* Mensajes de éxito y error */
-
-        .alert-success,
-        .alert-error{
-            position: fixed;
-            top: 95px;
-            right: 25px;
-            min-width: 320px;
-            max-width: 420px;
-            padding: 15px 18px;
-            border-radius: 14px;
-            color: #fff;
-            font-size: .95rem;
-            font-weight: 600;
-            box-shadow: 0 18px 45px rgba(0,0,0,.30);
-            z-index: 9999;
-            animation: slideInRight .35s ease;
-        }
-
-        .alert-success{
-            background: linear-gradient(135deg,#19c37d,#0f9d58);
-            border-left: 5px solid #ffffff;
-        }
-
-        .alert-error{
-            background: linear-gradient(135deg,#ff4f4f,#d62828);
-            border-left: 5px solid #ffffff;
-        }
-
-        @keyframes slideInRight{
-
-            from{
-                opacity:0;
-                transform:translateX(40px);
+        @media (max-width: 720px) {
+            .section {
+                padding: 62px 0;
             }
 
-            to{
-                opacity:1;
-                transform:translateX(0);
+            .section-heading {
+                align-items: flex-start;
+                flex-direction: column;
             }
 
+            .portfolio-grid {
+                grid-template-columns:
+                    repeat(2, minmax(0, 1fr));
+                grid-auto-rows: 190px;
+            }
+
+            .portfolio-item,
+            .portfolio-item:nth-child(n) {
+                grid-column: span 1;
+            }
+
+            .portfolio-item:nth-child(5) {
+                grid-column: 1 / -1;
+            }
+
+            .testimonial-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 560px) {
+            .container {
+                width:
+                    min(
+                        calc(100% - 24px),
+                        var(--container)
+                    );
+            }
+
+            .hero {
+                padding-top: 46px;
+            }
+
+            .hero-content {
+                min-height: 0;
+                padding: 30px 22px;
+            }
+
+            .hero-content h1 {
+                font-size:
+                    clamp(2.6rem, 15vw, 4rem);
+            }
+
+            .hero-actions .btn {
+                width: 100%;
+            }
+
+            .hero-visual {
+                min-height: 330px;
+            }
+
+            .hero-screen {
+                inset: 42px 20px 30px;
+            }
+
+            .hero-screen-content {
+                grid-template-columns: 1fr;
+            }
+
+            .visual-side {
+                display: none;
+            }
+
+            .floating-note.two {
+                display: none;
+            }
+
+            .category-grid,
+            .featured-grid,
+            .portfolio-grid,
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .portfolio-item,
+            .portfolio-item:nth-child(n) {
+                grid-column: auto;
+            }
+
+            .alert-success,
+            .alert-error {
+                right: 12px;
+                left: 12px;
+                min-width: 0;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            .reveal,
+            .btn,
+            .category-card,
+            .service-card,
+            .portfolio-item {
+                transition: none;
+            }
         }
     </style>
-    <link rel="stylesheet" href="../../public/css/store.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 
 <body>
-<div class="topbar">
-    Diseño gráfico, edición audiovisual y contenido digital desde El Paraíso, Honduras.
-</div>
 
 <nav class="navbar">
     <div class="container nav-inner">
-        <a href="#inicio" class="brand" aria-label="Ir al inicio">
-            <span class="brand-mark"><span>PC</span></span>
+
+        <a
+            href="{{ route('index') }}"
+            class="brand"
+            aria-label="Ir al inicio"
+        >
+            <span class="brand-mark">
+                <span>PC</span>
+            </span>
+
             <span>Punto Creativo</span>
         </a>
 
-        <button class="menu-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
+        <button
+            type="button"
+            class="menu-toggle"
+            aria-label="Abrir menú"
+            aria-expanded="false"
+        >
+            <i class="bi bi-list"></i>
+        </button>
 
-        <div class="nav-links" id="navLinks">
+        <div
+            class="nav-links"
+            id="navLinks"
+        >
+            <a href="#inicio">Inicio</a>
             <a href="#servicios">Servicios</a>
             <a href="#portafolio">Portafolio</a>
-            <a href="{{route('catalogo')}}">Tienda</a>
-            <a href="#cotizar">Contacto</a>
-            <form class="header-search" data-search-form role="search">
+            <a href="#nosotros">Nosotros</a>
+            <a href="#contacto">Contacto</a>
+
+            <form
+                class="header-search"
+                id="headerSearch"
+                role="search"
+            >
                 <div class="search-input">
 
                     <i class="bi bi-search"></i>
 
                     <input
+                        id="headerSearchInput"
                         type="search"
                         aria-label="Buscar servicios"
                         placeholder="Buscar servicios"
                     >
+
                 </div>
             </form>
-            @auth
+
+            <div class="nav-actions">
+
+                @auth
+                    <a
+                        class="nav-icon"
+                        href="{{ route('cuenta') }}"
+                        aria-label="Mi cuenta"
+                        title="Mi cuenta"
+                    >
+                        <i class="bi bi-person"></i>
+                    </a>
+                @else
+                    <button
+                        type="button"
+                        class="nav-icon account-modal-open"
+                        data-auth-open
+                        aria-label="Iniciar sesión"
+                        title="Iniciar sesión"
+                    >
+                        <i class="bi bi-person"></i>
+                    </button>
+                @endauth
+
                 <a
                     class="nav-icon"
-                    href="{{ route('cuenta') }}"
-                    aria-label="Mi cuenta"
-                    title="Mi cuenta"
+                    href="{{ route('carrito') }}"
+                    aria-label="Carrito"
+                    title="Carrito"
                 >
-                    <i class="bi bi-person"></i>              </a>
-            @else
-                <button
-                    type="button"
-                    class="nav-icon account-modal-open"
-                    data-auth-open
-                    aria-label="Iniciar sesión"
-                    title="Iniciar sesión"
-                >
-                    <i class="bi bi-person"></i>
-                </button>
-            @endauth
+                    <i class="bi bi-cart3"></i>
 
-            <a class="nav-icon" href="{{route('carrito')}}" aria-label="Carrito" title="Carrito"><i class="bi bi-cart3"></i><span class="cart-badge" data-cart-count>0</span></a>
+                    <span
+                        class="cart-badge"
+                        data-cart-count
+                    >
+                        0
+                    </span>
+                </a>
+
+            </div>
         </div>
+
     </div>
 </nav>
 
 <main>
+
     @if(session('success'))
-
-        <div class="alert-success" id="successAlert">
-
+        <div
+            class="alert-success"
+            id="successAlert"
+        >
+            <i class="bi bi-check-circle-fill"></i>
             {{ session('success') }}
-
         </div>
-
     @endif
-        @if(session('error'))
-            <div class="alert-error" id="errorAlert">
-                <i class="bi bi-exclamation-circle-fill"></i>
-                {{ session('error') }}
-            </div>
-        @endif
-    <header class="hero" id="inicio">
+
+    @if(session('error'))
+        <div
+            class="alert-error"
+            id="errorAlert"
+        >
+            <i class="bi bi-exclamation-circle-fill"></i>
+            {{ session('error') }}
+        </div>
+    @endif
+
+    {{-- =====================================
+         HERO
+    ====================================== --}}
+    <header
+        class="hero"
+        id="inicio"
+    >
         <div class="container hero-grid">
-            <div class="hero-copy reveal">
-                <span class="eyebrow">Creatividad con propósito</span>
-                <h1>Ideas que se vuelven <span class="gradient-text">contenido que conecta.</span></h1>
-                <p class="lead">
-                    Creamos diseños, videos y contenido digital para emprendedores, empresas,
-                    medios, páginas deportivas y creadores que quieren destacar en internet.
+
+            <section class="hero-content reveal">
+
+                <span class="hero-label">
+                    <i class="bi bi-stars"></i>
+                    Creatividad para tu marca
+                </span>
+
+                <h1>
+                    Servicios de diseño gráfico y
+                    <span>edición audiovisual</span>
+                    en Honduras.
+                </h1>
+
+                <p>
+                    Comunica tu marca con creatividad.
+                    Creamos logos, videos, contenido para redes
+                    sociales, flyers y piezas digitales adaptadas
+                    a las necesidades de tu proyecto.
                 </p>
 
                 <div class="hero-actions">
-                    <a class="btn btn-primary" href="#cotizar">Quiero una cotización →</a>
-                    <a class="btn btn-secondary" href="#portafolio">Ver portafolio</a>
-                    <a class="btn btn-secondary" href="{{route('catalogo')}}">Comprar servicios</a>
+
+                    <a
+                        class="btn btn-primary"
+                        href="https://wa.me/50492336467?text=Hola%2C%20Punto%20Creativo.%20Quiero%20solicitar%20un%20dise%C3%B1o."
+                        target="_blank"
+                        rel="noopener"
+                    >
+                        <i class="bi bi-pencil-square"></i>
+                        Solicitar diseño
+                    </a>
+
+                    <a
+                        class="btn btn-secondary"
+                        href="{{ route('catalogo') }}"
+                    >
+                        <i class="bi bi-grid"></i>
+                        Ver catálogo
+                    </a>
+
                 </div>
 
-                <div class="hero-proof">
-                    <span><i class="check">✓</i> Atención personalizada</span>
-                    <span><i class="check">✓</i> Entrega digital</span>
-                    <span><i class="check">✓</i> Diseños adaptados a cada plataforma</span>
-                </div>
-            </div>
+            </section>
 
-            <div class="hero-visual reveal" aria-label="Muestra visual de trabajos creativos">
-                <div class="orbit"></div>
+            <section
+                class="hero-visual reveal"
+                aria-label="Muestra visual de los servicios de Punto Creativo"
+            >
+                <div class="hero-screen">
 
-                <div class="design-board">
-                    <div class="window-bar">
-                        <span class="window-dot"></span>
-                        <span class="window-dot"></span>
-                        <span class="window-dot"></span>
+                    <div class="hero-screen-bar">
+                        <span></span>
+                        <span></span>
+                        <span></span>
                     </div>
 
-                    <div class="artboard">
-                        <div class="poster">
+                    <div class="hero-screen-content">
+
+                        <div class="visual-card visual-card-main">
                             <small>Punto Creativo</small>
-                            <strong>Tu marca merece ser vista.</strong>
+                            <strong>
+                                Tu marca merece ser vista.
+                            </strong>
                         </div>
 
-                        <div class="mini-grid">
-                            <div class="mini-card">
-                                <b>Videos para redes Sociales</b>
-                                <span>Reels · TikTok · Shorts</span>
+                        <div class="visual-side">
+
+                            <div class="visual-card visual-card-video">
+                                <span>
+                                    <i class="bi bi-camera-reels-fill"></i>
+                                    Video y edición
+                                </span>
                             </div>
-                            <div class="mini-card">
-                                <b>Identidad visual</b>
-                                <span>Logo · colores · estilo</span>
+
+                            <div class="visual-card visual-card-social">
+                                <span>
+                                    <i class="bi bi-share-fill"></i>
+                                    Contenido para redes
+                                </span>
                             </div>
+
                         </div>
+
                     </div>
                 </div>
 
-                <div class="floating-tag tag-one">✦ Diseño + estrategia</div>
-                <div class="floating-tag tag-two">▶ Contenido audiovisual</div>
-            </div>
-        </div>
+                <span class="floating-note one">
+                    <i class="bi bi-palette-fill"></i>
+                    Diseño personalizado
+                </span>
 
-        <div class="container stats reveal">
-            <div class="stats-grid">
-                <div class="stat">
-                    <strong>100%</strong>
-                    <span>Servicio digital</span>
-                </div>
-                <div class="stat">
-                    <strong>B2C + B2B</strong>
-                    <span>Personas y empresas</span>
-                </div>
-                <div class="stat">
-                    <strong>1 a 1</strong>
-                    <span>Atención personalizada</span>
-                </div>
-                <div class="stat">
-                    <strong>Honduras</strong>
-                    <span>Alcance sin fronteras</span>
-                </div>
-            </div>
+                <span class="floating-note two">
+                    <i class="bi bi-lightning-charge-fill"></i>
+                    Entrega digital
+                </span>
+
+            </section>
+
         </div>
     </header>
 
-    <section class="section" id="servicios">
+    {{-- =====================================
+         CATEGORÍAS
+    ====================================== --}}
+    <section
+        class="section section-soft"
+        id="servicios"
+    >
         <div class="container">
-            <div class="section-title reveal">
-                <span class="eyebrow">Lo que hacemos</span>
-                <h2>Soluciones visuales para mover tu marca.</h2>
-                <p>
-                    Desde una publicación puntual hasta una campaña completa, adaptamos cada pieza
-                    al objetivo, público y plataforma del cliente.
-                </p>
-            </div>
 
-            <div class="services-grid">
-                <a
-                    href="{{ route('catalogo', ['categoria' => ['Diseño gráfico']]) }}"
-                    class="service-card reveal"
-                    style="--accent:#8d5cff"
-                >
-                    <div class="service-icon">✦</div>
-                    <h3>Diseño gráfico</h3>
-                    <p>Anuncios, promociones, pósters y piezas visuales para campañas digitales.</p>
-                </a>
+            <div class="section-heading reveal">
 
-                <a
-                    href="{{ route('catalogo', ['categoria' => ['Fotografía']]) }}"
-                    class="service-card reveal"
-                    style="--accent:#23d5e8"
-                >
-                    <div class="service-icon">◈</div>
-                    <h3>Fotografía</h3>
-                    <p>Capturamos imágenes profesionales para productos, eventos, marcas y contenido para redes sociales.</p>
-                </a>
+                <div>
+                    <span class="section-kicker">
+                        Categorías
+                    </span>
 
-                <a
-                    href="{{ route('catalogo', ['categoria' => ['Edición de videos']]) }}"
-                    class="service-card reveal"
-                    style="--accent:#ff4fa3"
-                >
-                    <div class="service-icon">▶</div>
-                    <h3>Edición de video</h3>
-                    <p>Videos cortos, anuncios, reels, contenido deportivo y material audiovisual para redes.</p>
-                </a>
+                    <h2>
+                        Explora nuestros servicios.
+                    </h2>
 
-                <a
-                    href="{{ route('catalogo', ['categoria' => ['Redes Sociales']]) }}"
-                    class="service-card reveal"
-                    style="--accent:#ff9f43"
-                >
-                    <div class="service-icon">▣</div>
-                    <h3>Redes Sociales</h3>
-                    <p>Publicaciones, carruseles, historias y piezas adaptadas a Facebook, Instagram, TikTok y YouTube.</p>
-                </a>
-
-                <a
-                    href="{{ route('catalogo', ['categoria' => ['Flyers & Bounchers']]) }}"
-                    class="service-card reveal"
-                    style="--accent:#35d07f"
-                >
-                    <div class="service-icon">⌁</div>
-                    <h3>Flyers & Bounchers</h3>
-                    <p>Flyers, banners y piezas publicitarias para promociones, eventos y campañas digitales.</p>
-                </a>
-
-                <a
-                    href="{{ route('catalogo', ['categoria' => ['Motion Graphics']]) }}"
-                    class="service-card reveal"
-                    style="--accent:#5a7dff"
-                >
-                    <div class="service-icon">◎</div>
-                    <h3>Motion Graphics</h3>
-                    <p>Animaciones creativas con textos y efectos visuales para contenido publicitario y redes sociales.</p>
-                </a>
-            </div>
-        </div>
-    </section>
-
-    <section class="section" id="portafolio">
-        <div class="container">
-            <div class="section-title reveal">
-                <span class="eyebrow">Portafolio</span>
-                <h2>Una vitrina para ideas que ya cobraron forma.</h2>
-                <p>
-                    Estas piezas son muestras editables. Puedes sustituirlas luego por proyectos reales de Punto Creativo.
-                </p>
-            </div>
-
-            <div class="portfolio-shell reveal">
-                <div class="filter-row" aria-label="Filtros del portafolio">
-                    <button class="filter-btn active" data-filter="all">Todo</button>
-                    <button class="filter-btn" data-filter="diseno">Diseño</button>
-                    <button class="filter-btn" data-filter="video">Video</button>
-                    <button class="filter-btn" data-filter="marca">Marca</button>
-                    <button class="filter-btn" data-filter="deportes">Deportes</button>
-                </div>
-
-                <div class="portfolio-grid">
-                    <article class="work" data-category="diseno">
-                        <div class="work-bg"></div>
-                        <div class="work-content">
-                            <small>Campaña digital</small>
-                            <h3>Lanzamiento para emprendimiento</h3>
-                        </div>
-                    </article>
-
-                    <article class="work" data-category="video">
-                        <div class="work-bg"></div>
-                        <div class="work-content">
-                            <small>Contenido audiovisual</small>
-                            <h3>Reel promocional</h3>
-                        </div>
-                    </article>
-
-                    <article class="work" data-category="deportes">
-                        <div class="work-bg"></div>
-                        <div class="work-content">
-                            <small>Diseño deportivo</small>
-                            <h3>Jornada y resultados</h3>
-                        </div>
-                    </article>
-
-                    <article class="work" data-category="marca">
-                        <div class="work-bg"></div>
-                        <div class="work-content">
-                            <small>Identidad visual</small>
-                            <h3>Marca local</h3>
-                        </div>
-                    </article>
-
-                    <article class="work" data-category="diseno">
-                        <div class="work-bg"></div>
-                        <div class="work-content">
-                            <small>Redes sociales</small>
-                            <h3>Carrusel informativo</h3>
-                        </div>
-                    </article>
-
-                    <article class="work" data-category="video">
-                        <div class="work-bg"></div>
-                        <div class="work-content">
-                            <small>Edición</small>
-                            <h3>Video corto vertical</h3>
-                        </div>
-                    </article>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="section" id="proceso">
-        <div class="container">
-            <div class="section-title reveal">
-                <span class="eyebrow">Cómo trabajamos</span>
-                <h2>Un proceso claro, sin laberintos de correos.</h2>
-                <p>
-                    La comunicación se mantiene directa para reducir errores y avanzar con mayor rapidez.
-                </p>
-            </div>
-
-            <div class="process-grid">
-                <article class="step reveal">
-                    <h3>Cuéntanos tu idea</h3>
-                    <p>Describe el servicio, objetivo, público, estilo y fecha en que necesitas el trabajo.</p>
-                </article>
-
-                <article class="step reveal">
-                    <h3>Recibe tu propuesta</h3>
-                    <p>Definimos alcance, precio referencial, tiempo de entrega y condiciones del proyecto.</p>
-                </article>
-
-                <article class="step reveal">
-                    <h3>Diseño y revisión</h3>
-                    <p>Preparamos la propuesta visual, enviamos avances y aplicamos los cambios acordados.</p>
-                </article>
-
-                <article class="step reveal">
-                    <h3>Entrega digital</h3>
-                    <p>Recibes los archivos finales listos para publicar, compartir o utilizar en tu negocio.</p>
-                </article>
-            </div>
-        </div>
-    </section>
-
-    <section class="section" id="paquetes">
-        <div class="container">
-            <div class="section-title reveal">
-                <span class="eyebrow">Paquetes sugeridos</span>
-                <h2>Opciones simples para comenzar.</h2>
-                <p>
-                    Los valores son referenciales y pueden ajustarse según complejidad, cantidad de piezas y tiempo de entrega.
-                </p>
-            </div>
-
-            <div class="pricing-grid">
-                <article class="price-card reveal">
-                    <h3>Diseño puntual</h3>
-                    <p>Para una necesidad específica o una publicación rápida.</p>
-                    <div class="price">Desde L 100 <small>/ proyecto</small></div>
-                    <ul class="feature-list">
-                        <li><i class="check">✓</i> 1 pieza gráfica</li>
-                        <li><i class="check">✓</i> Adaptación a una plataforma</li>
-                        <li><i class="check">✓</i> Cambios básicos</li>
-                        <li><i class="check">✓</i> Entrega digital</li>
-                    </ul>
-                    <a class="btn btn-secondary" href="{{route('producto')}}?id=anuncio-publicitario">Ver servicio</a>
-                </article>
-
-                <article class="price-card featured reveal">
-                    <span class="popular">Recomendado</span>
-                    <h3>Impulso digital</h3>
-                    <p>Para negocios que necesitan varias piezas coordinadas.</p>
-                    <div class="price">Cotización <small>/ paquete</small></div>
-                    <ul class="feature-list">
-                        <li><i class="check">✓</i> Publicaciones para redes</li>
-                        <li><i class="check">✓</i> Diseño adaptado a la marca</li>
-                        <li><i class="check">✓</i> Una pieza de video corto</li>
-                        <li><i class="check">✓</i> Atención prioritaria</li>
-                    </ul>
-                    <a class="btn btn-primary" href="{{route('producto')}}l?id=pack-publicaciones">Ver paquete</a>
-                </article>
-
-                <article class="price-card reveal">
-                    <h3>Contenido mensual</h3>
-                    <p>Para marcas, páginas o medios que publican constantemente.</p>
-                    <div class="price">Personalizado <small>/ mes</small></div>
-                    <ul class="feature-list">
-                        <li><i class="check">✓</i> Calendario de contenido</li>
-                        <li><i class="check">✓</i> Diseños recurrentes</li>
-                        <li><i class="check">✓</i> Videos o miniaturas</li>
-                        <li><i class="check">✓</i> Seguimiento continuo</li>
-                    </ul>
-                    <a class="btn btn-secondary" href="{{route('producto')}}?id=plan-mensual">Ver plan</a>
-                </article>
-            </div>
-        </div>
-    </section>
-
-    <section class="section" id="nosotros">
-        <div class="container about-grid">
-            <div class="about-card reveal" aria-label="Valores de Punto Creativo">
-                <div class="about-chip">⚡ Agilidad</div>
-                <div class="about-chip">✦ Creatividad</div>
-                <div class="about-chip">◎ Cercanía</div>
-            </div>
-
-            <div class="about-copy reveal">
-                <span class="eyebrow">Sobre Punto Creativo</span>
-                <h2>Diseño cercano, flexible y hecho para el entorno digital.</h2>
-                <p>
-                    Punto Creativo nació para ayudar a pequeños negocios, medios, páginas deportivas
-                    y creadores a comunicar sus ideas mediante contenido visual atractivo.
-                </p>
-                <p>
-                    La empresa combina diseño gráfico y edición audiovisual con atención directa,
-                    precios accesibles y conocimiento del mercado local hondureño.
-                </p>
-
-                <div class="about-list">
-                    <div><strong>Personalización real:</strong> cada diseño responde a la necesidad del cliente.</div>
-                    <div><strong>Servicio integral:</strong> imagen, video y contenido dentro de una sola propuesta.</div>
-                    <div><strong>Escalabilidad:</strong> preparada para incorporar automatización, IA y nuevos servicios digitales.</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="section" id="cotizar">
-        <div class="container">
-            <div class="quote-shell reveal">
-                <aside class="quote-info">
-                    <span class="eyebrow">Hablemos</span>
-                    <h2>Convierte tu idea en un proyecto.</h2>
                     <p>
-                        Completa el formulario y se abrirá WhatsApp con el resumen de tu solicitud.
+                        Encuentra la opción adecuada según el
+                        tipo de contenido que necesita tu marca.
                     </p>
+                </div>
 
-                    <div class="contact-list">
-                        <div class="contact-item">
-                            <span class="contact-icon">⌖</span>
-                            <span>Guanacaste, El Paraíso, Honduras</span>
-                        </div>
-                        <div class="contact-item">
-                            <span class="contact-icon">◉</span>
-                            <span>Atención digital por WhatsApp</span>
-                        </div>
-                        <div class="contact-item">
-                            <span class="contact-icon">✉</span>
-                            <span>Entrega mediante archivos o enlaces digitales</span>
-                        </div>
-                    </div>
-                </aside>
+                <a
+                    class="section-link"
+                    href="{{ route('catalogo') }}"
+                >
+                    Ver todas
+                    <i class="bi bi-arrow-right"></i>
+                </a>
 
-                <form class="quote-form" id="quoteForm">
-                    <div class="field">
-                        <label for="name">Nombre</label>
-                        <input id="name" name="name" type="text" placeholder="Tu nombre" required />
-                    </div>
-
-                    <div class="field">
-                        <label for="business">Empresa o proyecto</label>
-                        <input id="business" name="business" type="text" placeholder="Nombre de tu marca" />
-                    </div>
-
-                    <div class="field">
-                        <label for="service">Servicio</label>
-                        <select id="service" name="service" required>
-                            <option value="">Seleccionar</option>
-                            <option>Diseño publicitario</option>
-                            <option>Logo e identidad visual</option>
-                            <option>Edición de video</option>
-                            <option>Contenido para redes</option>
-                            <option>Miniaturas digitales</option>
-                            <option>Paquete mensual</option>
-                            <option>Otro servicio</option>
-                        </select>
-                    </div>
-
-                    <div class="field">
-                        <label for="deadline">Fecha estimada</label>
-                        <input id="deadline" name="deadline" type="date" />
-                    </div>
-
-                    <div class="field full">
-                        <label for="details">Cuéntanos qué necesitas</label>
-                        <textarea id="details" name="details" placeholder="Objetivo, cantidad de piezas, estilo, plataforma y cualquier referencia..." required></textarea>
-                    </div>
-
-                    <p class="form-note">
-                        Importante: cambia el número de WhatsApp dentro del código antes de publicar el sitio.
-                    </p>
-
-                    <button class="btn btn-whatsapp" type="submit">Enviar solicitud por WhatsApp</button>
-                </form>
             </div>
+
+            <div class="category-grid">
+
+                <a
+                    class="category-card reveal"
+                    href="{{ route('catalogo', ['categoria' => ['Diseño gráfico']]) }}"
+                >
+                    <span class="category-icon">
+                        <i class="bi bi-vector-pen"></i>
+                    </span>
+
+                    <div>
+                        <h3>Diseño de logos</h3>
+                        <p>
+                            Identidad visual para negocios,
+                            marcas y emprendimientos.
+                        </p>
+                    </div>
+                </a>
+
+                <a
+                    class="category-card reveal"
+                    href="{{ route('catalogo', ['categoria' => ['Flyers & Bounchers']]) }}"
+                >
+                    <span class="category-icon">
+                        <i class="bi bi-file-earmark-image"></i>
+                    </span>
+
+                    <div>
+                        <h3>Flyers y banners</h3>
+                        <p>
+                            Material publicitario para promociones,
+                            eventos y campañas.
+                        </p>
+                    </div>
+                </a>
+
+                <a
+                    class="category-card reveal"
+                    href="{{ route('catalogo', ['categoria' => ['Edición de videos']]) }}"
+                >
+                    <span class="category-icon">
+                        <i class="bi bi-camera-reels"></i>
+                    </span>
+
+                    <div>
+                        <h3>Edición de video</h3>
+                        <p>
+                            Reels, anuncios, contenido corporativo
+                            y videos para redes.
+                        </p>
+                    </div>
+                </a>
+
+                <a
+                    class="category-card reveal"
+                    href="{{ route('catalogo', ['categoria' => ['Redes Sociales']]) }}"
+                >
+                    <span class="category-icon">
+                        <i class="bi bi-phone"></i>
+                    </span>
+
+                    <div>
+                        <h3>Redes sociales</h3>
+                        <p>
+                            Publicaciones, historias, carruseles
+                            y contenido recurrente.
+                        </p>
+                    </div>
+                </a>
+
+            </div>
+
         </div>
     </section>
 
+    {{-- =====================================
+         DESTACADOS
+    ====================================== --}}
     <section class="section">
         <div class="container">
-            <div class="section-title reveal" style="margin-inline:auto; text-align:center;">
-                <span class="eyebrow">Preguntas frecuentes</span>
-                <h2>Lo esencial antes de comenzar.</h2>
+
+            <div class="section-heading reveal">
+
+                <div>
+                    <span class="section-kicker">
+                        Más solicitados
+                    </span>
+
+                    <h2>
+                        Servicios destacados.
+                    </h2>
+
+                    <p>
+                        Opciones populares para comenzar a
+                        mejorar la imagen digital de tu proyecto.
+                    </p>
+                </div>
+
+                <a
+                    class="section-link"
+                    href="{{ route('catalogo') }}"
+                >
+                    Ver catálogo
+                    <i class="bi bi-arrow-right"></i>
+                </a>
+
             </div>
 
-            <div class="faq-grid reveal">
-                <details>
-                    <summary>¿Cómo se entrega el trabajo?</summary>
-                    <p>La entrega se realiza digitalmente mediante WhatsApp, correo o enlace de descarga, según el tipo de archivo.</p>
-                </details>
+            <div class="featured-grid">
 
-                <details>
-                    <summary>¿Los precios siempre son los mismos?</summary>
-                    <p>No. El precio depende de la complejidad, cantidad de piezas, urgencia y nivel de edición requerido.</p>
-                </details>
+                <article class="service-card reveal">
 
-                <details>
-                    <summary>¿Pueden trabajar con clientes fuera de El Paraíso?</summary>
-                    <p>Sí. Todo el proceso puede gestionarse en línea, por lo que Punto Creativo puede atender clientes de otras ciudades y países.</p>
-                </details>
+                    <div class="service-image logo">
+                        <i class="bi bi-bezier2"></i>
+                    </div>
 
-                <details>
-                    <summary>¿Ofrecen contenido mensual?</summary>
-                    <p>Sí. Se pueden crear paquetes recurrentes para negocios, páginas deportivas, medios y creadores de contenido.</p>
-                </details>
+                    <div class="service-card-body">
+
+                        <span class="service-category">
+                            Identidad visual
+                        </span>
+
+                        <h3>
+                            Diseño de logotipo profesional
+                        </h3>
+
+                        <div class="service-price">
+                            L 850.00
+                        </div>
+
+                        <a
+                            class="btn btn-secondary"
+                            href="{{ route('catalogo', ['categoria' => ['Diseño gráfico']]) }}"
+                        >
+                            Ver detalles
+                        </a>
+
+                    </div>
+                </article>
+
+                <article class="service-card reveal">
+
+                    <div class="service-image video">
+                        <i class="bi bi-film"></i>
+                    </div>
+
+                    <div class="service-card-body">
+
+                        <span class="service-category">
+                            Edición audiovisual
+                        </span>
+
+                        <h3>
+                            Edición de video corporativo
+                        </h3>
+
+                        <div class="service-price">
+                            L 1,200.00
+                        </div>
+
+                        <a
+                            class="btn btn-secondary"
+                            href="{{ route('catalogo', ['categoria' => ['Edición de videos']]) }}"
+                        >
+                            Ver detalles
+                        </a>
+
+                    </div>
+                </article>
+
+                <article class="service-card reveal">
+
+                    <div class="service-image social">
+                        <i class="bi bi-postcard-heart"></i>
+                    </div>
+
+                    <div class="service-card-body">
+
+                        <span class="service-category">
+                            Redes sociales
+                        </span>
+
+                        <h3>
+                            Pack para redes sociales x10
+                        </h3>
+
+                        <div class="service-price">
+                            L 650.00
+                        </div>
+
+                        <a
+                            class="btn btn-secondary"
+                            href="{{ route('catalogo', ['categoria' => ['Redes Sociales']]) }}"
+                        >
+                            Ver detalles
+                        </a>
+
+                    </div>
+                </article>
+
+                <article class="service-card reveal">
+
+                    <div class="service-image motion">
+                        <i class="bi bi-play-btn-fill"></i>
+                    </div>
+
+                    <div class="service-card-body">
+
+                        <span class="service-category">
+                            Motion graphics
+                        </span>
+
+                        <h3>
+                            Intro animada para YouTube
+                        </h3>
+
+                        <div class="service-price">
+                            L 950.00
+                        </div>
+
+                        <a
+                            class="btn btn-secondary"
+                            href="{{ route('catalogo', ['categoria' => ['Motion Graphics']]) }}"
+                        >
+                            Ver detalles
+                        </a>
+
+                    </div>
+                </article>
+
             </div>
+
         </div>
     </section>
+
+    {{-- =====================================
+         PORTAFOLIO
+    ====================================== --}}
+    <section
+        class="section section-soft"
+        id="portafolio"
+    >
+        <div class="container">
+
+            <div class="section-heading reveal">
+
+                <div>
+                    <span class="section-kicker">
+                        Trabajos creativos
+                    </span>
+
+                    <h2>
+                        Portafolio.
+                    </h2>
+
+                    <p>
+                        Una muestra del tipo de soluciones visuales
+                        que podemos desarrollar para diferentes marcas.
+                    </p>
+                </div>
+
+                <a
+                    class="section-link"
+                    href="{{ route('catalogo') }}"
+                >
+                    Explorar servicios
+                    <i class="bi bi-arrow-right"></i>
+                </a>
+
+            </div>
+
+            <div class="portfolio-grid">
+
+                <article class="portfolio-item one reveal">
+                    <div class="portfolio-content">
+                        <i class="bi bi-palette2"></i>
+                        <small>Identidad visual</small>
+                        <h3>Marca para emprendimiento</h3>
+                    </div>
+                </article>
+
+                <article class="portfolio-item two reveal">
+                    <div class="portfolio-content">
+                        <i class="bi bi-camera-reels"></i>
+                        <small>Video</small>
+                        <h3>Reel promocional</h3>
+                    </div>
+                </article>
+
+                <article class="portfolio-item three reveal">
+                    <div class="portfolio-content">
+                        <i class="bi bi-share"></i>
+                        <small>Redes sociales</small>
+                        <h3>Campaña digital</h3>
+                    </div>
+                </article>
+
+                <article class="portfolio-item four reveal">
+                    <div class="portfolio-content">
+                        <i class="bi bi-trophy"></i>
+                        <small>Diseño deportivo</small>
+                        <h3>Jornada y resultados</h3>
+                    </div>
+                </article>
+
+                <article class="portfolio-item five reveal">
+                    <div class="portfolio-content">
+                        <i class="bi bi-magic"></i>
+                        <small>Motion graphics</small>
+                        <h3>Animación de marca</h3>
+                    </div>
+                </article>
+
+            </div>
+
+        </div>
+    </section>
+
+    {{-- =====================================
+         NOSOTROS Y TESTIMONIOS
+    ====================================== --}}
+    <section
+        class="section"
+        id="nosotros"
+    >
+        <div class="container">
+
+            <div class="about-strip reveal">
+
+                <div class="about-visual">
+                    <strong>PC</strong>
+                </div>
+
+                <div class="about-copy">
+
+                    <span class="section-kicker">
+                        Sobre nosotros
+                    </span>
+
+                    <h2>
+                        Creatividad cercana para marcas que quieren crecer.
+                    </h2>
+
+                    <p>
+                        Punto Creativo combina diseño gráfico,
+                        edición audiovisual y atención personalizada
+                        para ayudar a emprendedores, empresas y creadores
+                        a comunicar mejor sus ideas en medios digitales.
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="section-heading reveal">
+
+                <div>
+                    <span class="section-kicker">
+                        Opiniones
+                    </span>
+
+                    <h2>
+                        Testimonios de clientes.
+                    </h2>
+
+                    <p>
+                        La confianza se construye con comunicación clara,
+                        cumplimiento y resultados visuales de calidad.
+                    </p>
+                </div>
+
+            </div>
+
+            <div class="testimonial-grid">
+
+                <article class="testimonial reveal">
+
+                    <i class="bi bi-quote quote-icon"></i>
+
+                    <blockquote>
+                        “El logo superó mis expectativas.
+                        Entendieron la idea y el resultado quedó
+                        profesional. Totalmente recomendado.”
+                    </blockquote>
+
+                    <footer>
+                        <span class="client-avatar">
+                            CM
+                        </span>
+
+                        <span class="client-data">
+                            <strong>Carlos M.</strong>
+                            <small>Emprendedor</small>
+                        </span>
+                    </footer>
+
+                </article>
+
+                <article class="testimonial reveal">
+
+                    <i class="bi bi-quote quote-icon"></i>
+
+                    <blockquote>
+                        “El video para mi empresa quedó increíble
+                        y fue entregado puntualmente. La comunicación
+                        durante el proceso fue excelente.”
+                    </blockquote>
+
+                    <footer>
+                        <span class="client-avatar">
+                            MR
+                        </span>
+
+                        <span class="client-data">
+                            <strong>María R.</strong>
+                            <small>Propietaria de negocio</small>
+                        </span>
+                    </footer>
+
+                </article>
+
+                <article class="testimonial reveal">
+
+                    <i class="bi bi-quote quote-icon"></i>
+
+                    <blockquote>
+                        “Excelente trabajo, comunicación clara
+                        y mucha atención a los detalles.
+                        El contenido quedó justo como lo necesitábamos.”
+                    </blockquote>
+
+                    <footer>
+                        <span class="client-avatar">
+                            AL
+                        </span>
+
+                        <span class="client-data">
+                            <strong>Andrea L.</strong>
+                            <small>Creadora de contenido</small>
+                        </span>
+                    </footer>
+
+                </article>
+
+            </div>
+
+        </div>
+    </section>
+
 </main>
 
-<footer>
-
-
+<footer
+    class="site-footer"
+    id="contacto"
+>
     <div class="container">
-
-
 
         <div class="footer-grid">
 
-
-
-
-
             <div class="footer-brand">
 
+                <a
+                    href="{{ route('index') }}"
+                    class="brand"
+                >
+                    <span class="brand-mark">
+                        <span>PC</span>
+                    </span>
 
-
-                <a href="{{route('index')}}" class="brand">
-
-
-<span class="brand-mark">
-
-<span>
-PC
-</span>
-
-
-</span>
-
-
-                    <span>
-Punto Creativo
-</span>
-
-
-
+                    <span>Punto Creativo</span>
                 </a>
 
-
-
-
-
                 <p>
-
-                    Diseño gráfico, edición audiovisual en Honduras
-
+                    Diseño gráfico, edición audiovisual
+                    y contenido digital desde El Paraíso,
+                    Honduras.
                 </p>
 
+            </div>
 
+            <div class="footer-column">
 
+                <h4>Contacto</h4>
+
+                <p>
+                    <i class="bi bi-envelope-fill"></i>
+                    info@puntocreativo.hn
+                </p>
+
+                <p>
+                    <i class="bi bi-telephone-fill"></i>
+                    +504 9233-6467
+                </p>
+
+                <p>
+                    <i class="bi bi-geo-alt-fill"></i>
+                    El Paraíso, Honduras
+                </p>
 
             </div>
 
+            <div class="footer-column">
 
+                <h4>WhatsApp</h4>
 
+                <p>
+                    Atención digital para consultas,
+                    cotizaciones y seguimiento.
+                </p>
 
-
-
-
-            <div class="footer-col">
-
-
-
-                <h4>
-                    Contacto
-                </h4>
-
-                <h4>
-                    <i class="fa-solid fa-envelope"></i> info@puntocreativo.hn <br>
-                    <i class="fa-solid fa-phone"></i> +504 9999-8888 <br>
-                    <i class="fa-solid fa-location-dot"></i> Danli, El Paraíso
-                </h4>
+                <a
+                    class="btn btn-secondary"
+                    href="https://wa.me/50492336467"
+                    target="_blank"
+                    rel="noopener"
+                >
+                    <i class="bi bi-whatsapp"></i>
+                    Escríbenos
+                </a>
 
             </div>
 
+            <div class="footer-column">
 
+                <h4>Enlaces</h4>
 
+                <a href="{{ route('terminos') }}">
+                    Términos
+                </a>
 
+                <a href="{{ route('privacidad') }}">
+                    Privacidad
+                </a>
 
-            <div class="footer-col">
+                <a href="{{ route('cookies') }}">
+                    Cookies
+                </a>
 
+                <div class="footer-social">
 
-                <h4>
-                    Redes Sociales
-                </h4>
-
-                <div>
-                    <i class="fa-brands fa-facebook"></i>
-                    <i class="fa-brands fa-instagram"></i>
-                    <i class="fa-brands fa-youtube"></i>
-                    <i class="fa-brands fa-tiktok"></i>
-
-                </div>
-
-                <div>
-                    <a href="{{route('terminos')}}">
-                        Términos
-                        <a href="{{route('privacidad')}}">
-                            Privacidad
-                        </a>
-                        <a href="{{route('cookies')}}">
-                            Cookies
-                        </a>
+                    <a
+                        href="#"
+                        aria-label="Facebook"
+                    >
+                        <i class="bi bi-facebook"></i>
                     </a>
+
+                    <a
+                        href="#"
+                        aria-label="Instagram"
+                    >
+                        <i class="bi bi-instagram"></i>
+                    </a>
+
+                    <a
+                        href="#"
+                        aria-label="YouTube"
+                    >
+                        <i class="bi bi-youtube"></i>
+                    </a>
+
+                    <a
+                        href="#"
+                        aria-label="TikTok"
+                    >
+                        <i class="bi bi-tiktok"></i>
+                    </a>
+
                 </div>
 
-
-
-
-
-
-
-
-
-
             </div>
-
 
         </div>
 
         <div class="footer-bottom">
-
-
-<span>
-
-    © <span data-year></span> Punto Creativo. Todos los derechos reservados.
-
-</span>
-
-
+            © <span data-year></span>
+            Punto Creativo. Todos los derechos reservados.
         </div>
 
-
-
-
     </div>
-
-
 </footer>
-@include('components.login-modal')
 
+@include('components.login-modal')
+@include('components.cookie-banner')
 
 <a
     class="whatsapp-float"
@@ -2287,94 +2414,195 @@ Punto Creativo
     rel="noopener"
     aria-label="Contactar por WhatsApp"
     title="WhatsApp"
->✆</a>
+>
+    <i class="bi bi-whatsapp"></i>
+</a>
 
 <script>
-    // WhatsApp real de Punto Creativo.
-    // Formato: código de país + número, sin espacios ni símbolos.
-    const WHATSAPP_NUMBER = "50492336467";
+    document.addEventListener(
+        'DOMContentLoaded',
+        function () {
+            const menuToggle =
+                document.querySelector(
+                    '.menu-toggle'
+                );
 
-    const menuToggle = document.querySelector(".menu-toggle");
-    const navLinks = document.getElementById("navLinks");
+            const navLinks =
+                document.getElementById(
+                    'navLinks'
+                );
 
-    menuToggle.addEventListener("click", () => {
-        const isOpen = navLinks.classList.toggle("open");
-        menuToggle.setAttribute("aria-expanded", isOpen);
-        menuToggle.textContent = isOpen ? "×" : "☰";
-    });
+            const formularioBusqueda =
+                document.getElementById(
+                    'headerSearch'
+                );
 
-    navLinks.querySelectorAll("a").forEach(link => {
-        link.addEventListener("click", () => {
-            navLinks.classList.remove("open");
-            menuToggle.setAttribute("aria-expanded", "false");
-            menuToggle.textContent = "☰";
-        });
-    });
+            const campoBusqueda =
+                document.getElementById(
+                    'headerSearchInput'
+                );
 
-    const filterButtons = document.querySelectorAll(".filter-btn");
-    const works = document.querySelectorAll(".work");
-
-    filterButtons.forEach(button => {
-        button.addEventListener("click", () => {
-            filterButtons.forEach(btn => btn.classList.remove("active"));
-            button.classList.add("active");
-
-            const filter = button.dataset.filter;
-
-            works.forEach(work => {
-                const matches = filter === "all" || work.dataset.category === filter;
-                work.classList.toggle("hidden", !matches);
-            });
-        });
-    });
-
-    const quoteForm = document.getElementById("quoteForm");
-
-    quoteForm.addEventListener("submit", event => {
-        event.preventDefault();
-
-        const name = document.getElementById("name").value.trim();
-        const business = document.getElementById("business").value.trim();
-        const service = document.getElementById("service").value;
-        const deadline = document.getElementById("deadline").value;
-        const details = document.getElementById("details").value.trim();
-
-        const message = [
-            "Hola, Punto Creativo. Quiero solicitar una cotización.",
-            "",
-            `Nombre: ${name}`,
-            `Empresa o proyecto: ${business || "No indicado"}`,
-            `Servicio: ${service}`,
-            `Fecha estimada: ${deadline || "No indicada"}`,
-            "",
-            "Detalles:",
-            details
-        ].join("\n");
-
-        const url = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
-        window.open(url, "_blank", "noopener");
-    });
-
-    if ("IntersectionObserver" in window) {
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add("visible");
-                    observer.unobserve(entry.target);
+            function actualizarIconoMenu() {
+                if (!menuToggle || !navLinks) {
+                    return;
                 }
-            });
-        }, { threshold: 0.12 });
-        document.querySelectorAll(".reveal").forEach(element => observer.observe(element));
-    } else {
-        document.querySelectorAll(".reveal").forEach(element => element.classList.add("visible"));
-    }
-    document.getElementById("year").textContent = new Date().getFullYear();
+
+                const abierto =
+                    navLinks.classList.contains(
+                        'open'
+                    );
+
+                menuToggle.innerHTML = abierto
+                    ? '<i class="bi bi-x-lg"></i>'
+                    : '<i class="bi bi-list"></i>';
+
+                menuToggle.setAttribute(
+                    'aria-expanded',
+                    String(abierto)
+                );
+            }
+
+            if (menuToggle && navLinks) {
+                menuToggle.addEventListener(
+                    'click',
+                    function () {
+                        navLinks.classList.toggle(
+                            'open'
+                        );
+
+                        actualizarIconoMenu();
+                    }
+                );
+
+                navLinks
+                    .querySelectorAll('a')
+                    .forEach(function (enlace) {
+                        enlace.addEventListener(
+                            'click',
+                            function () {
+                                navLinks.classList.remove(
+                                    'open'
+                                );
+
+                                actualizarIconoMenu();
+                            }
+                        );
+                    });
+
+                actualizarIconoMenu();
+            }
+
+            if (
+                formularioBusqueda &&
+                campoBusqueda
+            ) {
+                formularioBusqueda.addEventListener(
+                    'submit',
+                    function (evento) {
+                        evento.preventDefault();
+
+                        const busqueda =
+                            campoBusqueda.value.trim();
+
+                        const urlCatalogo =
+                            @json(route('catalogo'));
+
+                        if (!busqueda) {
+                            window.location.href =
+                                urlCatalogo;
+
+                            return;
+                        }
+
+                        const parametros =
+                            new URLSearchParams({
+                                buscar: busqueda,
+                                q: busqueda
+                            });
+
+                        window.location.href =
+                            urlCatalogo +
+                            '?' +
+                            parametros.toString();
+                    }
+                );
+            }
+
+            document
+                .querySelectorAll('[data-year]')
+                .forEach(function (elemento) {
+                    elemento.textContent =
+                        new Date().getFullYear();
+                });
+
+            const alertas =
+                document.querySelectorAll(
+                    '.alert-success, .alert-error'
+                );
+
+            if (alertas.length > 0) {
+                window.setTimeout(
+                    function () {
+                        alertas.forEach(
+                            function (alerta) {
+                                alerta.remove();
+                            }
+                        );
+                    },
+                    4000
+                );
+            }
+
+            if (
+                'IntersectionObserver' in window
+            ) {
+                const observador =
+                    new IntersectionObserver(
+                        function (entradas) {
+                            entradas.forEach(
+                                function (entrada) {
+                                    if (
+                                        entrada.isIntersecting
+                                    ) {
+                                        entrada.target
+                                            .classList
+                                            .add('visible');
+
+                                        observador.unobserve(
+                                            entrada.target
+                                        );
+                                    }
+                                }
+                            );
+                        },
+                        {
+                            threshold: 0.1
+                        }
+                    );
+
+                document
+                    .querySelectorAll('.reveal')
+                    .forEach(function (elemento) {
+                        observador.observe(
+                            elemento
+                        );
+                    });
+            } else {
+                document
+                    .querySelectorAll('.reveal')
+                    .forEach(function (elemento) {
+                        elemento.classList.add(
+                            'visible'
+                        );
+                    });
+            }
+        }
+    );
 </script>
-<script src="../../public/js/products.js"></script>
-<script src="../../public/js/index-upgrade.js"></script>
-<script src="{{ asset('js/store.js') }}"></script>
-<script src="{{ asset('js/carrito.js') }}?v={{ time() }}"></script>
-<script src="{{ asset('js/auth-modal.js') }}"></script>
+
+<script src="{{ asset('js/auth-modal.js') }}?v={{ time() }}"></script>
+<script src="{{ asset('js/cart-count.js') }}?v={{ time() }}"></script>
+<script src="{{ asset('js/cookie-banner.js') }}?v={{ time() }}"></script>
+
 </body>
 </html>
-

@@ -15,6 +15,10 @@
         rel="stylesheet"
         href="{{ asset('css/store.css') }}"
     >
+    <link
+        rel="stylesheet"
+        href="{{ asset('css/cookie-banner.css') }}?v={{ time() }}"
+    >
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <style>
@@ -1369,7 +1373,7 @@
         </a>
 
         <button class="menu-toggle" aria-label="Abrir menú" aria-expanded="false">
-            ☰
+            <i class="bi bi-list"></i>
         </button>
 
         <div class="nav-links" id="navLinks">
@@ -1394,11 +1398,11 @@
             </form>
 
             <a class="nav-icon" href="{{route('cuenta')}}" aria-label="Mi cuenta" title="Mi cuenta">
-                ♙
+                <i class="bi bi-person"></i>
             </a>
 
             <a class="nav-icon" href="{{route('carrito')}}" aria-label="Carrito" title="Carrito">
-                🛒
+                <i class="bi bi-cart3"></i>
                 <span class="cart-badge" data-cart-count>0</span>
             </a>
 
@@ -1413,7 +1417,9 @@
 
             <nav class="breadcrumbs">
                 <a href="{{route('index')}}">Inicio</a>
-                <span>›</span>
+                <span aria-hidden="true">
+                    <i class="bi bi-chevron-right"></i>
+                </span>
                 <span>Política de cookies</span>
             </nav>
 
@@ -1459,6 +1465,16 @@
                 <p>
                     Si en el futuro se incorporan analítica, publicidad o pasarelas externas, esta política deberá actualizarse para explicar los proveedores, finalidades y mecanismos de consentimiento.
                 </p>
+
+                <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-cookie-settings
+                    style="margin-top:24px"
+                >
+                    <i class="bi bi-sliders"></i>
+                    Cambiar preferencia de cookies
+                </button>
 
             </article>
 
@@ -1536,7 +1552,7 @@ Punto Creativo
 
                 <h4>
                     <i class="fa-solid fa-envelope"></i> info@puntocreativo.hn <br>
-                    <i class="fa-solid fa-phone"></i> +504 9999-8888 <br>
+                    <i class="fa-solid fa-phone"></i> +504 9233-6467 <br>
                     <i class="fa-solid fa-location-dot"></i> Danli, El Paraíso
                 </h4>
 
@@ -1606,18 +1622,51 @@ Punto Creativo
 
 
 </footer>
+@include('components.cookie-banner')
+
 <a class="whatsapp-float"
-   href="https://wa.me/50400000000"
+   href="https://wa.me/50492336467"
    target="_blank"
    rel="noopener"
    aria-label="Contactar por WhatsApp"
    title="WhatsApp">
-    ✆
+    <i class="bi bi-whatsapp"></i>
 </a>
 
-<script src="../../public/js/products.js"></script>
-<script src="../../public/js/store.js"></script>
-<script src="../../public/js/common.js"></script>
+<script src="{{ asset('js/store.js') }}"></script>
+<script src="{{ asset('js/common.js') }}"></script>
+<script src="{{ asset('js/cart-count.js') }}?v={{ time() }}"></script>
+
+<script src="{{ asset('js/cookie-banner.js') }}?v={{ time() }}"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const botonMenu = document.querySelector('.menu-toggle');
+        const enlacesMenu = document.getElementById('navLinks');
+
+        if (!botonMenu || !enlacesMenu) {
+            return;
+        }
+
+        function actualizarIconoMenu() {
+            botonMenu.innerHTML = enlacesMenu.classList.contains('open')
+                ? '<i class="bi bi-x-lg"></i>'
+                : '<i class="bi bi-list"></i>';
+        }
+
+        botonMenu.addEventListener('click', function () {
+            window.requestAnimationFrame(actualizarIconoMenu);
+        });
+
+        enlacesMenu.querySelectorAll('a').forEach(function (enlace) {
+            enlace.addEventListener('click', function () {
+                window.requestAnimationFrame(actualizarIconoMenu);
+            });
+        });
+
+        actualizarIconoMenu();
+    });
+</script>
 
 </body>
 </html>
